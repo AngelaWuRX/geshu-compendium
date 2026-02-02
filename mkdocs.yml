@@ -1,0 +1,17 @@
+site_name: Angela’s Notes
+theme:
+  name: material
+plugins:
+  - search
+nav:
+  - Home: index.md
+  - Course Notes:
+      - CS61B: courses/cs61b/index.md
+      - CS170: courses/cs170/index.md
+      - CS194: courses/cs194/index.md
+      - CMU 15-850(C): courses/cmu-15-850c/index.md
+  - Resources: resources/index.md
+  - Blog: blog/index.md
+markdown_extensions:
+  - toc:
+      permalink: true
