@@ -6,7 +6,7 @@ This repo hosts my personal notes for a small “curriculum”:
 - UC Berkeley **CS61B** – data structures  
 - UC Berkeley **CS170** – efficient algorithms (with pointers to LeetCode-style problems)  
 - UC Berkeley **CS194** – advanced algorithms / networks / graphs  
-- **CMU 15-850(C)** – Algorithms in the “Real World”  
+- CMU **15-850(C)** – Algorithms in the “Real World”  
 - Plus **math + ML prerequisites** and a short **paper-reading blog**
 
 The goal: make these concepts **approachable from zero**, while still honest about the real technical content.
