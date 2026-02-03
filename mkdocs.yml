@@ -4,7 +4,6 @@ theme:
 plugins:
   - search
 nav:
-  - Home: docs/index.md
   - Notes:
       - Data Structure: courses/cs61b/index.md
       - Efficient Algorithm: courses/cs170/index.md
