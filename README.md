@@ -104,9 +104,7 @@ This repo is designed to build into a small documentation site (via MkDocs + Git
 
 Once deployed, it will be available at:
 
-> `https://<your-username>.github.io/geshu-compendium/`
-
-(Replace `<your-username>` when you set it up.)
+> [geshu-compendium](https://angelawurx.github.io/geshu-compendium/)
 
 
 ## Status
