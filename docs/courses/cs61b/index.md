@@ -3,7 +3,7 @@
 Data Structure 
 
 ## Topics
-- ADT
+- [ADT]
 - Implementation Layer
 - Algorithms
 
