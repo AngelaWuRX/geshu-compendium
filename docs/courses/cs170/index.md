@@ -5,7 +5,6 @@ Focus: proof patterns + problem solving.
 - DP
 - Greedy
 - LP
-- Approximation Algorithm
 - Reductions / NP-completeness
 
 ## LeetCode mapping
