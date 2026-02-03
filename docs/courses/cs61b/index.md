@@ -3,7 +3,7 @@
 Data Structure 
 
 ## Topics
-- [ADT]
+- [ADT](docs/courses/cs61b/ADT.md)
 - Implementation Layer
 - Algorithms
 
