@@ -4,7 +4,7 @@ theme:
 plugins:
   - search
 nav:
-  - Home: index.md
+  - Home: docs/index.md
   - Course Notes:
       - CS61B: courses/cs61b/index.md
       - CS170: courses/cs170/index.md
