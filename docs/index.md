@@ -9,7 +9,6 @@ instead of just asking an AI to do it for them.
 
 The structure is **topic-based**, inspired by berkeley courses I've taken, but the goal is a standalone learning path.
 
----
 
 ## Topics
 
@@ -28,7 +27,6 @@ Graph/network algorithms beyond the basic.
 Optimization, geometry and meshing, biology, cryptography.  
 Heavily influenced by CMU 15-183.
 
----
 
 ## Resources
 
@@ -39,7 +37,6 @@ Short “math prereq” refresh notes for people who are not math majors but sti
 - Optimization basics  
 - Pointers to resources like *Math for Machine Learning* and similar references
 
----
 
 ## Blog
 
@@ -52,7 +49,6 @@ Short paper notes:
 
 This is more “learning log” than “research blog”.
 
----
 
 ## How to read this
 
