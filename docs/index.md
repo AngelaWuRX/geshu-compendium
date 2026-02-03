@@ -1,4 +1,4 @@
-# Angela’s Notes
+# geshu-compendium
 
 Notes for:
 - Data Structures
