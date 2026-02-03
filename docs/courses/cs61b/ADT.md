@@ -1,5 +1,8 @@
-#java
+tags: 
+- java
+
 Children: [[Interface]]; [[Class]]
+
 ## 2.1 Iterators
 - The Iterator Interface
 - The ListIterator Interface
