@@ -11,7 +11,7 @@ This repo hosts my personal notes for a small “curriculum”:
 
 The goal: make these concepts **approachable from zero**, while still honest about the real technical content.
 
-I’m *not* publishing solutions or staff materials. These are my own explanations, diagrams, and mental models.
+I’m *not* publishing solutions or staff materials. These are my own explanations, diagrams, and mental models. Because these notes follow my understanding, they don’t mirror the official course structure or cover every topic from class.
 
 ## Why this exists
 
