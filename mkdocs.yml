@@ -3,6 +3,7 @@ theme:
   name: material
 plugins:
   - search
+  - tags
 nav:
   - Notes:
       - Data Structure: courses/cs61b/index.md
