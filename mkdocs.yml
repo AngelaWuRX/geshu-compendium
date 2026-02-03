@@ -5,11 +5,11 @@ plugins:
   - search
 nav:
   - Home: docs/index.md
-  - Course Notes:
-      - CS61B: courses/cs61b/index.md
-      - CS170: courses/cs170/index.md
-      - CS194: courses/cs194/index.md
-      - CMU 15-850(C): courses/cmu-15-850c/index.md
+  - Notes:
+      - Data Structure: courses/cs61b/index.md
+      - Efficient Algorithm: courses/cs170/index.md
+      - Networks: courses/cs194/index.md
+      - Algorithms in Real World Application: courses/cmu-15-850c/index.md
   - Resources: resources/index.md
   - Blog: blog/index.md
 markdown_extensions:
