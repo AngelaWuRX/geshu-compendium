@@ -22,11 +22,16 @@ failed=0
 # --diff-filter=d skips deletions; :"$f" reads the *staged* blob, not the worktree,
 # so `git add` + edit can't sneak content past the check.
 for f in $(git diff --cached --name-only --diff-filter=d); do
-    # This file and the converter's manifest necessarily spell out the patterns
-    # they screen for, so scanning them would always self-trip. They are policy
-    # definitions, not content — review them by eye instead.
+    # Files that DEFINE the policy necessarily spell out the patterns they
+    # screen for, so scanning them always self-trips. They are policy, not
+    # content — review them by eye. Everything else gets scanned, including
+    # anything else under scripts/.
     case "$f" in
-        scripts/githooks/*|scripts/vault_manifest.toml|scripts/sync_vault.py|scripts/test_sync_vault.py)
+        scripts/githooks/*                \
+      | scripts/vault_manifest.toml       \
+      | scripts/sync_vault.py             \
+      | scripts/test_sync_vault.py        \
+      | .github/workflows/deploy.yml      )
             continue ;;
     esac
     # Skip binaries: -I makes grep treat them as non-matching.

@@ -3,11 +3,12 @@
 
 This repo hosts my personal notes for a small “curriculum”:
 
-- UC Berkeley **CS61B** – data structures  
-- UC Berkeley **CS170** – efficient algorithms (with pointers to LeetCode-style problems)  
-- UC Berkeley **CS194** – advanced algorithms / networks / graphs  
-- CMU **15-850(C)** – Algorithms in the “Real World”  
-- Plus **math + ML prerequisites** and a short **paper-reading blog**
+- **Networks** – random graphs, branching processes, epidemics, spectral methods  
+- **Machine Learning** – probability through transformers, with interview Q&A  
+- **Data Structures** – lists, trees, heaps, hashing, sorting  
+- **Algorithms** – divide and conquer, LP, reductions, graphs  
+
+Sections appear here when there are notes worth reading in them, not before.
 
 The goal: make these concepts **approachable from zero**, while still honest about the real technical content.
 
@@ -34,52 +35,50 @@ If it helps other people along the way, even better.
 
 ## What’s inside
 
-The content is split into a few top-level sections (mirrored in the website navigation):
+### 📚 Notes
 
-### 📚 Course Notes
+- **Networks**  
+  Random graphs, concentration, the giant component, branching processes,
+  configuration models, small worlds, preferential attachment, PageRank and
+  mixing, spectral clustering, cascades, SIR. The most complete section by
+  some distance — each note follows the same shape: what it is → definitions →
+  how to recognise it → standard proof moves → lemmas → common mistakes.
 
-- **CS61B – Data Structures**  
-  Intuition → invariants → complexity → “how this shows up in interviews and real systems”.  
-  Arrays, lists, trees, hashmaps, graphs, etc.
+- **Machine Learning**  
+  Probability and MLE/MAP through regression, clustering, classifiers,
+  optimisation, neural nets, CNNs/ResNet, transformers, language models and
+  self-supervised learning. Each note carries interview Q&A cards.
 
-- **CS170 – Efficient Algorithms**  
-  Proof patterns, DP/greedy/flows, reductions, and how these ideas map to typical problem sets / LeetCode-style questions.
+- **Data Structures**  
+  Lists, trees, heaps, hashing, sorting, union-find. Intuition → invariants →
+  complexity.
 
-- **CS194 – Advanced Algorithms / Networks**  
-  Graph/network algorithms beyond the basics, cut/flow, spectral-style thinking, and how to reason about networks at scale.
-
-- **CMU 15-850(C) – Algorithms in the Real World**  
-  Approximation, streaming, large-scale graphs, and the “systems view” of algorithms.
+- **Algorithms**  
+  Divide and conquer, linear programming, reductions, MSTs, shortest paths,
+  graph traversal.
 
 ### 🧮 Resources – Math / ML Prereqs
 
 Short refreshers for people who are **not** math majors but need the tools:
-
-- Linear algebra for ML  
-- Probability / random variables  
-- Optimization basics  
-- Notes tied to things like “Math for Machine Learning” and similar resources
-
-The idea: if you vaguely remember these topics but forgot the details, you can quickly rebuild the mental model.
+linear algebra, probability, optimisation basics.
 
 ### 📝 Blog – Paper Notes
 
-Very short writeups on papers I’m reading:
-
-- key ideas in plain language  
-- what I found interesting or weird  
-- what I don’t fully understand yet  
-- one possible extension or question, even if it’s naive
+Very short writeups on papers I’m reading: key ideas in plain language, what I
+found interesting or weird, what I don’t fully understand yet.
 
 **I’m not pretending to be an expert; this is a record of my own learning process.**
 
 ## How to use this
 
 - **Starting from zero?**  
-  Jump into the Course Notes section and treat it like lecture + discussion notes, not a textbook. I try to start from intuition and work up to formalism, not the other way around.
+  Begin with **Data Structures**, then **Algorithms**. Treat them like lecture + discussion notes, not a textbook — I start from intuition and work up to formalism, not the other way around.
+
+- **Here for the deep end?**  
+  **Networks** is the most developed section: random graphs and the giant component, through epidemics on configuration models.
 
 - **Brushing up for interviews / research / work?**  
-  Use the CS61B/CS170 pages + math refreshers as “recalibration” tools — remind yourself *why* things work, not just how to code them.
+  The **Machine Learning** notes end in collapsible Q&A cards — read the question, answer it yourself, then expand.
 
 - **Reading papers?**  
   Check the blog for quick takes, or use it as an example of how to write your own reading notes.
@@ -95,7 +94,15 @@ Very short writeups on papers I’m reading:
 - **If you’re an instructor / TA and see a problem:**  
   Open an issue or contact me, and I’ll remove or edit content as needed.
 
-Content is provided **as-is** for learning and discussion, not for commercial use.
+**Licensing.** The prose (everything under `docs/`, plus this README) is
+[CC BY-NC-SA 4.0](LICENSE-CONTENT) — share and adapt with attribution, non-commercially,
+under the same terms. The code (`mkdocs.yml`, `scripts/`, stylesheets) is [MIT](LICENSE).
+
+The split is deliberate: MIT is a software licence, and applying it to prose
+granted the right to *sell* these notes, which contradicted the non-commercial
+intent stated right here. It also asks anyone quoting a page to reproduce a
+21-line warranty disclaimer — which nobody does, so you get non-compliance
+instead of attribution.
 
 
 ## Website
@@ -107,13 +114,34 @@ Once deployed, it will be available at:
 > [geshu-compendium](https://angelawurx.github.io/geshu-compendium/)
 
 
+## How this is built
+
+The notes are written in Obsidian and live in local vaults that are **not** in
+this repo — they hold course PDFs, staff material and personal files that must
+never be published. `scripts/sync_vault.py` converts the publishable subset
+into `docs/`:
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+git config core.hooksPath scripts/githooks     # once per clone
+
+python3 scripts/sync_vault.py                  # vault -> docs/
+python3 scripts/sync_vault.py --check          # report drift, write nothing
+.venv/bin/mkdocs serve                         # preview
+```
+
+`scripts/vault_manifest.toml` decides what publishes and what never can. The
+denylist is a gate, not a filter: the script renders everything, checks every
+byte against it, and only then writes — so nothing lands half-done. Pages under
+`docs/notes/` are generated; edit the vault note and re-run.
+
 ## Status
 
-This is very much a work-in-progress:
+A living notebook, not a polished textbook — expect gaps and rough edges.
 
-- ✅ Skeleton and basic structure  
-- 🚧 Migrating/cleaning existing notes from Obsidian  
-- 🚧 Adding more math prereq pages  
-- 🚧 Writing more paper notes
-
-Expect gaps, TODOs, and rough edges — this is a living notebook, not a polished textbook.
+- ✅ Networks — 18 notes, the most complete section  
+- ✅ Machine Learning — 11 notes with interview Q&A  
+- 🚧 Data Structures / Algorithms — the substantive notes are up; several
+     stubs still to write, and the ADT pages want consolidating  
+- 🚧 Resources — math prereq pages  
+- 🚧 Blog — paper notes

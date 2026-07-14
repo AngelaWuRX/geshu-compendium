@@ -11,6 +11,29 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-      - run: pip install mkdocs-material
+          python-version: '3.12'
+
+      # Pinned via requirements.txt. This used to be a bare
+      # `pip install mkdocs-material`, which would eventually float into the
+      # next major and break config keys with no warning.
+      - run: pip install -r requirements.txt
+
+      # CI can't run `sync_vault.py --check` — the vaults are gitignored and
+      # never reach the runner — so guard the committed tree instead.
+      - name: Guard — no vault, PDF or private content in the tree
+        run: |
+          set -e
+          if git ls-files | grep -Ei '\.pdf$|\.tex$| copy/|midterm|resume|_sol'; then
+            echo "::error::A vault file, PDF or solution set is tracked. See .gitignore."
+            exit 1
+          fi
+          if git grep -ilE 'ruoxi|angela wu|510[- ]?499|berkeley\.edu|Shixiang|AgentHLE|HW ?[0-9]+ ?[PQ][0-9]' -- docs/; then
+            echo "::error::docs/ matches a private-info pattern. See scripts/vault_manifest.toml."
+            exit 1
+          fi
+
+      # --strict + the `validation:` block in mkdocs.yml turns a broken internal
+      # link into a failed build rather than a silently broken page.
+      - run: mkdocs build --strict
+
       - run: mkdocs gh-deploy --force
