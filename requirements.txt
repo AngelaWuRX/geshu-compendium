@@ -1,0 +1,8 @@
+# Pinned: the deploy workflow used to `pip install mkdocs-material` unpinned,
+# which would silently float into the next major and break config keys.
+mkdocs-material==9.6.*
+
+# Build-time only. mkdocs-material's search plugin uses jieba to segment
+# Chinese text when `search.lang` includes `zh`; without it, the Chinese
+# prose in the CS notes is unsearchable.
+jieba==0.42.1

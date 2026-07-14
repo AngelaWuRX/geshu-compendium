@@ -1,17 +1,79 @@
 site_name: geshu-compendium
+site_description: Personal notes on data structures, algorithms, networks and machine learning.
+site_url: https://angelawurx.github.io/geshu-compendium/
+repo_url: https://github.com/AngelaWuRX/geshu-compendium
+
 theme:
   name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - search.suggest
+
 plugins:
-  - search
+  - search:
+      # About a third of the CS notes are in Chinese. `zh` activates jieba
+      # segmentation (see requirements.txt) — without it that prose is
+      # effectively unsearchable, since CJK has no spaces to tokenise on.
+      lang:
+        - en
+        - zh
   - tags
+
 nav:
-  - Notes:
-      - Data Structure: courses/cs61b/index.md
-      - Efficient Algorithm: courses/cs170/index.md
-      - Networks: courses/cs194/index.md
-      - Algorithms in Real World Application: courses/cmu-15-850c/index.md
+  - Home: index.md
+  # BEGIN GENERATED NAV — scripts/sync_vault.py rewrites everything between
+  # these two markers. Do not hand-edit; edit the vault + manifest and re-run.
+  # END GENERATED NAV
   - Resources: resources/index.md
   - Blog: blog/index.md
+
 markdown_extensions:
   - toc:
       permalink: true
+  - admonition          # 45 note files use Obsidian callouts
+  - pymdownx.details    # collapsed `> [!question]-` -> `???`; the Q&A cards need this
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true     # 50 note files use LaTeX
+  - pymdownx.mark       # 14 note files use ==highlight==
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - attr_list
+  - md_in_html          # Asymptotic.md has raw <br> inside a table cell
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+# Makes `mkdocs build --strict` fail on broken relative links, which is the
+# real test that the converter's wikilink resolution worked.
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn

@@ -9,7 +9,13 @@
 
 set -eu
 
-PATTERN='ruoxi|angela wu|AngelaWuRX|510[- ]?499|berkeley\.edu|Shixiang|AgentHLE|\bHW ?[0-9]+ ?P[0-9]+\b'
+# Only things that must appear NOWHERE in the repo. Deliberately excludes the
+# GitHub handle: the repo lives at github.com/AngelaWuRX and deploys to
+# angelawurx.github.io, so mkdocs.yml and README must name it. Screening for it
+# here would fire on every config commit, and a hook that cries wolf just
+# teaches you to pass --no-verify. The handle is checked in docs/ instead
+# (see deploy.yml and sync_vault.py), where a note naming it IS a real signal.
+PATTERN='ruoxi|angela wu|510[- ]?499|berkeley\.edu|Shixiang|AgentHLE|\bHW ?[0-9]+ ?P[0-9]+\b'
 
 failed=0
 

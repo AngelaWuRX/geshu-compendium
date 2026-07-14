@@ -1,0 +1,63 @@
+/* Palette ported from the Obsidian vault's own snippet (networks-ui.css) so the
+   site reads like the notes it was built from: teal accent on near-black in
+   dark, deep teal on warm paper in light. Material's `primary: teal` gets the
+   header and links close; these variables carry over the exact values. */
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color:        #101418;
+  --md-default-fg-color:        #dce3e8;
+  --md-default-fg-color--light: #95a0a9;
+  --md-code-bg-color:           #1a2026;
+  --md-accent-fg-color:         #55c8af;
+  --md-typeset-a-color:         #82c9f4;
+  --gc-rule:                    #2b343c;
+  --gc-table-header:            #20282e;
+  --gc-quote-border:            #3fb99f;
+}
+
+[data-md-color-scheme="default"] {
+  --md-default-bg-color:        #fbfaf7;
+  --md-default-fg-color:        #1d2529;
+  --md-default-fg-color--light: #617078;
+  --md-code-bg-color:           #efeee8;
+  --md-accent-fg-color:         #1a9a83;
+  --md-typeset-a-color:         #126da0;
+  --gc-rule:                    #d7d2c6;
+  --gc-table-header:            #ebe8df;
+  --gc-quote-border:            #16836f;
+}
+
+.md-typeset {
+  line-height: 1.62;
+}
+
+.md-typeset blockquote {
+  border-left: 2px solid var(--gc-quote-border);
+  color: inherit;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--gc-table-header);
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--gc-rule);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Long proofs and method tables overflow on narrow viewports; scroll them
+   inside their own container rather than letting the page scroll sideways. */
+.md-typeset .md-typeset__table,
+.md-typeset .arithmatex {
+  overflow-x: auto;
+}
+
+/* The vault colour-codes tags by facet (area/ method/ model/ topic/) and the
+   notes' frontmatter already uses that vocabulary, so the same mapping works
+   here with no extra metadata. Material renders tags as .md-tag with the tag
+   text as a data attribute. */
+.md-typeset .md-tag[data-md-tag^="area/"]   { --md-default-fg-color--light: #7fc9b6; }
+.md-typeset .md-tag[data-md-tag^="method/"] { --md-default-fg-color--light: #91b9f2; }
+.md-typeset .md-tag[data-md-tag^="model/"]  { --md-default-fg-color--light: #d7b56d; }
+.md-typeset .md-tag[data-md-tag^="topic/"]  { --md-default-fg-color--light: #d698ad; }
