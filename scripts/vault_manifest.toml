@@ -111,11 +111,32 @@ include = [
   "ml/10 Language Models.md",
   "ml/11 Self-Supervised Learning.md",
 ]
+# "## Notes" is the one genuinely empty section (a single "- " bullet).
+# "## → add must-knows to [[ML]]" is the porting checklist footer.
 strip_headings = ["## Notes", "## → add must-knows to [[ML]]"]
-# `- [ ]` in these notes is a study artifact, not an unfinished task: the
-# Subtopics sections are the actual content. Unchecking is handled by
-# `debox = true`, which turns "- [ ] x" into "- x".
+
+# `- [ ]` here is a study artifact wrapped around real content, not an unfinished
+# task list: the Subtopics sections ARE the substance of these notes. Published
+# as checkboxes they read as abandoned; deboxing turns "- [ ] x" into "- x".
 debox = true
+
+# The breadcrumb line also carries `ref: attention_is_all_you_need.pdf`, which
+# points at a denylisted PDF. Nav replaces the breadcrumb; link arXiv if the
+# reference is wanted back.
+drop_lines_matching = [
+  '\[\[_ML Index',
+]
+
+# These parentheticals annotate where content came from — a paper cheatsheet, a
+# margin in a handwritten notebook, an Obsidian mechanic. Deliberately scrubbed
+# here rather than deleted from the vault: in Obsidian they tell you which
+# source a section came from, which is worth keeping. They just mean nothing to
+# a reader who has never seen the notebook.
+scrub_regex = [
+  '\s*\((?:from )?(?:your |the )?cheatsheet[^)]*\)',   # "(cheatsheet §9.1)", "(from cheatsheet §2)"
+  '\s*\(from your [^)]*\)',                            # "(from your red notes)"
+  '\s*\(collapse = flashcard\)',                       # an Obsidian mechanic
+]
 
 
 # ─── Data Structures (CS61B) ─────────────────────────────────────────────────
@@ -131,17 +152,31 @@ include = [
   "cs61b/LinkedList.md",
   "cs61b/Heap.md",
   "cs61b/Hashing.md",
-  "cs61b/QuickSort.md",
-  "cs61b/Comparison-based sort.md",
   "cs61b/Search Trees.md",
   "Red_Black Trees.md",
   "B-Trees.md",
   "Union-Find (Disjoint Set).md",
+  # The sort family. Individually thin, but each is linked from
+  # "Comparison-based sort" — leaving them out turned those links into dangling
+  # plain text and made the section read as half-written.
+  "cs61b/Sorting and Selecting.md",
+  "cs61b/Comparison-based sort.md",
+  "cs61b/QuickSort.md",
+  "cs61b/MergeSort.md",
+  "cs61b/HeapSort.md",
+  "cs61b/InsertionSort.md",
+  "cs61b/RadixSort.md",
 ]
 # Not included, all currently 0 bytes. They are linked *from* the notes above;
 # the resolver degrades those links to plain text rather than publishing blank
 # pages. Add them here the day they gain content:
 #   Stack.md  Queue.md  Tries.md
+#
+# Also held back: the ADT cluster (ADT.md, Interface.md, Class.md,
+# Implementation Layer.md, Java.md). Those four re-explain the same
+# List/Set/Map/Stack/Queue/Deque mapping — Java.md does it three times over in
+# ~40% of its 318 lines — and want consolidating into one page before they're
+# worth publishing. "Data structure.md" above covers the same ground once.
 
 
 # ─── Algorithms (CS170) ──────────────────────────────────────────────────────

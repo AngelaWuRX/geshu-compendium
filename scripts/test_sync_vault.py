@@ -197,11 +197,19 @@ class TestTitles(unittest.TestCase):
         # All 18 networks notes open with frontmatter then `## 1.`.
         n = sv.Note(src=Path("/v/06 Giant Component.md"), rel="06 Giant Component.md",
                     section=None, body="## 1. What this topic is about\n")
-        self.assertEqual(sv.ensure_title({}, n)["title"], "Giant Component")
+        fm, body = sv.ensure_title({}, n)
+        self.assertEqual(fm["title"], "Giant Component")
+        # and an H1 is synthesised, so the page doesn't start at h2
+        self.assertTrue(body.startswith("# Giant Component"))
 
-    def test_existing_h1_wins(self):
-        n = sv.Note(src=Path("/v/x.md"), rel="x.md", section=None, body="# Real Title\n")
-        self.assertEqual(sv.ensure_title({}, n)["title"], "Real Title")
+    def test_existing_h1_wins_but_loses_its_numeric_prefix(self):
+        # Otherwise nav reads "Giant Component" beside "09 Transformers & Attention".
+        n = sv.Note(src=Path("/v/09 Transformers & Attention.md"), rel="ml/09 t.md",
+                    section=None, body="# 09 Transformers & Attention\n\nbody\n")
+        fm, body = sv.ensure_title({}, n)
+        self.assertEqual(fm["title"], "Transformers & Attention")
+        self.assertIn("# Transformers & Attention", body)
+        self.assertNotIn("# 09 Transformers", body)
 
 
 class TestPolicyGate(unittest.TestCase):
@@ -251,6 +259,25 @@ class TestPolicyGate(unittest.TestCase):
 
 
 class TestRender(unittest.TestCase):
+    def test_frontmatter_is_the_very_first_thing_in_the_file(self):
+        """Regression: the marker used to sit above the frontmatter.
+
+        YAML frontmatter only counts if it opens the file. With the comment
+        first, MkDocs parsed the whole block as body text -- every page printed
+        "tags: - area/random-graphs ... title: Giant Component" as visible
+        content, ignored `title:` (so the H1 fell back to the lowercased
+        filename, "06 giant component"), and indexed zero tags. `mkdocs build
+        --strict` stayed green throughout: the output was valid markdown, just
+        wrong. Only reading the rendered HTML caught it.
+        """
+        n = sv.Note(src=Path("/v/x.md"), rel="networks/topics/06 Giant Component.md",
+                    section=None, frontmatter={"title": "Giant Component",
+                                               "tags": ["area/random-graphs"]},
+                    body="## 1. What\n")
+        out = sv.render(n)
+        self.assertTrue(out.startswith("---\n"), "frontmatter must open the file")
+        self.assertLess(out.index("title: Giant Component"), out.index(sv.MARKER_PREFIX))
+
     def test_marker_present_and_frontmatter_filtered(self):
         n = sv.Note(src=Path("/v/x.md"), rel="ml/09 x.md", section=None,
                     frontmatter={"title": "T", "tags": ["area/x"], "status": "draft",

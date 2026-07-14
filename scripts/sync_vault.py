@@ -401,17 +401,29 @@ def lift_leading_tag(body: str, fm: dict) -> tuple[str, dict]:
     return body, fm
 
 
-def ensure_title(fm: dict, note: Note) -> dict:
-    """The networks notes have no H1 — they open with frontmatter then `## 1.`."""
-    if fm.get("title"):
-        return fm
-    m = re.search(r"^#\s+(.+)$", note.body, flags=re.M)
+def ensure_title(fm: dict, note: Note) -> tuple[dict, str]:
+    """Give every page exactly one H1, with a consistent title.
+
+    Two shapes to reconcile. The networks notes have no H1 at all (frontmatter,
+    then straight into `## 1.`); the ML notes lead with `# 09 Transformers &
+    Attention`. Left alone that yields "Giant Component" next to "09
+    Transformers & Attention" in the same nav.
+
+    The numeric prefix earns its place in the *filename* (it makes alphabetical
+    order the intended order) but not in the heading, where the sidebar already
+    conveys sequence. So strip it from the title and synthesise an H1 when the
+    note lacks one.
+    """
+    body = note.body
+    m = re.search(r"^#\s+(.+)$", body, flags=re.M)
+    if not fm.get("title"):
+        raw = m.group(1).strip() if m else Path(note.rel).stem.replace("_", " ")
+        fm["title"] = re.sub(r"^\d+[.\s]+", "", raw).strip()
     if m:
-        fm["title"] = m.group(1).strip()
+        body = body.replace(m.group(0), f"# {fm['title']}", 1)
     else:
-        stem = Path(note.rel).stem
-        fm["title"] = re.sub(r"^\d+\s+", "", stem).replace("_", " ").strip()
-    return fm
+        body = f"# {fm['title']}\n\n{body}"
+    return fm, body
 
 
 # ── asset + link resolution ──────────────────────────────────────────────────
@@ -564,18 +576,31 @@ def assert_publishable(rendered: str, src_rel: str, patterns: list[re.Pattern]) 
 # ── emit ─────────────────────────────────────────────────────────────────────
 
 def render(note: Note) -> str:
+    """Frontmatter FIRST, then the marker.
+
+    YAML frontmatter is only frontmatter if it opens the file. Put anything
+    above it — even an HTML comment — and MkDocs parses the whole block as body
+    text, so `title:`/`tags:` are ignored and the page prints its own metadata
+    as visible content. `mkdocs build --strict` won't catch it: the output is
+    valid markdown, just wrong.
+    """
     fm = {k: v for k, v in note.frontmatter.items() if k in ("title", "tags") and v}
-    lines = [MARKER.format(src=note.rel), ""]
+    lines: list[str] = []
     if fm:
         lines.append("---")
-        for k, v in fm.items():
+        # title first: it's the line a human looks for.
+        for k in ("title", "tags"):
+            v = fm.get(k)
+            if not v:
+                continue
             if isinstance(v, list):
                 lines.append(f"{k}:")
                 lines.extend(f"  - {item}" for item in v)
             else:
                 lines.append(f"{k}: {v}")
         lines.append("---")
-        lines.append("")
+    lines.append(MARKER.format(src=note.rel))
+    lines.append("")
     body = re.sub(r"\n{3,}", "\n\n", note.body).strip("\n")
     lines.append(body)
     return "\n".join(lines).rstrip("\n") + "\n"
@@ -707,6 +732,7 @@ def main() -> int:
     index = build_name_index(roots)
 
     # Pass 1: parse, transform, decide output paths.
+    rewrite_hits: dict[tuple[str, str], int] = {}
     for n in notes:
         text = n.src.read_text(encoding="utf-8")
         n.frontmatter, n.body = split_frontmatter(text)
@@ -719,11 +745,15 @@ def main() -> int:
         # sentence around it, name the replacement rather than letting a regex
         # guess. Only then the generic scrub, which handles the cases where the
         # citation is a self-contained parenthetical.
+        #
+        # Hits are tallied across the whole section, not per file: a rewrite
+        # targets one sentence in one note, so warning per-file would emit one
+        # line for every other note and bury the warnings that matter. What's
+        # worth knowing is a rewrite that matched nothing ANYWHERE — that means
+        # a vault edit moved out from under it.
         for pat, sub in n.section.rewrite:
             n.body, k = re.subn(pat, sub, n.body)
-            if not k:
-                rep.warn(f"[{n.section.slug}] rewrite {pat!r} matched nothing in {n.rel}"
-                         if n.rel else "")
+            rewrite_hits[(n.section.slug, pat)] = rewrite_hits.get((n.section.slug, pat), 0) + k
         for pat in n.section.scrub_regex:
             n.body = re.sub(pat, "", n.body)
         if n.section.renumber:
@@ -735,8 +765,15 @@ def main() -> int:
         n.body = convert_callouts(n.body, rep, n.rel)
         n.body, n._rels = lift_parent_children(n.body, n.rel)
         n.body, n.frontmatter = lift_leading_tag(n.body, n.frontmatter)
-        n.frontmatter = ensure_title(n.frontmatter, n)
+        n.frontmatter, n.body = ensure_title(n.frontmatter, n)
         n.out = docs_root.relative_to(REPO) / n.section.slug / f"{slugify(Path(n.rel).stem)}.md"
+
+    # A rewrite that never fired anywhere means the vault text it targeted has
+    # changed or gone. Surface it: silently skipping is how a citation sneaks
+    # back in behind a rule that no longer applies.
+    for (slug, pat), k in rewrite_hits.items():
+        if k == 0:
+            rep.warn(f"[{slug}] rewrite {pat!r} matched nothing in any note — stale rule?")
 
     # Drop notes with no content left. They're linked from real notes, so the
     # resolver below degrades those links rather than publishing blank pages.
