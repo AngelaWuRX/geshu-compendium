@@ -685,18 +685,33 @@ def warn_if_stale(roots: dict, rep: Report) -> None:
 
 
 def build_nav(notes: list[Note], cfg: dict, only: list[str] | None) -> list[str]:
-    lines = []
+    """Emit the nav block, nesting sections under an optional `group`.
+
+    A section with `group = "Programming"` lands two levels deep
+    (Programming > Python > note); one without stays top-level. Consecutive
+    sections sharing a group share the parent heading, so manifest order is
+    nav order.
+    """
+    lines: list[str] = []
     by_slug: dict[str, list[Note]] = {}
     for n in notes:
         by_slug.setdefault(n.section.slug, []).append(n)
+
+    current_group: str | None = None
     for sc in cfg["section"]:
         group = by_slug.get(sc["slug"])
         if not group:
             continue
-        lines.append(f"  - {sc['title']}:")
+        parent = sc.get("group")
+        if parent != current_group:
+            if parent:
+                lines.append(f"  - {parent}:")
+            current_group = parent
+        indent = "      " if parent else "  "
+        lines.append(f"{indent}- {sc['title']}:")
         for n in sorted(group, key=lambda x: x.out.name):
             title = n.frontmatter.get("title", n.out.stem)
-            lines.append(f"      - {title}: {n.out.relative_to('docs').as_posix()}")
+            lines.append(f"{indent}    - {title}: {n.out.relative_to('docs').as_posix()}")
     return lines
 
 

@@ -27,6 +27,142 @@ name = "spring2026"
 root = "spring2026 copy"
 
 
+# ─── Programming → Python ────────────────────────────────────────────────────
+# Reading notes taken while working through hello-algo.
+#
+# hello-algo is CC BY-NC-SA, so this publishes the author's own commentary and
+# NOT the book's material. Concretely: all five image embeds are dropped —
+# "Running time comparison", "Data structure classification", "Memory space",
+# "logn/n! time complexity" are the book's own figures, not screenshots of
+# anything original. The prose that stays is hand-typed reading commentary
+# ("It might run slow, but still be constant!!!"), which is the point of a
+# reading note.
+[[section]]
+title   = "Python"
+slug    = "python"
+group   = "Programming"
+vault   = "python"
+include = ["Python & DSA/hello-algo Notes.md"]
+
+# The top half is a sprint-week progress tracker, not content.
+strip_headings = ["## Progress (mapped to the sprint weeks)", "## Also worth a pass", "### (chapter name)"]
+
+drop_lines_matching = [
+  '!\[\[Running time comparison',
+  '!\[\[logn time complexity',
+  '!\[\[n! time complexity',
+  '!\[\[Data structure classification',
+  '!\[\[Memory space',
+]
+
+# ─── Programming → Data Structures (CS61B) ───────────────────────────────────
+[[section]]
+title   = "Data Structures"
+slug    = "data-structures"
+group   = "Programming"
+vault   = "cs"
+include = [
+  "cs61b/Data structure.md",
+  "cs61b/OOP.md",
+  "cs61b/Asymptotic.md",
+  "cs61b/ArrayList.md",
+  "cs61b/LinkedList.md",
+  "cs61b/Heap.md",
+  "cs61b/Hashing.md",
+  "cs61b/Search Trees.md",
+  "Red_Black Trees.md",
+  "B-Trees.md",
+  "Union-Find (Disjoint Set).md",
+  # The sort family. Individually thin, but each is linked from
+  # "Comparison-based sort" — leaving them out turned those links into dangling
+  # plain text and made the section read as half-written.
+  "cs61b/Sorting and Selecting.md",
+  "cs61b/Comparison-based sort.md",
+  "cs61b/QuickSort.md",
+  "cs61b/MergeSort.md",
+  "cs61b/HeapSort.md",
+  "cs61b/InsertionSort.md",
+  "cs61b/RadixSort.md",
+]
+# Not included, all currently 0 bytes. They are linked *from* the notes above;
+# the resolver degrades those links to plain text rather than publishing blank
+# pages. Add them here the day they gain content:
+#   Stack.md  Queue.md  Tries.md
+#
+# Also held back: the ADT cluster (ADT.md, Interface.md, Class.md,
+# Implementation Layer.md, Java.md). Those four re-explain the same
+# List/Set/Map/Stack/Queue/Deque mapping — Java.md does it three times over in
+# ~40% of its 318 lines — and want consolidating into one page before they're
+# worth publishing. "Data structure.md" above covers the same ground once.
+
+
+# ─── Programming → Algorithms (CS170) ──────────────────────────────────────────────────────
+[[section]]
+title   = "Algorithms"
+slug    = "algorithms"
+group   = "Programming"
+vault   = "cs"
+include = [
+  "cs170/algorithm/Divide and Conquer.md",
+  "cs170/algorithm/optimization/Optimization.md",
+  "cs170/algorithm/optimization/Reduction.md",
+  "cs170/algorithm/optimization/Linear programming/Linear programming.md",
+  "Minimum spanning trees.md",
+  "Graph Traversal.md",
+  "Single-source shortest paths.md",
+  "Topological sort.md",
+]
+
+
+# ─── Model → Machine Learning ────────────────────────────────────────────────────────
+# S1/S2 held back: a framework whose worked example is empty, and a to-do list
+# with an empty python block. The other 11 are substantive.
+[[section]]
+title   = "Machine Learning"
+slug    = "machine-learning"
+group   = "Model"
+vault   = "python"
+include = [
+  "ml/01 Probability.md",
+  "ml/02 MLE & MAP.md",
+  "ml/03 Linear Regression & Regularization.md",
+  "ml/04 Clustering.md",
+  "ml/05 Classifiers.md",
+  "ml/06 Optimization.md",
+  "ml/07 Neural Networks.md",
+  "ml/08 CNNs & ResNet.md",
+  "ml/09 Transformers & Attention.md",
+  "ml/10 Language Models.md",
+  "ml/11 Self-Supervised Learning.md",
+]
+# "## Notes" is the one genuinely empty section (a single "- " bullet).
+# "## → add must-knows to [[ML]]" is the porting checklist footer.
+strip_headings = ["## Notes", "## → add must-knows to [[ML]]"]
+
+# `- [ ]` here is a study artifact wrapped around real content, not an unfinished
+# task list: the Subtopics sections ARE the substance of these notes. Published
+# as checkboxes they read as abandoned; deboxing turns "- [ ] x" into "- x".
+debox = true
+
+# The breadcrumb line also carries `ref: attention_is_all_you_need.pdf`, which
+# points at a denylisted PDF. Nav replaces the breadcrumb; link arXiv if the
+# reference is wanted back.
+drop_lines_matching = [
+  '\[\[_ML Index',
+]
+
+# These parentheticals annotate where content came from — a paper cheatsheet, a
+# margin in a handwritten notebook, an Obsidian mechanic. Deliberately scrubbed
+# here rather than deleted from the vault: in Obsidian they tell you which
+# source a section came from, which is worth keeping. They just mean nothing to
+# a reader who has never seen the notebook.
+scrub_regex = [
+  '\s*\((?:from )?(?:your |the )?cheatsheet[^)]*\)',   # "(cheatsheet §9.1)", "(from cheatsheet §2)"
+  '\s*\(from your [^)]*\)',                            # "(from your red notes)"
+  '\s*\(collapse = flashcard\)',                       # an Obsidian mechanic
+]
+
+
 # ─── Networks ────────────────────────────────────────────────────────────────
 # The flagship. Already in the target format: YAML frontmatter, faceted tags,
 # zero wikilinks, zero embeds.
@@ -43,6 +179,8 @@ root = "spring2026 copy"
 title   = "Networks"
 slug    = "networks"
 vault   = "spring2026"
+# No `group`: top-level. It's 18 notes / 15k words — over half the site — and it
+# is neither programming nor ML modelling.
 include = ["networks/topics/*.md"]
 
 strip_headings = ["## 7. Homework examples"]
@@ -101,111 +239,6 @@ scrub_regex = [
 #   networks/Midterm Learning Guide — a walkthrough of the real midterm
 #   networks/Midterm Method Index   — subsumed by the Final index
 # All three are also in [denylist] so a stray include can't resurrect them.
-
-
-# ─── Machine Learning ────────────────────────────────────────────────────────
-# S1/S2 held back: a framework whose worked example is empty, and a to-do list
-# with an empty python block. The other 11 are substantive.
-[[section]]
-title   = "Machine Learning"
-slug    = "machine-learning"
-vault   = "python"
-include = [
-  "ml/01 Probability.md",
-  "ml/02 MLE & MAP.md",
-  "ml/03 Linear Regression & Regularization.md",
-  "ml/04 Clustering.md",
-  "ml/05 Classifiers.md",
-  "ml/06 Optimization.md",
-  "ml/07 Neural Networks.md",
-  "ml/08 CNNs & ResNet.md",
-  "ml/09 Transformers & Attention.md",
-  "ml/10 Language Models.md",
-  "ml/11 Self-Supervised Learning.md",
-]
-# "## Notes" is the one genuinely empty section (a single "- " bullet).
-# "## → add must-knows to [[ML]]" is the porting checklist footer.
-strip_headings = ["## Notes", "## → add must-knows to [[ML]]"]
-
-# `- [ ]` here is a study artifact wrapped around real content, not an unfinished
-# task list: the Subtopics sections ARE the substance of these notes. Published
-# as checkboxes they read as abandoned; deboxing turns "- [ ] x" into "- x".
-debox = true
-
-# The breadcrumb line also carries `ref: attention_is_all_you_need.pdf`, which
-# points at a denylisted PDF. Nav replaces the breadcrumb; link arXiv if the
-# reference is wanted back.
-drop_lines_matching = [
-  '\[\[_ML Index',
-]
-
-# These parentheticals annotate where content came from — a paper cheatsheet, a
-# margin in a handwritten notebook, an Obsidian mechanic. Deliberately scrubbed
-# here rather than deleted from the vault: in Obsidian they tell you which
-# source a section came from, which is worth keeping. They just mean nothing to
-# a reader who has never seen the notebook.
-scrub_regex = [
-  '\s*\((?:from )?(?:your |the )?cheatsheet[^)]*\)',   # "(cheatsheet §9.1)", "(from cheatsheet §2)"
-  '\s*\(from your [^)]*\)',                            # "(from your red notes)"
-  '\s*\(collapse = flashcard\)',                       # an Obsidian mechanic
-]
-
-
-# ─── Data Structures (CS61B) ─────────────────────────────────────────────────
-[[section]]
-title   = "Data Structures"
-slug    = "data-structures"
-vault   = "cs"
-include = [
-  "cs61b/Data structure.md",
-  "cs61b/OOP.md",
-  "cs61b/Asymptotic.md",
-  "cs61b/ArrayList.md",
-  "cs61b/LinkedList.md",
-  "cs61b/Heap.md",
-  "cs61b/Hashing.md",
-  "cs61b/Search Trees.md",
-  "Red_Black Trees.md",
-  "B-Trees.md",
-  "Union-Find (Disjoint Set).md",
-  # The sort family. Individually thin, but each is linked from
-  # "Comparison-based sort" — leaving them out turned those links into dangling
-  # plain text and made the section read as half-written.
-  "cs61b/Sorting and Selecting.md",
-  "cs61b/Comparison-based sort.md",
-  "cs61b/QuickSort.md",
-  "cs61b/MergeSort.md",
-  "cs61b/HeapSort.md",
-  "cs61b/InsertionSort.md",
-  "cs61b/RadixSort.md",
-]
-# Not included, all currently 0 bytes. They are linked *from* the notes above;
-# the resolver degrades those links to plain text rather than publishing blank
-# pages. Add them here the day they gain content:
-#   Stack.md  Queue.md  Tries.md
-#
-# Also held back: the ADT cluster (ADT.md, Interface.md, Class.md,
-# Implementation Layer.md, Java.md). Those four re-explain the same
-# List/Set/Map/Stack/Queue/Deque mapping — Java.md does it three times over in
-# ~40% of its 318 lines — and want consolidating into one page before they're
-# worth publishing. "Data structure.md" above covers the same ground once.
-
-
-# ─── Algorithms (CS170) ──────────────────────────────────────────────────────
-[[section]]
-title   = "Algorithms"
-slug    = "algorithms"
-vault   = "cs"
-include = [
-  "cs170/algorithm/Divide and Conquer.md",
-  "cs170/algorithm/optimization/Optimization.md",
-  "cs170/algorithm/optimization/Reduction.md",
-  "cs170/algorithm/optimization/Linear programming/Linear programming.md",
-  "Minimum spanning trees.md",
-  "Graph Traversal.md",
-  "Single-source shortest paths.md",
-  "Topological sort.md",
-]
 
 
 # ─── Per-file surgery ────────────────────────────────────────────────────────

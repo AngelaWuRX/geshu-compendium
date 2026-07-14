@@ -40,6 +40,50 @@ plugins:
 nav:
   - Home: index.md
   # BEGIN GENERATED NAV — scripts/sync_vault.py rewrites everything between
+  - Programming:
+      - Python:
+          - 📖 hello-algo — Reading Notes: notes/python/hello-algo-notes.md
+      - Data Structures:
+          - ArrayList: notes/data-structures/arraylist.md
+          - Asymptotic: notes/data-structures/asymptotic.md
+          - B-Trees: notes/data-structures/b-trees.md
+          - Comparison-based sort: notes/data-structures/comparison-based-sort.md
+          - Data structure: notes/data-structures/data-structure.md
+          - Hashing: notes/data-structures/hashing.md
+          - Heap: notes/data-structures/heap.md
+          - HeapSort: notes/data-structures/heapsort.md
+          - InsertionSort: notes/data-structures/insertionsort.md
+          - LinkedList: notes/data-structures/linkedlist.md
+          - MergeSort: notes/data-structures/mergesort.md
+          - OOP: notes/data-structures/oop.md
+          - QuickSort: notes/data-structures/quicksort.md
+          - RadixSort: notes/data-structures/radixsort.md
+          - Red Black Trees: notes/data-structures/red-black-trees.md
+          - Search Trees: notes/data-structures/search-trees.md
+          - Sorting and Selecting: notes/data-structures/sorting-and-selecting.md
+          - Union-Find (Disjoint Set): notes/data-structures/union-find-disjoint-set.md
+      - Algorithms:
+          - Divide and Conquer: notes/algorithms/divide-and-conquer.md
+          - Graph Traversal: notes/algorithms/graph-traversal.md
+          - Linear programming: notes/algorithms/linear-programming.md
+          - Minimum spanning trees: notes/algorithms/minimum-spanning-trees.md
+          - Optimization: notes/algorithms/optimization.md
+          - Reduction: notes/algorithms/reduction.md
+          - Single-source shortest paths: notes/algorithms/single-source-shortest-paths.md
+          - Topological sort: notes/algorithms/topological-sort.md
+  - Model:
+      - Machine Learning:
+          - Probability: notes/machine-learning/01-probability.md
+          - MLE & MAP: notes/machine-learning/02-mle-and-map.md
+          - Linear Regression & Regularization: notes/machine-learning/03-linear-regression-and-regularization.md
+          - Clustering: notes/machine-learning/04-clustering.md
+          - Classifiers: notes/machine-learning/05-classifiers.md
+          - Optimization: notes/machine-learning/06-optimization.md
+          - Neural Networks: notes/machine-learning/07-neural-networks.md
+          - CNNs & ResNet: notes/machine-learning/08-cnns-and-resnet.md
+          - Transformers & Attention: notes/machine-learning/09-transformers-and-attention.md
+          - Language Models: notes/machine-learning/10-language-models.md
+          - Self-Supervised Learning: notes/machine-learning/11-self-supervised-learning.md
   - Networks:
       - Graph Counting Tricks: notes/networks/01-graph-counting-tricks.md
       - Expected Counts and Union Bounds: notes/networks/02-expected-counts-and-union-bounds.md
@@ -59,46 +103,6 @@ nav:
       - Information Cascades and Influence Maximization: notes/networks/16-information-cascades.md
       - SIR and Epidemics: notes/networks/17-sir-and-epidemics.md
       - SIR on Networks: notes/networks/18-sir-on-networks.md
-  - Machine Learning:
-      - Probability: notes/machine-learning/01-probability.md
-      - MLE & MAP: notes/machine-learning/02-mle-and-map.md
-      - Linear Regression & Regularization: notes/machine-learning/03-linear-regression-and-regularization.md
-      - Clustering: notes/machine-learning/04-clustering.md
-      - Classifiers: notes/machine-learning/05-classifiers.md
-      - Optimization: notes/machine-learning/06-optimization.md
-      - Neural Networks: notes/machine-learning/07-neural-networks.md
-      - CNNs & ResNet: notes/machine-learning/08-cnns-and-resnet.md
-      - Transformers & Attention: notes/machine-learning/09-transformers-and-attention.md
-      - Language Models: notes/machine-learning/10-language-models.md
-      - Self-Supervised Learning: notes/machine-learning/11-self-supervised-learning.md
-  - Data Structures:
-      - ArrayList: notes/data-structures/arraylist.md
-      - Asymptotic: notes/data-structures/asymptotic.md
-      - B-Trees: notes/data-structures/b-trees.md
-      - Comparison-based sort: notes/data-structures/comparison-based-sort.md
-      - Data structure: notes/data-structures/data-structure.md
-      - Hashing: notes/data-structures/hashing.md
-      - Heap: notes/data-structures/heap.md
-      - HeapSort: notes/data-structures/heapsort.md
-      - InsertionSort: notes/data-structures/insertionsort.md
-      - LinkedList: notes/data-structures/linkedlist.md
-      - MergeSort: notes/data-structures/mergesort.md
-      - OOP: notes/data-structures/oop.md
-      - QuickSort: notes/data-structures/quicksort.md
-      - RadixSort: notes/data-structures/radixsort.md
-      - Red Black Trees: notes/data-structures/red-black-trees.md
-      - Search Trees: notes/data-structures/search-trees.md
-      - Sorting and Selecting: notes/data-structures/sorting-and-selecting.md
-      - Union-Find (Disjoint Set): notes/data-structures/union-find-disjoint-set.md
-  - Algorithms:
-      - Divide and Conquer: notes/algorithms/divide-and-conquer.md
-      - Graph Traversal: notes/algorithms/graph-traversal.md
-      - Linear programming: notes/algorithms/linear-programming.md
-      - Minimum spanning trees: notes/algorithms/minimum-spanning-trees.md
-      - Optimization: notes/algorithms/optimization.md
-      - Reduction: notes/algorithms/reduction.md
-      - Single-source shortest paths: notes/algorithms/single-source-shortest-paths.md
-      - Topological sort: notes/algorithms/topological-sort.md
   # END GENERATED NAV
   - Resources: resources/index.md
   - Blog: blog/index.md
