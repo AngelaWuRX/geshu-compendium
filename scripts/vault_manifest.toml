@@ -1,0 +1,236 @@
+# What publishes, where it lands, and what must never leave the vault.
+#
+# This file is policy. It is meant to be read and argued with, which is why it
+# lives here as data rather than as a dict inside sync_vault.py.
+#
+# Sections use explicit per-file include lists rather than directory globs. That
+# is not fussiness: in the CS vault the folder tree contradicts the link graph
+# (cs61b/Graphs.md links to Graph Traversal.md, Minimum spanning trees.md and
+# Single-source shortest paths.md, all of which sit at the vault root), so a
+# glob over cs61b/ would miss half the section and a glob over the root would
+# sweep in a CS189 exam cram sheet.
+
+[output]
+docs_root  = "docs/notes"
+assets_dir = "docs/assets/images"
+
+[[vault]]
+name = "cs"
+root = "Computer Science copy"
+
+[[vault]]
+name = "python"
+root = "python copy"
+
+[[vault]]
+name = "spring2026"
+root = "spring2026 copy"
+
+
+# ─── Networks ────────────────────────────────────────────────────────────────
+# The flagship. Already in the target format: YAML frontmatter, faceted tags,
+# zero wikilinks, zero embeds.
+#
+# The homework coupling runs deeper than the "## 7" section suggests. Of 78
+# citations across the 18 notes, only 47 are in section 7. The rest:
+#   - 22 lemma headings carry a pointer suffix: "### Perfect matching count (HW5 Q2)".
+#     The lemma itself is textbook maths; the parenthetical is the only HW-specific
+#     part, so scrubbing it leaves the content whole.
+#   - 3 whole sections ARE a homework problem ("## HW8 P1: Direct (overlap-method)
+#     proof..."). Those go entirely — they're per-problem walkthroughs.
+#   - a handful of prose asides, incl. one pointing at a corrected HW solution.
+[[section]]
+title   = "Networks"
+slug    = "networks"
+vault   = "spring2026"
+include = ["networks/topics/*.md"]
+
+strip_headings = ["## 7. Homework examples"]
+
+# These notes number their sections, so removing #7 leaves "1..6, 8, 9, 10" —
+# a gap that advertises the removal. Renumber to run consecutively.
+renumber_headings = true
+
+# Sections whose title IS a homework problem. Prefix-matched because the title
+# varies per file.
+strip_heading_prefixes = ["## HW", "### HW"]
+
+# Kill whole lines that only exist to point at homework or its solutions.
+drop_lines_matching = [
+  "had a typo in the original",   # "...study the corrected solution" (12 Pref Attachment)
+]
+
+# Where a citation is load-bearing in the sentence, deleting it leaves debris
+# ("Why this is harder than." / "argument (the bulk of)"). Name the replacement
+# instead of letting a regex guess. Each entry is [pattern, replacement]; the
+# script warns if one stops matching, so a vault edit can't silently skip it.
+rewrite = [
+  ['\(the hard part, HW3 Q3 ii-v\)',        '(the hard part)'],
+  ['\s*\(the bulk of HW3 Q3\)',             ''],
+  ['\s*\(HW7 P2, P3\)',                     ''],
+  ['\s*\(HW7 P3, HW8 P3\)',                 ''],
+  ['Why this is harder than HW7 P2\.',      'Why this is harder than the plain giant-component argument.'],
+  ['\(final outbreak size, HW7 P3 bonus\)', '(final outbreak size)'],
+  ['Proof: repeat HW7 P2 \(iv\)',           'Proof: repeat the giant-component argument (iv)'],
+  ['\s*\(HW7 P3 — Lemma 7\.2\)',            ''],
+  ['or the corrected HW5 Q3\(iv\) approach ', ''],
+]
+
+# Only self-contained pointer parentheticals reach here — "(HW5 Q2)" appended to
+# a lemma heading. The lemma is textbook maths; the parenthetical is the whole
+# of the HW-specific part, so removing it leaves a complete sentence.
+# The [\d.-]* tail covers sub-part numbering like "(HW6 Q2.3.2-3)".
+scrub_regex = [
+  '\s*\((?:HW|hw)\s?\d+\s*[PQ]?[\d.-]*\)',
+]
+
+# Deliberately absent from this section:
+#   networks/hw/**                  — derivative of the staff solution PDFs
+#   networks/Midterm Learning Guide — a walkthrough of the real midterm
+#   networks/Midterm Method Index   — subsumed by the Final index
+# All three are also in [denylist] so a stray include can't resurrect them.
+
+
+# ─── Machine Learning ────────────────────────────────────────────────────────
+# S1/S2 held back: a framework whose worked example is empty, and a to-do list
+# with an empty python block. The other 11 are substantive.
+[[section]]
+title   = "Machine Learning"
+slug    = "machine-learning"
+vault   = "python"
+include = [
+  "ml/01 Probability.md",
+  "ml/02 MLE & MAP.md",
+  "ml/03 Linear Regression & Regularization.md",
+  "ml/04 Clustering.md",
+  "ml/05 Classifiers.md",
+  "ml/06 Optimization.md",
+  "ml/07 Neural Networks.md",
+  "ml/08 CNNs & ResNet.md",
+  "ml/09 Transformers & Attention.md",
+  "ml/10 Language Models.md",
+  "ml/11 Self-Supervised Learning.md",
+]
+strip_headings = ["## Notes", "## → add must-knows to [[ML]]"]
+# `- [ ]` in these notes is a study artifact, not an unfinished task: the
+# Subtopics sections are the actual content. Unchecking is handled by
+# `debox = true`, which turns "- [ ] x" into "- x".
+debox = true
+
+
+# ─── Data Structures (CS61B) ─────────────────────────────────────────────────
+[[section]]
+title   = "Data Structures"
+slug    = "data-structures"
+vault   = "cs"
+include = [
+  "cs61b/Data structure.md",
+  "cs61b/OOP.md",
+  "cs61b/Asymptotic.md",
+  "cs61b/ArrayList.md",
+  "cs61b/LinkedList.md",
+  "cs61b/Heap.md",
+  "cs61b/Hashing.md",
+  "cs61b/QuickSort.md",
+  "cs61b/Comparison-based sort.md",
+  "cs61b/Search Trees.md",
+  "Red_Black Trees.md",
+  "B-Trees.md",
+  "Union-Find (Disjoint Set).md",
+]
+# Not included, all currently 0 bytes. They are linked *from* the notes above;
+# the resolver degrades those links to plain text rather than publishing blank
+# pages. Add them here the day they gain content:
+#   Stack.md  Queue.md  Tries.md
+
+
+# ─── Algorithms (CS170) ──────────────────────────────────────────────────────
+[[section]]
+title   = "Algorithms"
+slug    = "algorithms"
+vault   = "cs"
+include = [
+  "cs170/algorithm/Divide and Conquer.md",
+  "cs170/algorithm/optimization/Optimization.md",
+  "cs170/algorithm/optimization/Reduction.md",
+  "cs170/algorithm/optimization/Linear programming/Linear programming.md",
+  "Minimum spanning trees.md",
+  "Graph Traversal.md",
+  "Single-source shortest paths.md",
+  "Topological sort.md",
+]
+
+
+# ─── Per-file surgery ────────────────────────────────────────────────────────
+
+# The "HW" column indexes staff problems by number, and some row names are
+# defined by them ("Multiplicative Chernov (HW7 P1)").
+[[patch]]
+file = "spring2026 copy/networks/Final Method Index.md"
+drop_table_columns = ["HW"]
+scrub_regex = ['\s*\((?:HW|hw)\s?\d+\s*P?\d*\)']
+
+# `### Solving problems` embeds a screenshot of a course problem's answer.
+[[patch]]
+file = "Computer Science copy/cs61b/OOP.md"
+drop_embeds = ["OOP eg answer.png"]
+
+[[patch]]
+file = "Computer Science copy/cs61b/Asymptotic.md"
+drop_embeds = ["asymptotic solution.png"]
+
+
+# ─── Denylist ────────────────────────────────────────────────────────────────
+# A gate, not a filter. A hit anywhere stops the whole run and writes nothing.
+# An include/deny intersection means the manifest is wrong; that is an error,
+# not a silent skip.
+[denylist]
+paths = [
+  # Staff / instructor material
+  "spring2026 copy/networks/hw/**",
+  "spring2026 copy/networks/Midterm Learning Guide.md",
+  "spring2026 copy/networks/Midterm Method Index.md",
+  "spring2026 copy/networks/midterm-solutions.pdf",
+  "spring2026 copy/networks/lecture_notes/**",
+  "spring2026 copy/machine_learning/lec/**",
+  "spring2026 copy/machine_learning/hw/**",
+  "spring2026 copy/machine_learning/reading/**",
+  "spring2026 copy/machine_learning/Guideline.md",
+  "spring2026 copy/machine_learning/hw4_written_student.tex",
+  "Computer Science copy/Files/**",
+  "Computer Science copy/Screenshot/OOP eg answer.png",
+  "Computer Science copy/Screenshot/asymptotic solution.png",
+  "Computer Science copy/Untitled.md",
+  # Own work that stays private
+  "python copy/application_plan/**",
+  "python copy/profile_strategy.md",
+  "python copy/daily_track/**",
+  "python copy/00 Dashboard.md",
+  "python copy/01 Sprint Plan.md",
+  # Copyright
+  "python copy/pdf/**",
+  # Blanket
+  "**/*.pdf",
+  "**/*.tex",
+  "**/midterm*",
+  "**/*_sol*",
+  "**/resume*",
+]
+
+# Regex, case-insensitive, applied to every rendered byte before any write.
+# A hit reports file+line+which-pattern, never the matched text — that would
+# copy the thing we're protecting into terminal scrollback and CI logs.
+fail_patterns = [
+  'ruoxi',
+  'angela wu',
+  'AngelaWuRX',
+  '510[- ]?499',
+  'berkeley\.edu',
+  'Shixiang',
+  'AgentHLE',
+  'NeurIPS',
+  '\bHW ?\d+ ?[PQ]\d+',            # "HW7 P2" — a homework citation that survived stripping
+  '\bMidterm Q\d',                 # "Midterm Q5(f)"
+  'from your (red|bottom-right|margin)',   # second-person refs to private artifacts
+  'Tell me if you want',           # assistant chatter left in _ML Index
+]

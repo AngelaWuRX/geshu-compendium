@@ -40,7 +40,25 @@ plugins:
 nav:
   - Home: index.md
   # BEGIN GENERATED NAV — scripts/sync_vault.py rewrites everything between
-  # these two markers. Do not hand-edit; edit the vault + manifest and re-run.
+  - Networks:
+      - Graph Counting Tricks: notes/networks/01-graph-counting-tricks.md
+      - Expected Counts and Union Bounds: notes/networks/02-expected-counts-and-union-bounds.md
+      - Concentration: notes/networks/03-concentration.md
+      - Configuration Model: notes/networks/04-configuration-model.md
+      - Thresholds: notes/networks/05-thresholds.md
+      - Giant Component: notes/networks/06-giant-component.md
+      - Branching Processes: notes/networks/07-branching-processes.md
+      - Diameter of the Giant Component: notes/networks/08-diameter-of-giant.md
+      - Directed Networks (Digraphs, SCC, Bow-tie): notes/networks/09-directed-networks.md
+      - Stochastic Block Model and Multitype Branching Process: notes/networks/10-sbm-and-multitype-bp.md
+      - Small World Models: notes/networks/11-small-world.md
+      - Preferential Attachment: notes/networks/12-preferential-attachment.md
+      - Markov Chains, Random Walks, PageRank: notes/networks/13-markov-chains-and-pagerank.md
+      - Mixing Time, Conductance, Spectral Gap: notes/networks/14-mixing-time-and-spectral-gap.md
+      - Spectral Clustering and Graph Partitioning: notes/networks/15-spectral-clustering.md
+      - Information Cascades and Influence Maximization: notes/networks/16-information-cascades.md
+      - SIR and Epidemics: notes/networks/17-sir-and-epidemics.md
+      - SIR on Networks (post-midterm): notes/networks/18-sir-on-networks.md
   # END GENERATED NAV
   - Resources: resources/index.md
   - Blog: blog/index.md
