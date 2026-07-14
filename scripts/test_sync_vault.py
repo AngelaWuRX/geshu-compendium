@@ -235,8 +235,11 @@ class TestPolicyGate(unittest.TestCase):
         try:
             sv.assert_publishable("call 510-499-0090\n", "t.md", self.patterns)
         except sv.PolicyViolation as e:
+            # The whole point: enough to find it, not enough to leak it.
             self.assertNotIn("0090", str(e))
-            self.assertIn("t.md:1", str(e))
+            self.assertNotIn("510-499", str(e))
+            self.assertIn("t.md", str(e))
+            self.assertIn("line 1", str(e))
         else:
             self.fail("expected PolicyViolation")
 
