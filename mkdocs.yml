@@ -58,7 +58,7 @@ nav:
       - Spectral Clustering and Graph Partitioning: notes/networks/15-spectral-clustering.md
       - Information Cascades and Influence Maximization: notes/networks/16-information-cascades.md
       - SIR and Epidemics: notes/networks/17-sir-and-epidemics.md
-      - SIR on Networks (post-midterm): notes/networks/18-sir-on-networks.md
+      - SIR on Networks: notes/networks/18-sir-on-networks.md
   - Machine Learning:
       - Probability: notes/machine-learning/01-probability.md
       - MLE & MAP: notes/machine-learning/02-mle-and-map.md

@@ -563,7 +563,10 @@ def find_violations(rendered: str, src_rel: str, patterns: list[re.Pattern]) -> 
     for i, line in enumerate(rendered.splitlines(), 1):
         for pat in patterns:
             if pat.search(line):
-                hits.append(f"{src_rel}:{i} matches /{pat.pattern}/")
+                # Line numbers are into the RENDERED page, not the source note —
+                # transforms have already added and removed lines by this point.
+                # Say so, or you go hunting at the wrong line in the vault.
+                hits.append(f"{src_rel} -> output line {i}: matches /{pat.pattern}/")
     return hits
 
 
@@ -811,7 +814,8 @@ def main() -> int:
         # sources or adding manifest rules, and doing that one-at-a-time across
         # 18 files is how you give up and weaken the patterns instead.
         raise PolicyViolation(
-            f"{len(violations)} hit(s) across {len({v.split(':')[0] for v in violations})} file(s):\n    "
+            f"{len(violations)} hit(s) across "
+            f"{len({v.split(' -> ')[0] for v in violations})} file(s):\n    "
             + "\n    ".join(violations)
         )
 

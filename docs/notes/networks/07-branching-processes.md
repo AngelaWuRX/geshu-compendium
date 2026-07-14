@@ -70,7 +70,7 @@ $$\Pr(c^{(1-\delta)n} \leq Z_n \leq c^{(1+\delta)n} \mid |T_X| = \infty) \to 1$$
   4. Union bound: $\sum_{s} e^{-Dk_s} \leq \frac{e^{-Dk_0}}{1-e^{-D}}$ (geometric series since $k_s \geq k_0 + s$)
   5. Use the bonus result to handle $Z_{n_0} < k_0$
 
-### Lemma: Linear growth conditioned on survival (HW3 Bonus)
+### Lemma: Linear growth conditioned on survival
 **Statement:** $\Pr(Z_n \leq \frac{c-1}{2}n \mid |T_X| = \infty) \leq \frac{e^{-D'n}}{1-e^{-D'}}$ where $D' = I(\frac{c+1}{2})$.
 
 **Proof idea:** If $Z_n = Y_{t_n}$ (BFS queue at generation boundary), then $Z_n$ small means $Y_t$ is small for some $t \geq n$. Apply concentration + union bound over $t \geq n$.

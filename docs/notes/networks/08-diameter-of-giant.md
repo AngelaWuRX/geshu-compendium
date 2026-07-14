@@ -76,5 +76,4 @@ $$Z_{a_n} \ge n^{1/2 + \epsilon/4}.$$
 - For CM and PA the same $\log n$ scaling holds; constant changes (use $\nu$ instead of $c$ for CM).
 
 ## 7. Where else it appears
-- HW10/11 references (if any) — typical-distance for SBM.
 - Lecture 14 (Small World): Watts-Strogatz / Newman-Watts beat the $\log n$ scaling at constant clustering. Standard graph models still have $\log n$.

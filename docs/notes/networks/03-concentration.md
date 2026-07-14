@@ -12,7 +12,7 @@ tags:
 
 ## 1. What this topic is about
 
-Concentration inequalities let you upgrade "in expectation" results to "with high probability" results. When a problem says "show that $X$ is close to its mean w.h.p." or "with probability tending to 1," you need concentration. The main tools in this course are Markov, Chebyshev, and the large deviation / rate function bound from HW1.
+Concentration inequalities let you upgrade "in expectation" results to "with high probability" results. When a problem says "show that $X$ is close to its mean w.h.p." or "with probability tending to 1," you need concentration. The main tools in this course are Markov, Chebyshev, and the large deviation / rate function bound.
 
 ## 2. Core objects / definitions
 

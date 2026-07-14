@@ -76,7 +76,7 @@ $$G_c(\lambda) = \frac{1}{1 + c(1-\lambda)}$$
 3. Apply dominated convergence (integrand $\leq 1$, $e^{-T}$ integrable)
 4. Evaluate: $\int_0^\infty e^{-T(1+c(1-\lambda))} dT = \frac{1}{1+c(1-\lambda)}$
 
-### Lemma: Survival probability (Lemma 1.1 from HW6)
+### Lemma: Survival probability
 **Statement:** For $\beta = c/n$: survival probability $\to 0$ if $c \leq 1$, and $\to 1 - 1/c$ if $c > 1$.
 
 **Proof idea:** Solve $G_c(\eta) = \eta$:

@@ -84,7 +84,7 @@ $$A_{ij} = \sum_{\alpha \in H_i} \sum_{\beta \in H_j} m_{\alpha,\beta} \quad (i 
 
 **Proof idea:** Sequential algorithm — pick lowest element, pair it with one of $M-1$ others, recurse. Gives $(M-1)(M-3)\cdots 1$ choices.
 
-### Lemma: Graph probability formula (Eq. 3 from HW5)
+### Lemma: Graph probability formula
 **Statement:** $P(G) = \frac{1}{(\ell_n - 1)!!} \prod_i \frac{d_i!}{2^{A_{ii}} A_{ii}!} \prod_{i<j} \frac{1}{A_{ij}!}$
 
 **Why it matters:** Gives the exact probability of any specific multigraph in the configuration model.

@@ -57,7 +57,8 @@ strip_heading_prefixes = ["## HW", "### HW"]
 
 # Kill whole lines that only exist to point at homework or its solutions.
 drop_lines_matching = [
-  "had a typo in the original",   # "...study the corrected solution" (12 Pref Attachment)
+  "had a typo in the original",       # "...study the corrected solution" (12 Pref Attachment)
+  "HW10/11 references \\(if any\\)",  # a to-do to self, not content (08 Diameter)
 ]
 
 # Where a citation is load-bearing in the sentence, deleting it leaves debris
@@ -74,6 +75,17 @@ rewrite = [
   ['Proof: repeat HW7 P2 \(iv\)',           'Proof: repeat the giant-component argument (iv)'],
   ['\s*\(HW7 P3 — Lemma 7\.2\)',            ''],
   ['or the corrected HW5 Q3\(iv\) approach ', ''],
+  # Pointer parentheticals the generic scrub can't reach: they carry words, not
+  # just a problem number.
+  ['\s*\(HW3 Bonus\)',                      ''],
+  ['\s*\(Eq\. 3 from HW5\)',                ''],
+  ['\s*\(Lemma 1\.1 from HW6\)',            ''],
+  ['\s*\(cite Lemma 7\.1 from HW7\)',       ''],
+  ['\s*bound from HW1\.',                   ' bound.'],
+  # "(post-midterm)" is a scope label and "see midterm SIR note" a cross-ref by
+  # exam scope — both name the exam to a reader who has no idea what it was.
+  ['\s*\(post-midterm\)',                   ''],
+  ['see midterm SIR note',                  'see the SIR and Epidemics note'],
 ]
 
 # Only self-contained pointer parentheticals reach here — "(HW5 Q2)" appended to
@@ -264,8 +276,12 @@ fail_patterns = [
   'Shixiang',
   'AgentHLE',
   'NeurIPS',
-  '\bHW ?\d+ ?[PQ]\d+',            # "HW7 P2" — a homework citation that survived stripping
-  '\bMidterm Q\d',                 # "Midterm Q5(f)"
+  # Deliberately broad. An earlier version matched only the "HW7 P2" shape and
+  # sailed straight past "(HW3 Bonus)", "(Eq. 3 from HW5)", "(cite Lemma 7.1
+  # from HW7)" and a stray "HW10/11 references" to-do. Any mention of a
+  # homework or the midterm is a citation; there is no innocent use.
+  '\bHW ?\d+',
+  '\bmidterm\b',
   'from your (red|bottom-right|margin)',   # second-person refs to private artifacts
   'Tell me if you want',           # assistant chatter left in _ML Index
 ]

@@ -103,7 +103,7 @@ $$f_{-\epsilon}(t/n) \leq \tilde Y_t / n \leq f_{+\epsilon}(t/n) + O(1/n).$$
 
 1. Write the BFS recurrence: $\tilde Y_{t+1} = \tilde Y_t + X_{t+1} - 1$, $X_{t+1} \sim \text{Bin}(N_t, c/n)$.
 2. State $\Delta_t \sim \text{Bin}(n-1, 1-(1-c/n)^t)$, $\tilde Y_t = \Delta_t + 1 - t$.
-3. Apply multiplicative Chernov to $\Delta_t$ (cite Lemma 7.1 from HW7).
+3. Apply multiplicative Chernov to $\Delta_t$.
 4. Identify the fluid limit $f(x) = 1 - e^{-cx} - x$ and its zero $\theta$.
 5. State the sandwich and conclude.
 
