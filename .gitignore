@@ -205,3 +205,23 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ─── Obsidian source vaults ───────────────────────────────────────────────
+# Local editing source only. Notes reach the site via scripts/sync_vault.py,
+# which writes the publishable subset into docs/. These directories hold staff
+# solution sets, lecture decks, resumes and copyrighted books — never commit them.
+/Computer Science copy/
+/python copy/
+/spring2026 copy/
+.obsidian/
+.DS_Store
+
+# ─── Defensive: never commit solutions or PII, even from a stray copy ─────
+# The site ships zero PDFs by design. If that ever changes, adding an explicit
+# "!docs/some-file.pdf" negation should be a conscious act.
+*.pdf
+*solution*
+[Mm]idterm*
+[Rr]esume*
+hw*_sol*
+*.tex

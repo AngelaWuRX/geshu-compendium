@@ -1,0 +1,52 @@
+#!/bin/sh
+# Blocks a commit whose staged content carries personal info or course-solution
+# markers. This is the last line of defense: .gitignore covers the vaults and
+# PDFs, sync_vault.py covers generated pages, and this covers everything else —
+# a note pasted straight into docs/, a stray file, a hand edit.
+#
+# Enable once per clone (hooks are not installed by git automatically):
+#   git config core.hooksPath scripts/githooks
+
+set -eu
+
+PATTERN='ruoxi|angela wu|AngelaWuRX|510[- ]?499|berkeley\.edu|Shixiang|AgentHLE|\bHW ?[0-9]+ ?P[0-9]+\b'
+
+failed=0
+
+# --diff-filter=d skips deletions; :"$f" reads the *staged* blob, not the worktree,
+# so `git add` + edit can't sneak content past the check.
+for f in $(git diff --cached --name-only --diff-filter=d); do
+    # This file and the converter's manifest necessarily spell out the patterns
+    # they screen for, so scanning them would always self-trip. They are policy
+    # definitions, not content — review them by eye instead.
+    case "$f" in
+        scripts/githooks/*|scripts/vault_manifest.toml|scripts/sync_vault.py|scripts/test_sync_vault.py)
+            continue ;;
+    esac
+    # Skip binaries: -I makes grep treat them as non-matching.
+    if git show ":$f" 2>/dev/null | grep -IinE "$PATTERN" >/dev/null 2>&1; then
+        if [ "$failed" -eq 0 ]; then
+            echo "BLOCKED: staged content matches a private-info pattern." >&2
+            echo >&2
+            failed=1
+        fi
+        echo "  $f" >&2
+        # Report which pattern hit and where, but never echo the matched text —
+        # that would copy the PII into terminal scrollback and CI logs.
+        git show ":$f" 2>/dev/null | grep -IinE "$PATTERN" | cut -d: -f1 | \
+            while read -r lineno; do echo "      line $lineno" >&2; done
+    fi
+done
+
+if [ "$failed" -ne 0 ]; then
+    cat >&2 <<'EOF'
+
+These patterns cover names, phone/email, private project codenames, and
+homework/exam citations. Fix the content rather than the pattern list.
+
+To commit anyway (you should be sure):  git commit --no-verify
+EOF
+    exit 1
+fi
+
+exit 0
