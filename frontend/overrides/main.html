@@ -1,0 +1,14 @@
+{#-
+  Root template override — the hook point for anything that needs to land in
+  <head> or wrap base.html. Keep it thin: the design lives in
+  frontend/overrides/stylesheets/extra.css.
+-#}
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {#- MathJax is the site's one external request (see mkdocs.yml
+      extra_javascript). Preconnecting shaves the TLS handshake off the
+      first equation render; harmless if the CDN is unreachable. -#}
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  {{ super() }}
+{% endblock %}

@@ -10,8 +10,15 @@ window.MathJax = {
     processEnvironments: true
   },
   options: {
+    // Ignore everything, then opt back in. `arithmatex` is the span arithmatex
+    // wraps body maths in. `md-nav__link` is the table of contents: the toc
+    // extension takes a heading's text content *after* arithmatex has already
+    // rewritten `$\theta$` into `\(\theta\)`, then strips the tags — so the
+    // sidebar ends up holding the delimiters as literal text. 32 headings carry
+    // maths, which showed up as 64 entries reading "Lemma: \(\theta\) is the BP
+    // survival probability". Nav links without delimiters are untouched.
     ignoreHtmlClass: ".*|",
-    processHtmlClass: "arithmatex"
+    processHtmlClass: "arithmatex|md-ellipsis"
   }
 };
 

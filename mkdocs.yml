@@ -5,18 +5,30 @@ repo_url: https://github.com/AngelaWuRX/geshu-compendium
 
 theme:
   name: material
+  # All presentation lives under frontend/ — see frontend/README.md.
+  # custom_dir supplies template overrides AND ships frontend/overrides/
+  # stylesheets/extra.css into the built site (MkDocs copies non-HTML files
+  # from the custom_dir), which is what `extra_css` below points at.
+  custom_dir: frontend/overrides
+  # No Google Fonts request (Material would load Roboto by default): the
+  # stylesheet sets system font stacks, incl. CJK families for the Chinese
+  # prose. Keeps the site self-contained and reader-private.
+  font: false
   palette:
+    # `custom` stops Material from emitting its own primary/accent colours;
+    # the real palette (ported from the author's Obsidian theme) is defined
+    # in frontend/overrides/stylesheets/extra.css for both schemes.
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: teal
-      accent: teal
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: teal
-      accent: teal
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -24,8 +36,11 @@ theme:
     - navigation.sections
     - navigation.top
     - navigation.indexes
+    - navigation.footer   # prev/next pager — the notes are meant to be read in order
+    - toc.follow
     - content.code.copy
     - search.suggest
+    - search.highlight
 
 plugins:
   - search:
@@ -130,8 +145,11 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
+# Served from frontend/overrides/stylesheets/extra.css via theme.custom_dir.
 extra_css:
   - stylesheets/extra.css
+
+copyright: Notes CC BY-NC-SA 4.0 · code MIT
 
 # Makes `mkdocs build --strict` fail on broken relative links, which is the
 # real test that the converter's wikilink resolution worked.
