@@ -183,6 +183,13 @@ vault   = "spring2026"
 # is neither programming nor ML modelling.
 include = ["networks/topics/*.md"]
 
+# The landing page: 30-odd methods, which topic each one powers, and a decision
+# tree from question shape to method. It says what 18 parallel notes can't — that
+# they're mostly the same few ideas in different clothes. Written in May and left
+# unpublished; the [[patch]] below was written for it and never fired, because no
+# section included the file.
+index = "networks/Final Method Index.md"
+
 # The template's spine is a triage protocol for a timed final: it teaches you to
 # recognize a question type and execute, not to understand the topic. The course
 # is over and these notes are a learning track now, so the exam slots go. What's
@@ -205,6 +212,16 @@ strip_headings = [
   "## Recognition signals",
   "## 8. Recognition signals",   # 11 Small World
   "## 9. Recognition signals",   # 09 Directed Networks
+  # The index page's own two exam sections. Publishing an exam-framed hub on top
+  # of notes we just de-examed would only contradict itself. Its other five
+  # sections are about how the topics relate, which is the point of the page.
+  #
+  # "## 7." is the last heading in that file, and a section runs to the next
+  # same-or-higher heading OR to EOF — so this strip takes everything after it
+  # too. That's correct, but it means the index page must not end in trailing
+  # prose: anything below §7 is published nowhere and edited into a void.
+  "## 6. Exam pitfall checklist",
+  "## 7. Strategic exam advice",
 ]
 
 # These notes number their sections, so removing #7 leaves "1..6, 8, 9, 10" —

@@ -100,6 +100,7 @@ nav:
           - Language Models: notes/machine-learning/10-language-models.md
           - Self-Supervised Learning: notes/machine-learning/11-self-supervised-learning.md
   - Networks:
+      - notes/networks/index.md
       - Graph Counting Tricks: notes/networks/01-graph-counting-tricks.md
       - Expected Counts and Union Bounds: notes/networks/02-expected-counts-and-union-bounds.md
       - Concentration: notes/networks/03-concentration.md

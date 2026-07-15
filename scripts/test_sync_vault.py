@@ -347,5 +347,64 @@ class TestRender(unittest.TestCase):
         self.assertNotIn("cs189", out)
 
 
+class TestBuildNav(unittest.TestCase):
+    """The nav block had no coverage at all until the index page needed it."""
+
+    def _note(self, slug, name, title=None, is_index=False):
+        sec = sv.Section(title=slug.title(), slug=slug, vault_root=Path("/v"),
+                         vault_name="v", include=[])
+        return sv.Note(src=Path("/v") / name, rel=name, section=sec,
+                       frontmatter={"title": title} if title else {},
+                       out=Path("docs/notes") / slug / name, is_index=is_index)
+
+    def test_ungrouped_section_stays_top_level(self):
+        cfg = {"section": [{"slug": "networks", "title": "Networks"}]}
+        nav = sv.build_nav([self._note("networks", "01-a.md", "A")], cfg, None)
+        self.assertEqual(nav, ["  - Networks:", "      - A: notes/networks/01-a.md"])
+
+    def test_group_header_is_emitted_once_for_consecutive_sections(self):
+        cfg = {"section": [
+            {"slug": "python", "title": "Python", "group": "Programming"},
+            {"slug": "algorithms", "title": "Algorithms", "group": "Programming"},
+        ]}
+        nav = sv.build_nav(
+            [self._note("python", "01-a.md", "A"), self._note("algorithms", "01-b.md", "B")],
+            cfg, None,
+        )
+        self.assertEqual(nav.count("  - Programming:"), 1)
+
+    def test_index_is_hoisted_above_notes_that_sort_before_it(self):
+        # "index.md" sorts after "01-..." alphabetically, which is precisely
+        # where navigation.indexes cannot use it.
+        cfg = {"section": [{"slug": "networks", "title": "Networks"}]}
+        nav = sv.build_nav([
+            self._note("networks", "01-a.md", "A"),
+            self._note("networks", "index.md", "Hub", is_index=True),
+        ], cfg, None)
+        self.assertLess(nav.index("      - notes/networks/index.md"),
+                        nav.index("      - A: notes/networks/01-a.md"))
+
+    def test_index_emits_a_bare_path_and_no_title(self):
+        # A titled entry makes it an ordinary child page; the bare path is the
+        # whole signal that folds it into the section header.
+        cfg = {"section": [{"slug": "networks", "title": "Networks"}]}
+        nav = sv.build_nav(
+            [self._note("networks", "index.md", "Method Index", is_index=True)], cfg, None)
+        self.assertIn("      - notes/networks/index.md", nav)
+        self.assertNotIn("Method Index", "\n".join(nav))
+
+    def test_section_without_an_index_is_unchanged(self):
+        cfg = {"section": [{"slug": "algorithms", "title": "Algorithms"}]}
+        nav = sv.build_nav([
+            self._note("algorithms", "02-b.md", "B"),
+            self._note("algorithms", "01-a.md", "A"),
+        ], cfg, None)
+        self.assertEqual(nav, [
+            "  - Algorithms:",
+            "      - A: notes/algorithms/01-a.md",
+            "      - B: notes/algorithms/02-b.md",
+        ])
+
+
 if __name__ == "__main__":
     unittest.main()

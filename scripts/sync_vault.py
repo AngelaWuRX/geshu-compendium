@@ -97,6 +97,7 @@ class Note:
     frontmatter: dict = field(default_factory=dict)
     body: str = ""
     out: Path | None = None
+    is_index: bool = False   # the section's landing page; see Section.index
 
 
 @dataclass
@@ -113,6 +114,12 @@ class Section:
     drop_lines_matching: list[str] = field(default_factory=list)
     renumber: bool = False
     debox: bool = False
+    # A vault-relative path (like `include`, not a glob) whose note becomes the
+    # section's landing page: written to <slug>/index.md and hoisted to the top
+    # of the section's nav as a bare path, which is the shape Material's
+    # `navigation.indexes` needs. Collected automatically — it does not need an
+    # `include` entry of its own.
+    index: str | None = None
 
 
 @dataclass
@@ -650,12 +657,25 @@ def collect(cfg: dict, only: list[str] | None, rep: Report) -> tuple[list[Note],
             drop_lines_matching=sc.get("drop_lines_matching", []),
             renumber=sc.get("renumber_headings", False),
             debox=sc.get("debox", False),
+            index=sc.get("index"),
         )
         if not section.vault_root.exists():
             rep.warn(f"vault {section.vault_name!r} not found at {section.vault_root} — skipped")
             continue
         seen: set[Path] = set()
-        for pattern in section.include:
+        # The index is a plain note that happens to land on index.md, so it goes
+        # through every transform and the same policy gate as the rest. Collected
+        # first so an `include` glob that also picks it up hits `seen` and can't
+        # add it a second time as an ordinary page.
+        patterns = list(section.include)
+        if section.index:
+            if not (section.vault_root / section.index).is_file():
+                raise SystemExit(
+                    f"[{section.slug}] index {section.index!r} not found in vault "
+                    f"{section.vault_name!r} — a section landing page cannot be a glob"
+                )
+            patterns.insert(0, section.index)
+        for pattern in patterns:
             matches = sorted(section.vault_root.glob(pattern))
             if not matches:
                 rep.warn(f"[{section.slug}] include {pattern!r} matched nothing")
@@ -670,7 +690,10 @@ def collect(cfg: dict, only: list[str] | None, rep: Report) -> tuple[list[Note],
                         f"[{section.slug}] include {pattern!r} selects denylisted "
                         f"path {rel_to_repo(src)!r} — the manifest contradicts itself"
                     )
-                notes.append(Note(src=src, rel=rel_to_repo(src), section=section))
+                notes.append(Note(
+                    src=src, rel=rel_to_repo(src), section=section,
+                    is_index=bool(section.index) and src == section.vault_root / section.index,
+                ))
     return notes, roots, deny
 
 
@@ -700,6 +723,12 @@ def build_nav(notes: list[Note], cfg: dict, only: list[str] | None) -> list[str]
     (Programming > Python > note); one without stays top-level. Consecutive
     sections sharing a group share the parent heading, so manifest order is
     nav order.
+
+    A section with an `index` note emits it first as a bare path — no title —
+    which is what `navigation.indexes` keys on to fold the page into the section
+    header rather than listing it as a child. Alphabetical order would put
+    index.md last ("i" sorts after the digits every note name starts with),
+    which is exactly where the feature can't see it, so it is hoisted.
     """
     lines: list[str] = []
     by_slug: dict[str, list[Note]] = {}
@@ -718,9 +747,14 @@ def build_nav(notes: list[Note], cfg: dict, only: list[str] | None) -> list[str]
             current_group = parent
         indent = "      " if parent else "  "
         lines.append(f"{indent}- {sc['title']}:")
-        for n in sorted(group, key=lambda x: x.out.name):
+        ordered = sorted(group, key=lambda x: (not x.is_index, x.out.name))
+        for n in ordered:
+            path = n.out.relative_to("docs").as_posix()
+            if n.is_index:
+                lines.append(f"{indent}    - {path}")
+                continue
             title = n.frontmatter.get("title", n.out.stem)
-            lines.append(f"{indent}    - {title}: {n.out.relative_to('docs').as_posix()}")
+            lines.append(f"{indent}    - {title}: {path}")
     return lines
 
 
@@ -793,7 +827,8 @@ def main() -> int:
         n.body, n._rels = lift_parent_children(n.body, n.rel)
         n.body, n.frontmatter = lift_leading_tag(n.body, n.frontmatter)
         n.frontmatter, n.body = ensure_title(n.frontmatter, n)
-        n.out = docs_root.relative_to(REPO) / n.section.slug / f"{slugify(Path(n.rel).stem)}.md"
+        name = "index.md" if n.is_index else f"{slugify(Path(n.rel).stem)}.md"
+        n.out = docs_root.relative_to(REPO) / n.section.slug / name
 
     # A rewrite that never fired anywhere means the vault text it targeted has
     # changed or gone. Surface it: silently skipping is how a citation sneaks
