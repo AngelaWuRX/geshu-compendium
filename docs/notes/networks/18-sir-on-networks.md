@@ -146,11 +146,6 @@ Force is **proportional to $k$** ⇒ high-degree susceptibles deplete fastest.
 
 ---
 
-## Recognition signals
-- "Outbreak threshold on $G(n,c/n)$ / CM" → forward-BP test $R_0 > 1$.
-- "Final outbreak size" → fixed-point in $\theta$ or $\eta$.
-- "Why hubs get hit first" → force ∝ degree.
-
 ## Pitfalls
 - For CM, the **excess** degree $G^*$ enters offspring (forward BP), not the raw $G$.
 - $R_0 = c\mathbb E[p_T] = c\bar p$; missing the $\bar p$ factor (averaging over recovery time) is the most common slip.

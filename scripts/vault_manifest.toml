@@ -183,7 +183,29 @@ vault   = "spring2026"
 # is neither programming nor ML modelling.
 include = ["networks/topics/*.md"]
 
-strip_headings = ["## 7. Homework examples"]
+# The template's spine is a triage protocol for a timed final: it teaches you to
+# recognize a question type and execute, not to understand the topic. The course
+# is over and these notes are a learning track now, so the exam slots go. What's
+# left — proof moves, lemmas, common mistakes, memory hooks — earns its place
+# either way.
+#
+# Matching is exact-full-line against VAULT text, before renumbering (sync_vault
+# strips at :758, renumbers at :777). So these are the vault's numbers, not the
+# ones the site shows: "## 9. What I should try first on an exam" publishes as
+# "## 8." today. A near-miss here is a silent no-op, not an error.
+#
+# Exactness is also what keeps "## 9. Common mistakes" (11 Small World) — the
+# same number, a section worth keeping.
+strip_headings = [
+  "## 7. Homework examples",
+  "## 3. Main question types",
+  "## 4. How to recognize this topic in a problem",
+  "## 9. What I should try first on an exam",
+  # Same idea, unnumbered — the six notes that never took the template.
+  "## Recognition signals",
+  "## 8. Recognition signals",   # 11 Small World
+  "## 9. Recognition signals",   # 09 Directed Networks
+]
 
 # These notes number their sections, so removing #7 leaves "1..6, 8, 9, 10" —
 # a gap that advertises the removal. Renumber to run consecutively.
@@ -218,7 +240,9 @@ rewrite = [
   ['\s*\(HW3 Bonus\)',                      ''],
   ['\s*\(Eq\. 3 from HW5\)',                ''],
   ['\s*\(Lemma 1\.1 from HW6\)',            ''],
-  ['\s*\(cite Lemma 7\.1 from HW7\)',       ''],
+  # '(cite Lemma 7.1 from HW7)' lived in 06's "try first on an exam" list, which
+  # strip_headings now takes whole. The rule went stale the moment that section
+  # did, and the stale-rewrite warning is what surfaced it.
   ['\s*bound from HW1\.',                   ' bound.'],
   # "(post-midterm)" is a scope label and "see midterm SIR note" a cross-ref by
   # exam scope — both name the exam to a reader who has no idea what it was.

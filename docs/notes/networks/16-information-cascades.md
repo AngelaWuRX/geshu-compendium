@@ -71,11 +71,6 @@ $$f(A_k) \geq \tfrac{1}{k}f(A^*)\sum_{i=0}^{k-1}(1-\tfrac{1}{k})^i = f(A^*)\big(
 
 ---
 
-## Recognition signals
-- "Choose $k$ seeds maximizing spread" → influence max.
-- "Diminishing returns" → submodularity.
-- IC model + reachability → submodular via random-digraph reduction.
-
 ## Pitfalls
 - Submodularity proof: must condition on $X$ (the random digraph) first; otherwise $C(\cdot)$ is random.
 - Greedy gives $1-1/e\approx 0.632$, not exact optimum (NP-hard).

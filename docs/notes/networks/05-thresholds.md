@@ -29,29 +29,14 @@ X is the number of isolated vertices here.
 $$\Pr(X > 0) \geq \frac{(E[X])^2}{E[X^2]}$$
 If this ratio $\to 1$, the structure exists w.h.p.
 
-## 3. Main question types
-
-- Show that a property has threshold $p^*(n)$ (prove both directions)
-- Prove absence of a structure below threshold via first moment
-- Prove existence above threshold via second moment
-- Determine when giant component appears ($c = 1$)
-- Determine when isolated vertices disappear ($p = \log n / n$)
-
-## 4. How to recognize this topic in a problem
-
-- The problem asks "when does [property] start to hold?"
-- You see "with probability tending to 1" or "w.h.p."
-- There's a parameter scaling like $p = c \cdot f(n)/n$ and you need to find the critical $c$
-- The behavior changes dramatically at some value
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Define an indicator-based count** $X = \sum I_i$ for the structure of interest
 2. **First moment (easy direction):** Compute $E[X]$, show it $\to 0$ on one side
 3. **Second moment (hard direction):** Compute $E[X^2]$, show $E[X^2]/(E[X])^2 \to 1$ on the other side
 4. The second moment calculation always involves **splitting $E[X^2]$ into diagonal ($i=j$) and off-diagonal ($i \neq j$) terms** and bounding the correlation
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Lemma: Threshold for isolated vertices in $G(n,p)$
 **Statement:** The threshold for isolated vertices is $p^* = \frac{\log n}{n}$.
@@ -85,7 +70,7 @@ If this ratio $\to 1$, the structure exists w.h.p.
 ### Key approximation
 $(1-p)^n \approx e^{-pn}$ — used constantly. More precisely: $\log(1-p) \geq -p - p^2$ for $p \leq 1/2$.
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Using $(1-p)^{2(n-1)}$ instead of $(1-p)^{2n-3}$ for two isolated vertices — forgetting the shared edge between $i$ and $j$
 - In second moment: forgetting that $E[I_i I_j] \neq E[I_i]E[I_j]$ (indicators are correlated through shared edges/vertices)
@@ -93,15 +78,7 @@ $(1-p)^n \approx e^{-pn}$ — used constantly. More precisely: $\log(1-p) \geq -
 - Forgetting the $1/2$ for unoriented cycles (counting both directions)
 - In tree counting: the $k^{k-2}$ formula is for labeled trees, not unlabeled
 
-## 8. What I should try first on an exam
-
-1. Define the count $X = \sum I_i$ for the relevant structure
-2. Compute $E[X]$ — this gives one direction for free via Markov
-3. For the other direction: set up $E[X^2]$, split into same/different terms
-4. Bound the ratio $E[X^2]/(E[X])^2$ — the correlation term is where the work is
-5. Use $(1-p)^n \approx e^{-pn}$ liberally
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "First moment kills it (structure gone), second moment saves it (structure exists)"
 - "$E[X^2]/(E[X])^2$: the closer to 1, the more concentrated $X$ is"

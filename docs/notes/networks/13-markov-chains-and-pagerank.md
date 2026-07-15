@@ -74,11 +74,6 @@ This bounds $\|\mu_{t,x}-\pi\|_{TV}$.
 
 ---
 
-## Recognition signals
-- "stationary distribution / does it converge" → Lemma 1–3.
-- "PageRank from random walk" → restart trick to make irreducible+aperiodic.
-- "How fast PageRank mixes" → Lemma 7 coupling.
-
 ## Common pitfalls
 - Forgetting periodicity kills convergence (e.g., bipartite RW). Fix: lazy chain.
 - Forgetting sinks make $P$ ill-defined (divide by 0); restart fixes it.

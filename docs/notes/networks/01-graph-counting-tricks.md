@@ -30,21 +30,7 @@ Counting specific substructures (cycles, trees, matchings, wedges) in random gra
 
 **Inductive bound:** $k^k \leq k! \cdot e^{k-1}$ (proved using $(1+1/k)^k \leq e$)
 
-## 3. Main question types
-
-- Count cycles, trees, wedges, triangles in $G(n,p)$
-- Count matchings in the configuration model
-- Bound the expected number of substructures
-- Determine probability of specific multi-graph in configuration model
-
-## 4. How to recognize this topic in a problem
-
-- "How many ways to have a cycle/tree/path on $k$ vertices?"
-- Expected count calculations that require careful combinatorics
-- Configuration model probability formula
-- Anything where you need to avoid overcounting
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Start with labeled count**, then divide out symmetries
 2. **For cycles:** $k!/2k = (k-1)!/2$ (remove starting point and orientation)
@@ -52,7 +38,7 @@ Counting specific substructures (cycles, trees, matchings, wedges) in random gra
 4. **For matchings:** sequential algorithm gives $(M-1)!!$
 5. **Bound binomial coefficients:** $\binom{n}{k} \leq n^k/k!$
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Cycle counting
 **$(k-1)!/2$ unoriented cycles on $k$ labeled vertices.**
@@ -82,7 +68,7 @@ When computing $E[N_w^2]$, classify pairs of wedges by edge overlap:
 $$N(G) = \prod_i \frac{d_i!}{2^{A_{ii}} A_{ii}!} \cdot \prod_{i<j} \frac{1}{A_{ij}!}$$
 (Proof via decentralized algorithm — each vertex independently chooses local matchings.)
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Forgetting to divide by 2 for cycle orientation
 - Using $k!$ instead of $(k-1)!/2$ for cycle count
@@ -90,14 +76,7 @@ $$N(G) = \prod_i \frac{d_i!}{2^{A_{ii}} A_{ii}!} \cdot \prod_{i<j} \frac{1}{A_{i
 - In overlap counting: missing a case or miscounting the number of pairs in each case
 - Confusing labeled vs unlabeled counts
 
-## 8. What I should try first on an exam
-
-1. Identify what you're counting (cycles, trees, matchings, etc.)
-2. Start with the overcounted version (all orderings)
-3. Divide out symmetries carefully (rotations, reflections, starting points)
-4. Sanity check with small cases ($k = 3$: should get 1 triangle, etc.)
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "Cycles: $k!$ permutations, divide by $2k$ = $(k-1)!/2$"
 - "Trees: $k^{k-2}$ (Cayley's formula)"

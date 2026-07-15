@@ -24,20 +24,7 @@ In $G(n, p)$ with $p = c/n$, when $c > 1$ a unique component of size $\Theta(n)$
 - **Component size:** $|C(x)| = \min\{t : \tilde Y_t = 0\} = \min\{t : \tilde Y_t \leq 0\}$.
 - **Giant fraction $\theta$:** non-trivial solution of $\theta + e^{-c\theta} = 1$, equivalently the unique $\theta \in (0,1)$ with $f(\theta) = 0$ where $f(x) = 1 - e^{-cx} - x$.
 
-## 3. Main question types
-
-- Show $|C(x)|/n \to \theta$ in probability conditioned on $|C(x)|$ being "large" (i.e., $\geq K\log n$).
-- Show no component besides the giant exceeds $K\log n$ (uniqueness — separate argument).
-- Threshold: show $\theta > 0$ iff $c > 1$.
-- Compute $\theta$ implicitly or to leading order.
-
-## 4. How to recognize this topic in a problem
-
-- "$G(n, c/n)$" with $c > 1$.
-- Asks about size of largest component, outbreak, percolation cluster.
-- Hints: "show concentration around the survival probability of a branching process."
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Set up BFS exploration**, write the $\tilde Y_t$ recurrence.
 2. **Find the binomial:** show $N_t \sim \text{Bin}(n-1, (1-c/n)^t)$ via the "each unexplored vertex independently survives each round" coupling. Then $\Delta_t := n-1-N_t \sim \text{Bin}(n-1, 1 - (1-c/n)^t)$ and $\tilde Y_t = \Delta_t + 1 - t$.
@@ -47,7 +34,7 @@ In $G(n, p)$ with $p = c/n$, when $c > 1$ a unique component of size $\Theta(n)$
 6. **Convert to bounds on $|C(x)|$:** lower from sandwich ⇒ $\tilde Y_t > 0$ until $t \approx (\theta-\delta)n$; upper from sandwich ⇒ $\tilde Y_t < 0$ by $t \approx (\theta+\delta)n$.
 7. **Union bound over $t \in [K\log n, n]$:** the geometric tail of $e^{-\epsilon^2 t / 8}$ gives $O(e^{-\epsilon^2 K \log n / 8}) \to 0$, hence "w.h.p. for all $t$ in range".
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Lemma: BFS active queue is binomially distributed
 
@@ -91,7 +78,7 @@ $$f_{-\epsilon}(t/n) \leq \tilde Y_t / n \leq f_{+\epsilon}(t/n) + O(1/n).$$
 
 **Proof idea.** $f_{-\epsilon}'(0) = (1-\epsilon)c - 1 > 0$ when $\epsilon < 1 - 1/c$, $f_{-\epsilon}(1) < 0$, $f_{-\epsilon}$ is strictly convex ⇒ exactly one nontrivial zero. Convergence $x_-(\epsilon) \to \theta$ uses $f$ is strictly convex with $f(\theta)=0$, so $f(\theta - \delta) > 0$, and $f_{-\epsilon}(\theta - \delta) \to f(\theta - \delta) > 0$ by continuity in $\epsilon$.
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Using **additive** Chernov when **multiplicative** is required.
 - Forgetting $|C(x)| \geq K\log n$ conditioning — small components are dominated by branching-process noise, not the fluid limit.
@@ -99,15 +86,7 @@ $$f_{-\epsilon}(t/n) \leq \tilde Y_t / n \leq f_{+\epsilon}(t/n) + O(1/n).$$
 - Forgetting that $\theta > 0$ requires $c > 1$ (else $f'(0) = c - 1 \leq 0$ and the only root is $x=0$).
 - Confusing "fraction of unexplored remaining" $(1-c/n)^t$ with "Poisson($ct/n$) probability of being missed". They agree to leading order but the binomial is the rigorous form.
 
-## 8. What I should try first on an exam
-
-1. Write the BFS recurrence: $\tilde Y_{t+1} = \tilde Y_t + X_{t+1} - 1$, $X_{t+1} \sim \text{Bin}(N_t, c/n)$.
-2. State $\Delta_t \sim \text{Bin}(n-1, 1-(1-c/n)^t)$, $\tilde Y_t = \Delta_t + 1 - t$.
-3. Apply multiplicative Chernov to $\Delta_t$.
-4. Identify the fluid limit $f(x) = 1 - e^{-cx} - x$ and its zero $\theta$.
-5. State the sandwich and conclude.
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - **"BFS active queue does a Poisson($c$) branching process — until the unexplored pool runs out."** The $-x$ term is the depletion correction.
 - **$f(x) = 1 - e^{-cx} - x$:** "fraction explored minus fraction popped."

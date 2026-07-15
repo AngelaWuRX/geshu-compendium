@@ -85,12 +85,6 @@ Off-giant components: $\max_{x\notin C_{\max}}|C(x)| = O(\log n)$.
 
 ---
 
-## Recognition signals
-- "Network with hidden communities of types/colors" → SBM.
-- "Multiple types of nodes with type-dependent offspring" → MTBP, look at $\lambda_{\max}(C)$.
-- "Giant component / outbreak threshold" → $\lambda_{\max}(C) > 1$.
-- "Survival vector $\vec\theta$" → smallest fixed point of $\vec\eta = \vec G(\vec\eta)$.
-
 ## Pitfalls
 - Use $\lambda_{\max}(C)$, not the entries of $C$, as the criticality test.
 - Smallest fixed point of $\vec G(\vec\eta)=\vec\eta$ is the extinction prob; survival is $1$ minus that.

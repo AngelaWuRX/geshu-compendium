@@ -38,22 +38,7 @@ $$A_{ij} = \sum_{\alpha \in H_i} \sum_{\beta \in H_j} m_{\alpha,\beta} \quad (i 
 - $\Pr(\text{specific pair matched}) = \frac{1}{\ell_n - 1}$
 - $\Pr(\text{two disjoint pairs both matched}) = \frac{1}{(\ell_n - 1)(\ell_n - 3)}$
 
-## 3. Main question types
-
-- **Count self-loops:** Expected number of loops = $\frac{1}{\ell_n - 1} \sum_i \binom{d_i}{2}$
-- **Count multi-edges:** Bound using $A_{ij}(A_{ij}-1)$ and matching probabilities
-- **Probability of a specific graph:** $P(G) = \frac{1}{(\ell_n-1)!!} \prod_i \frac{d_i!}{2^{A_{ii}} A_{ii}!} \prod_{i<j} \frac{1}{A_{ij}!}$
-- **Local structure:** Neighborhoods look tree-like when degrees are bounded
-- **Giant component via differential equations:** BFS exploration + ODE approximation
-
-## 4. How to recognize this topic in a problem
-
-- The problem gives you a **fixed degree sequence**
-- You see "half-edges" or "random perfect matching"
-- The problem asks about loops, multi-edges, or simplicity of the resulting graph
-- You're told to condition on degrees rather than using $G(n,p)$
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Write the quantity in terms of matching indicators** $m_{\alpha,\beta}$
 2. **Use $E[m_{\alpha,\beta}] = 1/(\ell_n - 1)$** for single pair probabilities
@@ -61,7 +46,7 @@ $$A_{ij} = \sum_{\alpha \in H_i} \sum_{\beta \in H_j} m_{\alpha,\beta} \quad (i 
 4. **Count candidate structures** (how many ways can the structure appear), then multiply by probability per structure
 5. **For graph probability:** Use the decentralized algorithm — each vertex independently assigns its half-edges to edges, then combine local choices into a global matching
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Lemma: Matching pair probability
 **Statement:** For any fixed pair $\{\alpha, \beta\} \subset H$, $E[m_{\alpha,\beta}] = \frac{1}{\ell_n - 1}$.
@@ -101,22 +86,14 @@ $$A_{ij} = \sum_{\alpha \in H_i} \sum_{\beta \in H_j} m_{\alpha,\beta} \quad (i 
 4. Solve: $S(\tau) = e^{-c\tau}$, $I(\tau) = 1 - e^{-c\tau} - \tau$
 5. Component size = where $I(\theta) = 0$, i.e., $\theta + e^{-c\theta} = 1$
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Forgetting the factor of $1/2$ in self-loop count (matching $\{\alpha,\beta\}$ is unordered)
 - Using $(\ell_n - 1)^2$ instead of $(\ell_n - 1)(\ell_n - 3)$ for two disjoint pairs — the second pair has fewer options
 - Confusing $A_{ij}$ (number of edges between $i,j$) with the indicator $1[A_{ij} \geq 1]$
 - In the ODE method: forgetting that $\tilde{Y}_t$ can go negative (unlike the stopped process $Y_t$), but both give the same stopping time
 
-## 8. What I should try first on an exam
-
-1. Identify what quantity involves half-edge pairings
-2. Write it in terms of $m_{\alpha,\beta}$ indicators
-3. Use $E[m_{\alpha,\beta}] = 1/(\ell_n - 1)$ to compute expectation
-4. If variance needed: use disjoint pair formula $1/[(\ell_n-1)(\ell_n-3)]$
-5. Count candidate structures carefully (don't overcount orientations)
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "Half-edges are the atoms, matching is the randomness"
 - "$1/(\ell_n - 1)$ is like $1/(2m-1)$ — the chance your half-edge finds a specific partner"
@@ -125,7 +102,7 @@ $$A_{ij} = \sum_{\alpha \in H_i} \sum_{\beta \in H_j} m_{\alpha,\beta} \quad (i 
 
 ---
 
-## 10. Adjacent models (Lecture 11)
+## 7. Adjacent models (Lecture 11)
 
 ### Chung-Lu model [2002]
 Fix weights $w_1, \ldots, w_n \ge 0$ with $\ell_n = \sum_i w_i$. Connect $i \ne j$ independently with prob $p_{ij} = w_i w_j / \ell_n$ (and $p_{ii} = w_i^2 / (2\ell_n)$). Assumption: $\max_i w_i^2 / \ell_n \le 1$ ensures probabilities $\le 1$.

@@ -32,23 +32,7 @@ $$G_c(\lambda) = \frac{1}{1 + c(1-\lambda)}$$
 
 **Extinction probability:** Smallest solution of $\eta = G_c(\eta)$, which gives $\eta = 1/c$ for $c > 1$.
 
-## 3. Main question types
-
-- Compute the offspring distribution and its generating function
-- Find the survival/extinction probability of the epidemic branching process
-- Prove convergence of finite-$n$ generating function to the limit $G_c$
-- Derive concentration bounds for outbreak size below criticality
-- Connect epidemic threshold to branching process threshold ($c = 1$)
-
-## 4. How to recognize this topic in a problem
-
-- Infection spreading from one source
-- "Outbreak size" or "epidemic threshold"
-- Exponential recovery/infection times
-- Comparison to branching process
-- Generating functions with $G(\eta) = \eta$ fixed-point equations
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Condition on recovery time $T$**: Write offspring as $\text{Bin}(n, p_T)$ conditional on $T \sim \text{exp}(1)$
 2. **Compute generating function**: Integrate over $T$ to get $G_n(\lambda)$
@@ -56,7 +40,7 @@ $$G_c(\lambda) = \frac{1}{1 + c(1-\lambda)}$$
 4. **Solve fixed-point equation**: $G_c(\eta) = \eta$ gives extinction probability
 5. **For tail bounds below criticality**: Use moment generating function + Chernoff-style bounds
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Lemma: Infection probability
 **Statement:** $p_T = 1 - e^{-\beta T}$ where $T' \sim \text{exp}(\beta)$.
@@ -100,7 +84,7 @@ $$I(x) \geq x\log\frac{x}{c} + (1+x)\log\frac{1+c}{1+x} \geq \frac{(x-c)^2}{2x(1
 3. Optimal $t_0 = \log\frac{(1+c)x}{c(1+x)}$
 4. Taylor expand around $x=c$ to get quadratic lower bound
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Forgetting to condition on recovery time $T$ before computing offspring distribution
 - Using $np_T = c$ instead of $np_T \to cT$ (the $T$ matters!)
@@ -109,15 +93,7 @@ $$I(x) \geq x\log\frac{x}{c} + (1+x)\log\frac{1+c}{1+x} \geq \frac{(x-c)^2}{2x(1
 - In the fixed-point equation: $\eta = 1/c$ is the extinction prob, not $c$ itself
 - In concentration proofs: the rate function bound requires $c \leq x \leq 1$, not just $x \geq c$
 
-## 8. What I should try first on an exam
-
-1. Write the offspring distribution by conditioning on recovery time $T$
-2. Compute $R_0 = E[X]$ to determine if above/below threshold
-3. If generating function asked: write integral form, take limit via DCT
-4. If survival prob asked: solve $G(\eta) = \eta$
-5. If concentration asked: use $|T| > k \implies \sum X_i \geq k$, then Chernoff
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "Condition on $T$, then it's just a binomial" — this unlocks everything
 - "$R_0 = c$ is the threshold, survival prob = $1 - 1/c$"

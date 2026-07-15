@@ -24,21 +24,7 @@ Many proofs in random graph theory start by **counting** how many copies of some
 
 **Second moment method:** $\Pr(X > 0) \geq \frac{(E[X])^2}{E[X^2]}$. Proves existence when the count concentrates.
 
-## 3. Main question types
-
-- Show some structure does not exist w.h.p. (first moment)
-- Show some structure does exist w.h.p. (second moment)
-- Bound the expected number of self-loops, multi-edges, cycles, etc.
-- Prove "for all vertices/pairs/subsets, property holds" via union bound
-
-## 4. How to recognize this topic in a problem
-
-- "Show that w.h.p., no [structure] exists"
-- "Show that the expected number of [structure] is..."
-- Counting substructures in a random graph
-- "For all vertices" / "for all pairs" — union bound signal
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Define $X = \sum I_i$** — identify all candidate structures
 2. **Count candidates** — how many possible locations for the structure?
@@ -46,7 +32,7 @@ Many proofs in random graph theory start by **counting** how many copies of some
 4. **Multiply:** $E[X] = (\text{number of candidates}) \times (\text{probability per candidate})$
 5. **If second moment needed:** compute $E[X^2]$ by splitting into overlap cases
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Expected number of cycles
 **Statement:** Expected number of $k$-cycles in $G(n,p)$:
@@ -90,7 +76,7 @@ $$\sum_{\{i,j\}} \Pr(A_{ij} \geq 2) \leq \frac{1}{2} \sum_{i \neq j} \frac{d_i(d
 
 **Result:** $\text{Var}(N_w) \leq 9\left(\frac{1}{n^{3/2}p} + \frac{1}{n^3 p^2}\right)(E[N_w])^2$
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Overcounting cycles: forgetting to divide by $2k$ (orientations and starting points) — result is $\frac{(k-1)!}{2}$
 - Not bounding $\binom{n}{k}$ correctly: use $\binom{n}{k} \leq \frac{n^k}{k!}$ for upper bounds
@@ -98,15 +84,7 @@ $$\sum_{\{i,j\}} \Pr(A_{ij} \geq 2) \leq \frac{1}{2} \sum_{i \neq j} \frac{d_i(d
 - Using $E[X^2] = (E[X])^2$ (that's only true for constants!) — you need to actually compute $E[X^2]$
 - In the tree size argument: forgetting that $E[X_{\geq k}]$ needs a geometric series sum, not just one term
 
-## 8. What I should try first on an exam
-
-1. Write the count as $X = \sum I_i$
-2. Count candidates and per-candidate probability → $E[X]$
-3. If "no structure exists": check if $E[X] \to 0$ (done!)
-4. If "structure exists": need second moment — split $E[X^2]$ by overlap
-5. For union bounds: list the bad events, sum their probabilities
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "Count candidates, multiply by probability, sum — that's the expected count"
 - "$\frac{(k-1)!}{2}$ for unoriented cycles: divide by $k$ starting points and $2$ orientations"

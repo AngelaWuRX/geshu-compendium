@@ -92,6 +92,58 @@ class TestStripHeadings(unittest.TestCase):
         self.assertNotIn("HW7 P2", out)
         self.assertNotIn("Homework examples", out)
 
+    def test_exam_slots_go_and_the_learning_slots_stay(self):
+        # The manifest strips three of the template's ten sections at once.
+        src = (
+            "## 2. Core objects / definitions\nkeep\n\n"
+            "## 3. Main question types\n1. count the thing\n\n"
+            "## 4. How to recognize this topic in a problem\n1. BFS smell\n\n"
+            "## 5. Standard proof moves\nkeep\n\n"
+            "## 9. What I should try first on an exam\n1. write the recursion\n\n"
+            "## 10. Quick memory hooks\nkeep\n"
+        )
+        out = sv.strip_headings(
+            src,
+            [
+                "## 3. Main question types",
+                "## 4. How to recognize this topic in a problem",
+                "## 9. What I should try first on an exam",
+            ],
+        )
+        self.assertIn("## 2. Core objects / definitions", out)
+        self.assertIn("## 5. Standard proof moves", out)
+        self.assertIn("## 10. Quick memory hooks", out)
+        self.assertNotIn("Main question types", out)
+        self.assertNotIn("BFS smell", out)
+        self.assertNotIn("on an exam", out)
+        self.assertNotIn("write the recursion", out)
+
+    def test_same_number_different_title_is_not_collateral(self):
+        # 11 Small World numbers "Common mistakes" as 9, which is the exam slot's
+        # number everywhere else. Exact-line matching is the only thing keeping it.
+        src = (
+            "## 9. Common mistakes\nkeep me\n\n"
+            "## 10. Quick memory hooks\nkeep me too\n"
+        )
+        out = sv.strip_headings(src, ["## 9. What I should try first on an exam"])
+        self.assertIn("## 9. Common mistakes", out)
+        self.assertIn("keep me", out)
+
+    def test_unnumbered_variant_strips_too(self):
+        # Six notes never took the numbered template.
+        src = "## Recognition signals\n- looks like a BP\n\n## Pitfalls\nkeep\n"
+        out = sv.strip_headings(src, ["## Recognition signals"])
+        self.assertIn("## Pitfalls", out)
+        self.assertNotIn("looks like a BP", out)
+
+    def test_pattern_matching_a_non_heading_is_an_error_not_a_swallowed_note(self):
+        # A prefix without hashes used to reach re.match(...).group(1) on None and
+        # die with a bare AttributeError; the section it "matched" has no level to
+        # bound, so the rest of the note would go with it.
+        src = "intro\nHW mentioned in passing\nmore body\n"
+        with self.assertRaises(SystemExit):
+            sv.strip_headings(src, [], ["HW"])
+
 
 class TestRenumber(unittest.TestCase):
     def test_gap_left_by_stripped_section_is_closed(self):

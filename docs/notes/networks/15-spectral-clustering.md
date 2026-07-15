@@ -72,11 +72,6 @@ $$S=\arg\min\sum_{\ell=1}^k\sum_{i\in S_\ell}\|v_i-m_\ell\|^2,\quad m_\ell=\tfra
 
 ---
 
-## Recognition signals
-- "Cut into well-separated parts" → spectral relaxation of $\phi$.
-- "Find communities / blocks" → SBM with $ab>\varepsilon^2$ ⇒ spectral works.
-- "Top-$k$ eigenvectors" → $k$-way k-means embedding.
-
 ## Pitfalls
 - The eigenproblem is **generalized**: $(D-A)\psi=\Lambda D\psi$, not $(D-A)\psi=\Lambda\psi$.
 - The orthogonality is $\psi^T D\mathbf 1=0$, not $\psi^T\mathbf 1=0$.

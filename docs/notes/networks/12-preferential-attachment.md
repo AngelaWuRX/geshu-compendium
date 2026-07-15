@@ -21,28 +21,14 @@ Preferential attachment is a model where a graph grows one vertex at a time, and
 
 **Conditional expected increment:** $E[D_i(t+1) - D_i(t) \mid G_t]$ — the expected degree gain in one step, given the current graph.
 
-## 3. Main question types
-
-- Track the expected degree of a specific vertex over time
-- Show degree distribution follows a power law
-- Prove concentration of degree around its mean
-- Analyze how degree of early vs. late vertices differs
-
-## 4. How to recognize this topic in a problem
-
-- Graph grows **one vertex at a time**
-- Attachment probability is **proportional to degree** (or some function of degree)
-- Problem asks about degree of a vertex, degree distribution, or how degree evolves
-- You see "at time $t$" or "after a new vertex arrives"
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Write the one-step conditional expectation**: $E[D_i(t+1) \mid G_t] = D_i(t) + f(D_i(t), t)$
 2. **Derive a recurrence** for $E[D_i(t)]$
 3. **Solve the recurrence** (often gives power-law growth)
 4. **For concentration**: use martingale arguments or variance bounds
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Key recurrence pattern
 **Setup:** At time $t$, the total degree is $2t$ (or similar). Vertex $i$ gains an edge with probability $D_i(t)/(2t)$.
@@ -58,22 +44,14 @@ $$E[D_i(t)] = D_i(i) \cdot \prod_{s=i}^{t-1}\left(1 + \frac{1}{2s}\right) \appro
 ### Concentration for PA degrees
 Use variance bounds to show degrees concentrate around their expected values.
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Forgetting that total degree changes at each step (denominator in attachment probability is time-dependent)
 - Not conditioning on $G_t$ properly — the increment depends on the current state
 - Confusing the expected degree recurrence with a deterministic recursion
 - In concentration: using bounds that are too loose because you didn't account for the dependence structure
 
-## 8. What I should try first on an exam
-
-1. Write down the attachment rule explicitly
-2. Compute $E[D_i(t+1) - D_i(t) \mid G_t]$ — this is always the first step
-3. Take full expectations to get a recurrence for $E[D_i(t)]$
-4. Solve the recurrence (product formula, then approximate with logarithms/exponentials)
-5. If concentration is asked: compute variance or use known inequalities
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "Rich get richer = degree is proportional to attachment probability"
 - "One-step conditional expectation is the engine of every PA proof"

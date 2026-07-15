@@ -97,21 +97,14 @@ This matches the WS heuristic with $p \mapsto \lambda$.
 
 These are how you get **both** $\text{diam} = O(\log n)$ AND $C_{\text{loc}} = \Theta(1)$ without giving up rigor.
 
-## 8. Recognition signals
-
-- "Network with high clustering and short diameter" → small world.
-- "Watts-Strogatz", "rewire with prob $p$" → WS.
-- "Newman-Watts", "add long edges from $G(n,c/n)$" → NW.
-- "Kleinberg / navigation / myopic agent" → $\alpha = d$ exponent magic.
-
-## 9. Common mistakes
+## 8. Common mistakes
 
 - Confusing **adding** edges (Newman-Watts) with **rewiring** (Watts-Strogatz). Rigor exists for NW; WS is mostly numerical/heuristic.
 - Assuming the WS diameter formula $\log n / (k^2 p)$ is rigorous — it's a heuristic.
 - For Kleinberg: $\alpha = d$ (dimension), not $\alpha = 1$. In 2D grid, the magic exponent is 2.
 - Greedy in 1D Kleinberg model takes $\Theta(\sqrt n)$, not $\Theta(\log n)$ — the magic exponent for 1D requires $\alpha = 1$.
 
-## 10. Quick memory hooks
+## 9. Quick memory hooks
 
 - "Local clustering + short diameter ⇒ need long-range edges."
 - "Newman-Watts: keep the cycle, sprinkle in $G(n,c/n)$ on top."

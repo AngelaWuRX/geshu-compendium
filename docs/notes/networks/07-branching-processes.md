@@ -27,30 +27,14 @@ A branching process models a population where each individual independently prod
 
 **Survival probability:** $\theta = 1 - \eta = \Pr(|T_X| = \infty)$.
 
-## 3. Main question types
-
-- Determine survival/extinction probability from offspring distribution
-- Prove exponential growth conditioned on survival
-- Use branching process to approximate early BFS / epidemic spread
-- Compute or bound PGF, solve fixed-point equations
-- Apply concentration to generation sizes
-
-## 4. How to recognize this topic in a problem
-
-- Each individual generates offspring **independently**
-- Early-stage spread from a single source (epidemic, BFS)
-- Population grows or dies — question is about which happens
-- You see generating functions or $G(\eta) = \eta$
-- "Conditioned on survival" / "conditioned on non-extinction"
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Compute mean $c = E[X]$** — this tells you if process is sub/supercritical
 2. **Write PGF** $G(\lambda) = E[\lambda^X]$
 3. **Solve $G(\eta) = \eta$** for extinction probability (take smallest solution in $[0,1]$)
 4. **For growth rate:** $E[Z_n] = c^n$, and conditioned on survival, $\frac{1}{n}\log Z_n \to \log c$
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Lemma: Extinction criterion
 **Statement:** $\theta > 0$ iff $c > 1$.
@@ -85,7 +69,7 @@ $$\Pr(c^{(1-\delta)n} \leq Z_n \leq c^{(1+\delta)n} \mid |T_X| = \infty) \to 1$$
 
 **Extinction equation:** $\eta = 1/c$, so $P = 1 - 1/c$.
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Confusing $\eta$ (extinction) with $\theta$ (survival): $\theta = 1 - \eta$
 - Solving $G(\eta) = \eta$ but taking the wrong root — always take the **smallest** in $[0,1]$
@@ -93,15 +77,7 @@ $$\Pr(c^{(1-\delta)n} \leq Z_n \leq c^{(1+\delta)n} \mid |T_X| = \infty) \to 1$$
 - In the lower bound proof: trying to apply concentration directly to $Z_n$ instead of going through the step-by-step argument with targets $k_t$
 - Mixing up $(1-\delta)$ vs $(1-\delta/2)$ in the growth rate — the $\delta/2$ slack is needed for the inductive argument
 
-## 8. What I should try first on an exam
-
-1. Identify the offspring distribution
-2. Compute $c = E[X]$ — this determines the regime
-3. If survival probability asked: write PGF, solve $G(\eta) = \eta$
-4. If growth rate asked: start with Markov for the upper bound (easy), then set up the target sequence for the lower bound
-5. Think "is this a branching process in disguise?" when seeing early-stage exploration
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "$c > 1$ = supercritical = survives; $c \leq 1$ = dies"
 - "$E[Z_n] = c^n$ is easy. Showing $Z_n \approx c^n$ w.h.p. is the real work"

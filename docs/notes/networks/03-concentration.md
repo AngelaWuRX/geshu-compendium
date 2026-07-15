@@ -28,27 +28,13 @@ where $I(\lambda) > 0$ is the rate function.
 
 **Rate function:** $I(x) = \sup_{t} \{tx - \log E[e^{tX}]\}$ (Legendre transform of the log-MGF).
 
-## 3. Main question types
-
-- Show a random variable is close to its mean w.h.p.
-- Prove "with high probability" statements about graph properties
-- Derive tail bounds for sums of random variables
-- Apply concentration to branching process / epidemic arguments
-
-## 4. How to recognize this topic in a problem
-
-- "Show that ... with high probability"
-- "Close to its mean" / "does not fluctuate"
-- Expectation alone isn't enough — you need a probability bound
-- The problem gives you a variance calculation and asks you to finish
-
-## 5. Standard proof moves
+## 3. Standard proof moves
 
 1. **Markov** (weakest, easiest): Just need $E[X]$. Use when $E[X] \to 0$ and you want $\Pr(X > 0) \to 0$.
 2. **Chebyshev** (medium): Need $\text{Var}(X)$. Use when $\text{Var}(X) \ll (E[X])^2$.
 3. **Chernoff/rate function** (strongest): Need MGF. Use for sums of i.i.d. variables when you need exponential tail bounds.
 
-## 6. Important lemmas / facts
+## 4. Important lemmas / facts
 
 ### Markov → First moment method
 **Statement:** $\Pr(X > 0) \leq E[X]$ for integer-valued $X \geq 0$.
@@ -122,7 +108,7 @@ $$\Pr(S_k \leq (1-\epsilon)\mathbb{E}[S_k]) \leq e^{-\epsilon^2 \mathbb{E}[S_k]/
 - **Convexity → MGF bound on [0,1]:** $f(x)=e^{tx}$ convex, so $f(x) \leq (1-x)f(0) + xf(1)$. Take expectation. This is the entire reason the [0,1] bound exists.
 - **$1+x \leq e^x$:** the workhorse that lets you upgrade $\mathbb{E}[e^{tY}] \leq 1 + \mathbb{E}[Y](e^t-1)$ to the exponential form.
 
-## 7. Common mistakes
+## 5. Common mistakes
 
 - Using Markov when you need Chebyshev (Markov only gives $\Pr(X \geq a) \leq E[X]/a$, often too weak)
 - Computing variance wrong by missing correlation terms in $E[X^2]$
@@ -130,14 +116,7 @@ $$\Pr(S_k \leq (1-\epsilon)\mathbb{E}[S_k]) \leq e^{-\epsilon^2 \mathbb{E}[S_k]/
 - Forgetting that $I(\lambda)$ must be strictly positive — this requires $\lambda \neq c$
 - In the branching process concentration: mixing up the conditioning on survival with unconditional probabilities
 
-## 8. What I should try first on an exam
-
-1. First ask: is Markov enough? (Does $E[X] \to 0$ or $\to \infty$ suffice?)
-2. If not: can I compute the variance and use Chebyshev?
-3. If exponential bounds needed: look for i.i.d. structure and use rate function/Chernoff
-4. For variance of a count: always case-split $E[X^2]$ by overlap structure
-
-## 9. Quick memory hooks
+## 6. Quick memory hooks
 
 - "Markov is free, Chebyshev costs a variance, Chernoff costs an MGF"
 - "Variance of a count = sum over pairs, split by how much they overlap"

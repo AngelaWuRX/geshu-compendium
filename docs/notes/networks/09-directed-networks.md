@@ -115,9 +115,3 @@ Different probabilities $P_+ \ne P_-$ for SIR (because forward uses random $T$ a
 - "SCC = $\theta^2$ because you need both forward AND backward survival."
 - "Forward and backward BFS are asymptotically independent — that's why it's a *product*."
 - "OPA: power laws on in AND out degrees, correlated."
-
-## 9. Recognition signals
-- "Web graph / citation graph / Twitter follower graph" → directed.
-- "Strongly connected" or "SCC" → bow-tie analysis.
-- "Out-component / reachable from $x$" → forward BFS, $\theta$.
-- "Probability $x$ in giant SCC" → $\theta^2$.

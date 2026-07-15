@@ -94,12 +94,6 @@ Since $\bar d(t)=\max\tfrac12\|\mu_{t,x}-\mu_{t,y}\|_1\leq\max\|\mu_{t,x}-\pi\|_
 
 ---
 
-## Recognition signals
-
-- "How fast does the chain mix?" → Cheeger + Theorem 2 chain: $\tau \asymp \frac{1}{1-\lambda_2}\log(1/\pi_{\min}) \leq \frac{1}{\phi^2/8}\log(1/\pi_{\min})$.
-- "Bottleneck cut" → small $\phi$ ⇒ slow mixing.
-- "Symmetric eigenvalues" — pass to $\tilde P=D^{-1/2}AD^{-1/2}$.
-
 ## Common pitfalls
 - Confusing $\lambda_n$ ($-1$ end, periodicity) with $\lambda_2$ (mixing). The lazy chain pushes everything to $[0,1]$ so only $\lambda_2$ matters.
 - $\varphi_1$ is the **eigenvector of $\tilde P$**, not of $P$. The eigenvector of $P$ for $\lambda=1$ is $\mathbf 1$.

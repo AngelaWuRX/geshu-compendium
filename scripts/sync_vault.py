@@ -251,7 +251,16 @@ def strip_headings(body: str, headings: list[str], prefixes: list[str] | None = 
             elif any(stripped.startswith(p) for p in prefixes):
                 hit = stripped
         if hit:
-            skip_to = len(re.match(r"^(#{1,6})", hit).group(1))
+            level = re.match(r"^(#{1,6})", hit)
+            if level is None:
+                # Both patterns bound a section by its heading level, so a match on
+                # a non-heading has no end to find and would swallow the rest of the
+                # note. Only reachable via a manifest entry that forgot its hashes.
+                raise SystemExit(
+                    f"strip pattern matched a non-heading line: {hit!r}\n"
+                    "  strip_headings / strip_heading_prefixes must name headings."
+                )
+            skip_to = len(level.group(1))
             continue
         out.append(line)
     return "\n".join(out)
