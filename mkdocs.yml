@@ -1,5 +1,5 @@
 site_name: geshu-compendium
-site_description: Personal notes on data structures, algorithms, networks and machine learning.
+site_description: A living notebook recording my daily work progress related to AI — projects, paper notes, and reference notes.
 site_url: https://angelawurx.github.io/geshu-compendium/
 repo_url: https://github.com/AngelaWuRX/geshu-compendium
 
@@ -52,8 +52,22 @@ plugins:
         - zh
   - tags
 
+# The LeetCode problem template is an in-repo authoring aid, not a page. Exclude
+# it from the build so `--strict` doesn't flag it as omitted-from-nav.
+exclude_docs: |
+  projects/leetcode/_template.md
+
 nav:
   - Home: index.md
+  - Projects:
+      - projects/index.md
+      - Building ChatGPT from Scratch: projects/chatgpt-from-scratch.md
+      - Postmortem Agent: projects/postmortem-agent.md
+      - LeetCode:
+          - projects/leetcode/index.md
+          - Two Sum: projects/leetcode/two-sum.md
+          - Remove Element: projects/leetcode/remove-element.md
+  - Blog: blog/index.md
   # BEGIN GENERATED NAV — scripts/sync_vault.py rewrites everything between
   - Programming:
       - Python:
@@ -120,8 +134,6 @@ nav:
       - SIR and Epidemics: notes/networks/17-sir-and-epidemics.md
       - SIR on Networks: notes/networks/18-sir-on-networks.md
   # END GENERATED NAV
-  - Resources: resources/index.md
-  - Blog: blog/index.md
 
 markdown_extensions:
   - toc:
