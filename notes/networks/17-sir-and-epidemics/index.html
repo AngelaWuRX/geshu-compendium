@@ -1,0 +1,2814 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A living notebook recording my daily work progress related to AI — projects, paper notes, and reference notes.">
+      
+      
+      
+        <link rel="canonical" href="https://angelawurx.github.io/geshu-compendium/notes/networks/17-sir-and-epidemics/">
+      
+      
+        <link rel="prev" href="../16-information-cascades/">
+      
+      
+        <link rel="next" href="../18-sir-on-networks/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>SIR and Epidemics - geshu-compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sir-and-epidemics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="geshu-compendium" class="md-header__button md-logo" aria-label="geshu-compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            geshu-compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SIR and Epidemics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AngelaWuRX/geshu-compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="geshu-compendium" class="md-nav__button md-logo" aria-label="geshu-compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    geshu-compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AngelaWuRX/geshu-compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../projects/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/chatgpt-from-scratch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building ChatGPT from Scratch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/postmortem-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postmortem Agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../projects/leetcode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    LeetCode
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            LeetCode
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/leetcode/two-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Two Sum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/leetcode/remove-element/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remove Element
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programming
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Programming
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/hello-algo-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📖 hello-algo — Reading Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/arraylist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ArrayList
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/asymptotic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asymptotic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/b-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    B-Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/comparison-based-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparison-based sort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/data-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hashing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/heap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/heapsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HeapSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    InsertionSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/linkedlist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinkedList
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MergeSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OOP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/radixsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RadixSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/red-black-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Red Black Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/search-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/sorting-and-selecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sorting and Selecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/union-find-disjoint-set/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Union-Find (Disjoint Set)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithms
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/divide-and-conquer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Divide and Conquer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/graph-traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph Traversal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/linear-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear programming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/minimum-spanning-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Minimum spanning trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/reduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/single-source-shortest-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Single-source shortest paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/topological-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Topological sort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Machine Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Machine Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/01-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/02-mle-and-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MLE & MAP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/03-linear-regression-and-regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Regression & Regularization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/04-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clustering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/05-classifiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Classifiers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/06-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/07-neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/08-cnns-and-resnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CNNs & ResNet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/09-transformers-and-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformers & Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/10-language-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Language Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/11-self-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Supervised Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Networks
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-graph-counting-tricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph Counting Tricks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-expected-counts-and-union-bounds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expected Counts and Union Bounds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concentration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-configuration-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-giant-component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giant Component
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-branching-processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Branching Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-diameter-of-giant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diameter of the Giant Component
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-directed-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directed Networks (Digraphs, SCC, Bow-tie)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-sbm-and-multitype-bp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stochastic Block Model and Multitype Branching Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-small-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Small World Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-preferential-attachment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Preferential Attachment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-markov-chains-and-pagerank/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markov Chains, Random Walks, PageRank
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-mixing-time-and-spectral-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixing Time, Conductance, Spectral Gap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-spectral-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spectral Clustering and Graph Partitioning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-information-cascades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Cascades and Influence Maximization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    SIR and Epidemics
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    SIR and Epidemics
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-this-topic-is-about" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What this topic is about
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-objects-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core objects / definitions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-standard-proof-moves" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Standard proof moves
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-important-lemmas-facts" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Important lemmas / facts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Important lemmas / facts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lemma-infection-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Infection probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-limiting-generating-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Limiting generating function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-survival-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Survival probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-concentration-below-criticality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Concentration below criticality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-rate-function-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Rate function bound
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Common mistakes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quick-memory-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Quick memory hooks
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-sir-on-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SIR on Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-this-topic-is-about" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What this topic is about
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-objects-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core objects / definitions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-standard-proof-moves" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Standard proof moves
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-important-lemmas-facts" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Important lemmas / facts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Important lemmas / facts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lemma-infection-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Infection probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-limiting-generating-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Limiting generating function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-survival-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Survival probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-concentration-below-criticality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Concentration below criticality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lemma-rate-function-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma: Rate function bound
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Common mistakes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quick-memory-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Quick memory hooks
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="area/epidemics">area/epidemics</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="area/processes">area/processes</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="method/branching-process">method/branching-process</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="model/sir">model/sir</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<!-- AUTOGENERATED by scripts/sync_vault.py from "spring2026 copy/networks/topics/17 SIR and Epidemics.md". DO NOT EDIT — edit the vault note and re-run: python3 scripts/sync_vault.py -->
+
+<h1 id="sir-and-epidemics">SIR and Epidemics<a class="headerlink" href="#sir-and-epidemics" title="Permanent link">&para;</a></h1>
+<h2 id="1-what-this-topic-is-about">1. What this topic is about<a class="headerlink" href="#1-what-this-topic-is-about" title="Permanent link">&para;</a></h2>
+<p>The stochastic SIR model describes how an infection spreads through a population. Each infected individual infects susceptible ones at rate <span class="arithmatex">\(\beta = c/n\)</span> and recovers at rate <span class="arithmatex">\(\gamma = 1\)</span>. The key insight is that the early stage of an epidemic looks like a <strong>branching process</strong>, and the survival probability of that branching process determines whether a large outbreak occurs.</p>
+<p>The main result: for <span class="arithmatex">\(c &gt; 1\)</span>, a large outbreak happens with probability <span class="arithmatex">\(P = 1 - 1/c\)</span>. For <span class="arithmatex">\(c \leq 1\)</span>, the epidemic always dies out.</p>
+<h2 id="2-core-objects-definitions">2. Core objects / definitions<a class="headerlink" href="#2-core-objects-definitions" title="Permanent link">&para;</a></h2>
+<p><strong>SIR dynamics:</strong> Infected individual <span class="arithmatex">\(i\)</span> stays infected for <span class="arithmatex">\(T_i \sim \text{exp}(1)\)</span>. During that time, infects susceptible <span class="arithmatex">\(j\)</span> if infection clock <span class="arithmatex">\(T_{ij} \sim \text{exp}(\beta)\)</span> fires before recovery, i.e., <span class="arithmatex">\(T_{ij} &lt; T_i\)</span>.</p>
+<p><strong>Infection probability given recovery time:</strong>
+$<span class="arithmatex">\(p_T = \Pr(T_{ij} &lt; T) = 1 - e^{-\beta T}\)</span>$</p>
+<p><strong>Offspring distribution:</strong> Conditioned on <span class="arithmatex">\(T\)</span>, number infected is <span class="arithmatex">\(X \mid T \sim \text{Bin}(n, p_T)\)</span>.</p>
+<p><strong>Basic reproduction number:</strong> <span class="arithmatex">\(R_0 = E[X] = \frac{n\beta}{1+\beta} = \frac{c}{1+c/n} \to c\)</span> as <span class="arithmatex">\(n \to \infty\)</span>.</p>
+<p><strong>Generating function (limiting):</strong>
+$<span class="arithmatex">\(G_c(\lambda) = \frac{1}{1 + c(1-\lambda)}\)</span>$</p>
+<p><strong>Extinction probability:</strong> Smallest solution of <span class="arithmatex">\(\eta = G_c(\eta)\)</span>, which gives <span class="arithmatex">\(\eta = 1/c\)</span> for <span class="arithmatex">\(c &gt; 1\)</span>.</p>
+<h2 id="3-standard-proof-moves">3. Standard proof moves<a class="headerlink" href="#3-standard-proof-moves" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Condition on recovery time <span class="arithmatex">\(T\)</span></strong>: Write offspring as <span class="arithmatex">\(\text{Bin}(n, p_T)\)</span> conditional on <span class="arithmatex">\(T \sim \text{exp}(1)\)</span></li>
+<li><strong>Compute generating function</strong>: Integrate over <span class="arithmatex">\(T\)</span> to get <span class="arithmatex">\(G_n(\lambda)\)</span></li>
+<li><strong>Take <span class="arithmatex">\(n \to \infty\)</span> limit</strong>: Use dominated convergence to get <span class="arithmatex">\(G_c(\lambda)\)</span></li>
+<li><strong>Solve fixed-point equation</strong>: <span class="arithmatex">\(G_c(\eta) = \eta\)</span> gives extinction probability</li>
+<li><strong>For tail bounds below criticality</strong>: Use moment generating function + Chernoff-style bounds</li>
+</ol>
+<h2 id="4-important-lemmas-facts">4. Important lemmas / facts<a class="headerlink" href="#4-important-lemmas-facts" title="Permanent link">&para;</a></h2>
+<h3 id="lemma-infection-probability">Lemma: Infection probability<a class="headerlink" href="#lemma-infection-probability" title="Permanent link">&para;</a></h3>
+<p><strong>Statement:</strong> <span class="arithmatex">\(p_T = 1 - e^{-\beta T}\)</span> where <span class="arithmatex">\(T' \sim \text{exp}(\beta)\)</span>.</p>
+<p><strong>Why it matters:</strong> This converts the continuous-time infection process into a probability you can plug into a binomial.</p>
+<p><strong>Proof:</strong> <span class="arithmatex">\(p_T = \Pr(T' &lt; T) = \int_0^T \beta e^{-\beta t'} dt' = 1 - e^{-\beta T}\)</span>.</p>
+<h3 id="lemma-limiting-generating-function">Lemma: Limiting generating function<a class="headerlink" href="#lemma-limiting-generating-function" title="Permanent link">&para;</a></h3>
+<p><strong>Statement:</strong> <span class="arithmatex">\(G_n(\lambda) \to G_c(\lambda) = \frac{1}{1+c(1-\lambda)}\)</span> for <span class="arithmatex">\(\lambda \in [0,1]\)</span>.</p>
+<p><strong>Why it matters:</strong> Links the finite-population SIR model to a simple branching process.</p>
+<p><strong>Proof idea:</strong>
+1. Write <span class="arithmatex">\(G_n(\lambda) = \int_0^\infty (1-(1-\lambda)p_T)^n e^{-T} dT\)</span>
+2. Show <span class="arithmatex">\((1-(1-\lambda)p_T)^n \to e^{-cT(1-\lambda)}\)</span> pointwise (since <span class="arithmatex">\(np_T \to cT\)</span>)
+3. Apply dominated convergence (integrand <span class="arithmatex">\(\leq 1\)</span>, <span class="arithmatex">\(e^{-T}\)</span> integrable)
+4. Evaluate: <span class="arithmatex">\(\int_0^\infty e^{-T(1+c(1-\lambda))} dT = \frac{1}{1+c(1-\lambda)}\)</span></p>
+<h3 id="lemma-survival-probability">Lemma: Survival probability<a class="headerlink" href="#lemma-survival-probability" title="Permanent link">&para;</a></h3>
+<p><strong>Statement:</strong> For <span class="arithmatex">\(\beta = c/n\)</span>: survival probability <span class="arithmatex">\(\to 0\)</span> if <span class="arithmatex">\(c \leq 1\)</span>, and <span class="arithmatex">\(\to 1 - 1/c\)</span> if <span class="arithmatex">\(c &gt; 1\)</span>.</p>
+<p><strong>Proof idea:</strong> Solve <span class="arithmatex">\(G_c(\eta) = \eta\)</span>:
+$<span class="arithmatex">\(\eta(1 + c(1-\eta)) = 1 \iff (1-\eta)(1-c\eta) = 0\)</span>$
+Solutions: <span class="arithmatex">\(\eta = 1\)</span> and <span class="arithmatex">\(\eta = 1/c\)</span>. Smallest is <span class="arithmatex">\(1/c\)</span> (for <span class="arithmatex">\(c &gt; 1\)</span>), so <span class="arithmatex">\(P = 1 - 1/c\)</span>.</p>
+<h3 id="lemma-concentration-below-criticality">Lemma: Concentration below criticality<a class="headerlink" href="#lemma-concentration-below-criticality" title="Permanent link">&para;</a></h3>
+<p><strong>Statement:</strong> For <span class="arithmatex">\(c &lt; 1\)</span>: <span class="arithmatex">\(\Pr(|T_{\text{SIR}}^{n,\beta}| &gt; k) \leq e^{-\frac{(1-c)^2}{4}k}\)</span>.</p>
+<p><strong>Why it matters:</strong> Outbreak size has exponential tail when below threshold.</p>
+<p><strong>Proof idea:</strong> <span class="arithmatex">\(|T| &gt; k\)</span> implies <span class="arithmatex">\(X_1 + \cdots + X_k \geq k\)</span>. Apply Chernoff bound with rate function <span class="arithmatex">\(I(x) \geq \frac{(x-c)^2}{2x(x+1)}\)</span>.</p>
+<h3 id="lemma-rate-function-bound">Lemma: Rate function bound<a class="headerlink" href="#lemma-rate-function-bound" title="Permanent link">&para;</a></h3>
+<p><strong>Statement:</strong> For <span class="arithmatex">\(c \leq x \leq 1\)</span>:
+$<span class="arithmatex">\(I(x) \geq x\log\frac{x}{c} + (1+x)\log\frac{1+c}{1+x} \geq \frac{(x-c)^2}{2x(1+x)}\)</span>$</p>
+<p><strong>Proof idea:</strong>
+1. Bound MGF: <span class="arithmatex">\(E[e^{tX}] \leq \frac{1}{1-c(e^t-1)}\)</span> (using <span class="arithmatex">\(p_T \leq \beta T\)</span> and <span class="arithmatex">\(1+x \leq e^x\)</span>)
+2. Optimize Chernoff bound: <span class="arithmatex">\(I(x) \geq \sup_t \{tx + \log(1-c(e^t-1))\}\)</span>
+3. Optimal <span class="arithmatex">\(t_0 = \log\frac{(1+c)x}{c(1+x)}\)</span>
+4. Taylor expand around <span class="arithmatex">\(x=c\)</span> to get quadratic lower bound</p>
+<h2 id="5-common-mistakes">5. Common mistakes<a class="headerlink" href="#5-common-mistakes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Forgetting to condition on recovery time <span class="arithmatex">\(T\)</span> before computing offspring distribution</li>
+<li>Using <span class="arithmatex">\(np_T = c\)</span> instead of <span class="arithmatex">\(np_T \to cT\)</span> (the <span class="arithmatex">\(T\)</span> matters!)</li>
+<li>Not checking dominated convergence conditions (need integrand bounded by integrable function)</li>
+<li>Confusing extinction probability <span class="arithmatex">\(\eta\)</span> with survival probability <span class="arithmatex">\(P = 1 - \eta\)</span></li>
+<li>In the fixed-point equation: <span class="arithmatex">\(\eta = 1/c\)</span> is the extinction prob, not <span class="arithmatex">\(c\)</span> itself</li>
+<li>In concentration proofs: the rate function bound requires <span class="arithmatex">\(c \leq x \leq 1\)</span>, not just <span class="arithmatex">\(x \geq c\)</span></li>
+</ul>
+<h2 id="6-quick-memory-hooks">6. Quick memory hooks<a class="headerlink" href="#6-quick-memory-hooks" title="Permanent link">&para;</a></h2>
+<ul>
+<li>"Condition on <span class="arithmatex">\(T\)</span>, then it's just a binomial" — this unlocks everything</li>
+<li>"<span class="arithmatex">\(R_0 = c\)</span> is the threshold, survival prob = <span class="arithmatex">\(1 - 1/c\)</span>"</li>
+<li>"Generating function <span class="arithmatex">\(G_c(\lambda) = 1/(1+c(1-\lambda))\)</span> — memorize this"</li>
+<li>"Below threshold: outbreak dies exponentially fast, rate <span class="arithmatex">\((1-c)^2/4\)</span>"</li>
+<li>"DCT is the magic word for <span class="arithmatex">\(G_n \to G_c\)</span>"</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../16-information-cascades/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Information Cascades and Influence Maximization">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Information Cascades and Influence Maximization
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../18-sir-on-networks/" class="md-footer__link md-footer__link--next" aria-label="Next: SIR on Networks">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                SIR on Networks
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Notes CC BY-NC-SA 4.0 · code MIT
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

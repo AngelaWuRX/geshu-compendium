@@ -1,0 +1,2869 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A living notebook recording my daily work progress related to AI — projects, paper notes, and reference notes.">
+      
+      
+      
+        <link rel="canonical" href="https://angelawurx.github.io/geshu-compendium/notes/networks/18-sir-on-networks/">
+      
+      
+        <link rel="prev" href="../17-sir-and-epidemics/">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>SIR on Networks - geshu-compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sir-on-networks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="geshu-compendium" class="md-header__button md-logo" aria-label="geshu-compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            geshu-compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SIR on Networks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AngelaWuRX/geshu-compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="geshu-compendium" class="md-nav__button md-logo" aria-label="geshu-compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    geshu-compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AngelaWuRX/geshu-compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../projects/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/chatgpt-from-scratch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building ChatGPT from Scratch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/postmortem-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postmortem Agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../projects/leetcode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    LeetCode
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            LeetCode
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/leetcode/two-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Two Sum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/leetcode/remove-element/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remove Element
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programming
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Programming
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/hello-algo-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📖 hello-algo — Reading Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/arraylist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ArrayList
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/asymptotic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asymptotic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/b-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    B-Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/comparison-based-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparison-based sort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/data-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hashing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/heap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/heapsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HeapSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    InsertionSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/linkedlist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinkedList
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MergeSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OOP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/radixsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RadixSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/red-black-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Red Black Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/search-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/sorting-and-selecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sorting and Selecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-structures/union-find-disjoint-set/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Union-Find (Disjoint Set)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithms
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/divide-and-conquer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Divide and Conquer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/graph-traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph Traversal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/linear-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear programming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/minimum-spanning-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Minimum spanning trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/reduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/single-source-shortest-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Single-source shortest paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/topological-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Topological sort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Model
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Machine Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Machine Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/01-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/02-mle-and-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MLE & MAP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/03-linear-regression-and-regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Regression & Regularization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/04-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clustering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/05-classifiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Classifiers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/06-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/07-neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/08-cnns-and-resnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CNNs & ResNet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/09-transformers-and-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformers & Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/10-language-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Language Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine-learning/11-self-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Supervised Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Networks
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-graph-counting-tricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph Counting Tricks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-expected-counts-and-union-bounds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expected Counts and Union Bounds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concentration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-configuration-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-giant-component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giant Component
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-branching-processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Branching Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-diameter-of-giant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diameter of the Giant Component
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-directed-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directed Networks (Digraphs, SCC, Bow-tie)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-sbm-and-multitype-bp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stochastic Block Model and Multitype Branching Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-small-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Small World Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-preferential-attachment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Preferential Attachment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-markov-chains-and-pagerank/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markov Chains, Random Walks, PageRank
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-mixing-time-and-spectral-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixing Time, Conductance, Spectral Gap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-spectral-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spectral Clustering and Graph Partitioning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-information-cascades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Cascades and Influence Maximization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-sir-and-epidemics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SIR and Epidemics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    SIR on Networks
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    SIR on Networks
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-infection-digraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup: Infection digraph
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theorem-1-bow-tie-two-stage-bp-for-gnp-sir-pcn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theorem 1 (Bow-tie / two-stage BP for \(G(n,p)\) SIR, \(p=c/n\))
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Theorem 1 (Bow-tie / two-stage BP for \(G(n,p)\) SIR, \(p=c/n\))">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rigorous-proof-of-the-supercritical-fluid-limit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rigorous proof of the supercritical fluid limit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-forwardbackward-bp-perspective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Forward/backward BP perspective)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sir-ode-limit-homogeneous-mixing-gncn" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIR ODE limit (homogeneous mixing, \(G(n,c/n)\))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theorem-2-lln-for-sir-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theorem 2 (LLN for SIR ODE)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-final-size-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Final size formula)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sir-on-configuration-model-cmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIR on Configuration Model CM(\(d\))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-closed-form-via-theta-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Closed-form via \(\theta\)-reduction)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theorem-3-single-ode-for-theta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theorem 3 (Single ODE for \(\theta\))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-final-outbreak-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Final outbreak size)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#force-of-infection-infection-runs-out-of-high-degree-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Force of infection / "infection runs out of high-degree first"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pitfalls
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-infection-digraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup: Infection digraph
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theorem-1-bow-tie-two-stage-bp-for-gnp-sir-pcn" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theorem 1 (Bow-tie / two-stage BP for \(G(n,p)\) SIR, \(p=c/n\))
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Theorem 1 (Bow-tie / two-stage BP for \(G(n,p)\) SIR, \(p=c/n\))">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rigorous-proof-of-the-supercritical-fluid-limit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rigorous proof of the supercritical fluid limit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-forwardbackward-bp-perspective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Forward/backward BP perspective)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sir-ode-limit-homogeneous-mixing-gncn" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIR ODE limit (homogeneous mixing, \(G(n,c/n)\))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theorem-2-lln-for-sir-ode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theorem 2 (LLN for SIR ODE)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-final-size-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Final size formula)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sir-on-configuration-model-cmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIR on Configuration Model CM(\(d\))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-closed-form-via-theta-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Closed-form via \(\theta\)-reduction)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theorem-3-single-ode-for-theta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theorem 3 (Single ODE for \(\theta\))
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lemma-final-outbreak-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lemma (Final outbreak size)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#force-of-infection-infection-runs-out-of-high-degree-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Force of infection / "infection runs out of high-degree first"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pitfalls
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="area/epidemics">area/epidemics</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="area/random-graphs">area/random-graphs</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="method/branching-process">method/branching-process</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="method/ode">method/ode</span>
+      
+    
+      
+      
+      
+        <span class="md-tag" data-md-tag="model/sir">model/sir</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<!-- AUTOGENERATED by scripts/sync_vault.py from "spring2026 copy/networks/topics/18 SIR on Networks.md". DO NOT EDIT — edit the vault note and re-run: python3 scripts/sync_vault.py -->
+
+<h1 id="sir-on-networks">SIR on Networks<a class="headerlink" href="#sir-on-networks" title="Permanent link">&para;</a></h1>
+<p>Companion to <strong>SIR and Epidemics.md</strong> (homogeneous mixing); this note covers SIR on <span class="arithmatex">\(G(n,p)\)</span> and the configuration model, plus the SIR ODEs.</p>
+<h2 id="setup-infection-digraph">Setup: Infection digraph<a class="headerlink" href="#setup-infection-digraph" title="Permanent link">&para;</a></h2>
+<p>Each vertex draws recovery time <span class="arithmatex">\(T_i\sim\mu\)</span> i.i.d. Conditional on <span class="arithmatex">\(\{T_i\}\)</span>, for each edge <span class="arithmatex">\(ij\)</span> independently draw it as "open" with prob <span class="arithmatex">\(p_{T_i} = 1-e^{-\beta T_i}\)</span>.
+<span class="arithmatex">\(C_+(v)=R(\infty)=\)</span> vertices ever-infected starting from <span class="arithmatex">\(v\)</span> = those reachable in the infection digraph.</p>
+<hr />
+<h2 id="theorem-1-bow-tie-two-stage-bp-for-gnp-sir-pcn">Theorem 1 (Bow-tie / two-stage BP for <span class="arithmatex">\(G(n,p)\)</span> SIR, <span class="arithmatex">\(p=c/n\)</span>)<a class="headerlink" href="#theorem-1-bow-tie-two-stage-bp-for-gnp-sir-pcn" title="Permanent link">&para;</a></h2>
+<p>For homogeneous mixing on <span class="arithmatex">\(K_{n+1}\)</span> or <span class="arithmatex">\(G(n,p)\)</span>:
+- If <span class="arithmatex">\(R_0 = c\mathbb E[p_T] &lt; 1\)</span>: <span class="arithmatex">\(R_\infty\)</span> is bounded in probability.
+- If <span class="arithmatex">\(R_0 &gt; 1\)</span>: <span class="arithmatex">\(\Pr(R_\infty\geq n^{1/3}) \to P&gt;0\)</span>, and conditioned on <span class="arithmatex">\(R_\infty\geq n^{1/3}\)</span>, <span class="arithmatex">\(R_\infty/n\to\theta&gt;0\)</span> where
+$<span class="arithmatex">\(\theta + e^{-\theta R_0} = 1,\quad\text{equivalently}\quad 1-P = \mathbb E_T[e^{-cP\,p_T}].\)</span>$</p>
+<p><strong>Proof sketch (BFS + concentration).</strong> Track <span class="arithmatex">\(N_t\)</span> = #susceptibles after <span class="arithmatex">\(t\)</span> infections, <span class="arithmatex">\(\Delta_t\)</span> = #ever-infected. Each newly infected node draws <span class="arithmatex">\(X_t\sim\text{Bin}(N_{t-1}, \tfrac{c}{n}p_{T_t})\)</span> new infections. By independence the BP approximation <span class="arithmatex">\(X_t^+\sim\text{Bin}(n, \tfrac{c}{n}p_T)\)</span> couples to <span class="arithmatex">\(X_t\)</span> with error <span class="arithmatex">\(O(t/n)\)</span>, valid for <span class="arithmatex">\(t\leq n^{1/3}\)</span>. Subcriticality (rate function bound, see the SIR and Epidemics note) gives <span class="arithmatex">\(\Pr(R_\infty\geq k)\leq e^{-(1-c)^2 k/4}\)</span>. Above criticality, BFS leaves the BP regime and a deterministic LLN takes over: <span class="arithmatex">\(\Delta_t/n\to f(t/n)\)</span> on the rescaled time, fixed point <span class="arithmatex">\(\theta+e^{-c\theta}=1\)</span> (general <span class="arithmatex">\(\mu\)</span>: replace <span class="arithmatex">\(c\)</span> by <span class="arithmatex">\(R_0\)</span>).</p>
+<h3 id="rigorous-proof-of-the-supercritical-fluid-limit">Rigorous proof of the supercritical fluid limit<a class="headerlink" href="#rigorous-proof-of-the-supercritical-fluid-limit" title="Permanent link">&para;</a></h3>
+<p><strong>Lemma 7.2.</strong> There exists <span class="arithmatex">\(\alpha&gt;0\)</span> such that for <span class="arithmatex">\(n\)</span> large, <span class="arithmatex">\(R_0&gt;1\)</span>, and <span class="arithmatex">\(0&lt;\epsilon\leq 1/2\)</span>, with prob <span class="arithmatex">\(\geq 1 - O(e^{-\alpha\epsilon^2 t})\)</span>:
+$<span class="arithmatex">\(f_{-\epsilon}(t/n) \leq \tilde Y_t/n \leq f_{+\epsilon}(t/n) + O(1/n),\quad f_{\pm\epsilon}(x) = (1\pm\epsilon)\big(1-e^{-(1\pm\epsilon)R_0 x}\big) - x.\)</span>$</p>
+<p><strong>Setup.</strong> <span class="arithmatex">\(\tilde Y_0=1\)</span>, <span class="arithmatex">\(\tilde Y_{t+1} = \tilde Y_t + X_{t+1} - 1\)</span>, with <span class="arithmatex">\(X_t\mid \mathcal{F}_{t-1}, T_t \sim \text{Bin}(N_{t-1}, p_t)\)</span> where <span class="arithmatex">\(p_t = (c/n) p_{T_t}\)</span> and <span class="arithmatex">\(p_{T_t} = 1 - e^{-\beta T_t}\)</span>. Then <span class="arithmatex">\(|C_+(x)| = \min\{t : \tilde Y_t \leq 0\}\)</span>.</p>
+<p><strong>Why this is harder than the plain giant-component argument.</strong> Two layers of randomness: the durations <span class="arithmatex">\(T_i\)</span> (which determine <span class="arithmatex">\(p_i\)</span>), and the binomial neighbor draws given <span class="arithmatex">\(T_i\)</span>. We apply multiplicative Chernov <strong>twice</strong> — once on <span class="arithmatex">\(\sum p_i\)</span> over the <span class="arithmatex">\(T_i\)</span>'s, once on <span class="arithmatex">\(\Delta_t\)</span> given the <span class="arithmatex">\(T_i\)</span>'s.</p>
+<p><strong>Proof.</strong></p>
+<p><em>(i) Conditional binomial structure.</em> By the same survival-coupling as in P2, conditional on <span class="arithmatex">\(T_1,\ldots,T_t\)</span>:
+$<span class="arithmatex">\(\Delta_t = X_1+\cdots+X_t \sim \text{Bin}\Big(n-1,\;1-\prod_{i=1}^t(1-p_i)\Big),\qquad \tilde Y_t = \Delta_t + 1 - t.\)</span>$</p>
+<p><em>(ii) Sandwich <span class="arithmatex">\(\prod(1-p_i)\)</span> and concentrate <span class="arithmatex">\(\sum p_i\)</span>.</em> For <span class="arithmatex">\(n\geq 2c\)</span> we have <span class="arithmatex">\(p_i\leq c/n\leq 1/2\)</span>, so Taylor of <span class="arithmatex">\(\log(1-p_i)\)</span> gives
+$<span class="arithmatex">\(-p_i(1+c/n) \leq \log(1-p_i) \leq -p_i,\)</span>$
+and exponentiating: <span class="arithmatex">\(e^{-(1+c/n)\sum p_i} \leq \prod_{i=1}^t(1-p_i) \leq e^{-\sum p_i}\)</span>.</p>
+<p>Now <span class="arithmatex">\(\sum p_i = (c/n)\sum_i Y_i\)</span> where <span class="arithmatex">\(Y_i = 1 - e^{-\beta T_i}\in[0,1]\)</span> are i.i.d. with mean <span class="arithmatex">\(\bar p\)</span>. The multiplicative Chernov bound on <span class="arithmatex">\(\sum Y_i\)</span> gives, with prob <span class="arithmatex">\(\geq 1 - 2e^{-\epsilon^2 \bar p t/4}\)</span>:
+$<span class="arithmatex">\((1-\epsilon)R_0\,\tfrac{t}{n} \leq \sum_{i=1}^t p_i \leq (1+\epsilon)R_0\,\tfrac{t}{n}\quad(R_0 := c\bar p).\)</span>$
+On this event:
+$<span class="arithmatex">\(e^{-(1+c/n)(1+\epsilon)R_0\,t/n} \leq \prod_{i=1}^t(1-p_i) \leq e^{-(1-\epsilon)R_0\,t/n}.\tag{7.6}\)</span>$</p>
+<p><em>(iii) Concentrate <span class="arithmatex">\(\Delta_t\)</span> given the <span class="arithmatex">\(T_i\)</span>'s.</em> On (7.6), use <span class="arithmatex">\(1-e^{-x}\geq x(1-e^{-1})\)</span> for <span class="arithmatex">\(x\in[0,1]\)</span>:
+$<span class="arithmatex">\(\mathbb E[\Delta_t\mid T_1,\ldots,T_t] \geq (n-1)\big(1 - e^{-(1-\epsilon)R_0\,t/n}\big) \geq \tfrac{1-\epsilon}{2}t \geq t/4\quad(\epsilon\leq 1/2,\;n \text{ large}).\)</span>$
+Multiplicative Chernov (P1) applied to <span class="arithmatex">\(\Delta_t \mid T_1,\ldots,T_t\)</span> then gives, with prob <span class="arithmatex">\(\geq 1 - 2e^{-\epsilon^2 t/16}\)</span>:
+$<span class="arithmatex">\((1-\epsilon)\,\mathbb E[\Delta_t\mid T_1,\ldots,T_t] \leq \Delta_t \leq (1+\epsilon)\,\mathbb E[\Delta_t\mid T_1,\ldots,T_t].\tag{7.7}\)</span>$
+Both events (7.6) and (7.7) hold with prob <span class="arithmatex">\(\geq 1 - O(e^{-\alpha\epsilon^2 t})\)</span>, <span class="arithmatex">\(\alpha = \min(\bar p/4, 1/16)\)</span>.</p>
+<p><em>(iv) Lower envelope.</em> Combining (7.6) and (7.7):
+$<span class="arithmatex">\(\Delta_t \geq (1-\epsilon)(n-1)\big(1 - e^{-(1-\epsilon)R_0\,t/n}\big),\)</span>$
+so
+$<span class="arithmatex">\(\tilde Y_t \geq 1 - t + (1-\epsilon)(n-1)\big(1 - e^{-(1-\epsilon)R_0\,t/n}\big) \geq n\,f_{-\epsilon}(t/n).\)</span>$</p>
+<p><em>(v) Upper envelope.</em> On the upper side of (7.6):
+$<span class="arithmatex">\(\mathbb E[\Delta_t\mid T_1,\ldots,T_t] \leq (n-1)\big(1 - e^{-(1+\epsilon)(1+c/n)R_0\,t/n}\big) \leq n\big(1-e^{-(1+\epsilon)R_0\,t/n}\big) + O(t/n),\)</span>$
+where the second step uses <span class="arithmatex">\(e^{-(1+c/n)R_0 t/n} = e^{-R_0 t/n}\cdot e^{-O(t/n^2)}\)</span> and <span class="arithmatex">\(t \leq n\)</span>. Combined with (7.7):
+$<span class="arithmatex">\(\tilde Y_t \leq 1 - t + (1+\epsilon)\mathbb E[\Delta_t\mid\cdot] \leq n(1+\epsilon)\big(1-e^{-(1+\epsilon)R_0 t/n}\big) - t + O(1) = n\big(f_{+\epsilon}(t/n) + O(1/n)\big).\)</span>$</p>
+<p>This establishes Lemma 7.2. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Corollary 7.3 (final outbreak size).</strong> If <span class="arithmatex">\(R_0&gt;1\)</span> and <span class="arithmatex">\(k_n\to\infty\)</span> with <span class="arithmatex">\(k_n/n\to 0\)</span>, then conditioned on <span class="arithmatex">\(R_\infty\geq k_n\)</span>, <span class="arithmatex">\(R_\infty/n\to\theta\)</span> in probability, where <span class="arithmatex">\(\theta+e^{-R_0\theta}=1\)</span>. Proof: repeat the giant-component argument (iv)–(viii) with <span class="arithmatex">\(c\)</span> replaced by <span class="arithmatex">\(R_0\)</span> — geometry of <span class="arithmatex">\(f_{\pm\epsilon}\)</span> is structurally identical.</p>
+<p><strong>Method extraction (two-layer Chernov).</strong>
+- <em>Recognition.</em> A process where each step has both a "type/weight" attached (here <span class="arithmatex">\(T_i\)</span>) and an inner random outcome (here <span class="arithmatex">\(\text{Bin}(N_{t-1},p_i)\)</span>).
+- <em>First move.</em> Condition on the types, get binomial inner structure. Then concentrate the sum-of-types separately as <span class="arithmatex">\([0,1]\)</span>-valued sum via P1.
+- <em>Pitfall.</em> If you don't peel the layers, you'll end up with <span class="arithmatex">\(\sum(1-e^{-\beta T_i})\)</span> inside an exponential and lose the Chernov hook. Also: <span class="arithmatex">\(p_i \leq c/n\)</span> is required for the Taylor sandwich on <span class="arithmatex">\(\log(1-p_i)\)</span> to drop higher-order terms.
+- <em>Threshold takeaway.</em> <span class="arithmatex">\(R_0 = c\bar p\)</span> is the natural epidemic threshold — it's the offspring mean of the BFS-equivalent branching process averaged over recovery times.</p>
+<h2 id="lemma-forwardbackward-bp-perspective">Lemma (Forward/backward BP perspective)<a class="headerlink" href="#lemma-forwardbackward-bp-perspective" title="Permanent link">&para;</a></h2>
+<p>For the bow-tie picture: let <span class="arithmatex">\(\eta = \Pr(\text{forward BP dies})\)</span>, <span class="arithmatex">\(\eta^* = \Pr(\text{backward BP dies})\)</span>. Then
+$<span class="arithmatex">\(1-P = G_+(1-P) = \mathbb E_T[e^{-cp_T P}],\qquad 1-\theta = G_-(1-\theta) = e^{-R_0\theta}.\)</span>$
+Here <span class="arithmatex">\(G_+, G_-\)</span> are the offspring PGFs of forward/backward BPs, with <span class="arithmatex">\(G_-\)</span> using degree-biased distribution.</p>
+<p>(Same fixed-point shape as homogeneous mixing; the network just changes the offspring law.)</p>
+<hr />
+<h2 id="sir-ode-limit-homogeneous-mixing-gncn">SIR ODE limit (homogeneous mixing, <span class="arithmatex">\(G(n,c/n)\)</span>)<a class="headerlink" href="#sir-ode-limit-homogeneous-mixing-gncn" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(S(t)\)</span> = #susceptibles, <span class="arithmatex">\(X(t)\)</span> = #unexplored edges out of infectives, <span class="arithmatex">\(I(t)\)</span> = #infected.</p>
+<p>Stochastic dynamics (Markov rates):
+- At rate <span class="arithmatex">\(\beta X\)</span>: explore one edge. With prob <span class="arithmatex">\(S/n\)</span>, the other endpoint is susceptible → it becomes infected, gains <span class="arithmatex">\(\text{Poi}(c)\)</span> new edges. Either way <span class="arithmatex">\(X\to X-1\)</span>.
+- At rate <span class="arithmatex">\(\gamma\)</span> each, an infective recovers (<span class="arithmatex">\(d_v\to 0\)</span>).</p>
+<h2 id="theorem-2-lln-for-sir-ode">Theorem 2 (LLN for SIR ODE)<a class="headerlink" href="#theorem-2-lln-for-sir-ode" title="Permanent link">&para;</a></h2>
+<p>As <span class="arithmatex">\(n\to\infty\)</span>, <span class="arithmatex">\((S/n, X/n, I/n)\to(s,x,i)\)</span> deterministic, with
+$<span class="arithmatex">\(\dot s = -\beta x s,\qquad \dot x = -(\beta+\gamma)x - c\dot s,\qquad \dot i = -\gamma i - \dot s.\)</span>$</p>
+<p>(Proof = differential-equation method à la Darling-Norris; quoted.)</p>
+<h2 id="lemma-final-size-formula">Lemma (Final size formula)<a class="headerlink" href="#lemma-final-size-formula" title="Permanent link">&para;</a></h2>
+<p><span class="arithmatex">\(s(\infty) = s(0)\,e^{-R_0(s(0)-s(\infty))}\)</span> where <span class="arithmatex">\(R_0 = c\beta/(\beta+\gamma) = c\bar p\)</span> (<span class="arithmatex">\(\bar p = \mathbb E[p_T]\)</span>).</p>
+<p><strong>Proof.</strong> From <span class="arithmatex">\(\dot x = -(\beta+\gamma)x - c\dot s\)</span> integrate <span class="arithmatex">\(0\to\infty\)</span> with <span class="arithmatex">\(x(0)=x(\infty)=0\)</span>:
+$<span class="arithmatex">\(0 = -(\beta+\gamma)\int_0^\infty x\,dt - c(s(\infty)-s(0))\;\Rightarrow\; \beta\int x = \tfrac{c\beta}{\beta+\gamma}(s(0)-s(\infty)).\)</span>$
+And <span class="arithmatex">\(\dot s/s = -\beta x\)</span> gives <span class="arithmatex">\(s(\infty) = s(0)e^{-\beta\int x}\)</span>. Combine.</p>
+<hr />
+<h2 id="sir-on-configuration-model-cmd">SIR on Configuration Model CM(<span class="arithmatex">\(d\)</span>)<a class="headerlink" href="#sir-on-configuration-model-cmd" title="Permanent link">&para;</a></h2>
+<p>Track:
+- <span class="arithmatex">\(X(t)\)</span> = #active half-edges (incident to infectives, unmatched)
+- <span class="arithmatex">\(S_d(t)\)</span> = #susceptible vertices of degree <span class="arithmatex">\(d\)</span>
+- <span class="arithmatex">\(U(t)\)</span> = #unmatched half-edges total</p>
+<p>Rate-of-change identities (when a <span class="arithmatex">\(\beta\)</span>-clock rings, pair an active half-edge with a uniform unmatched one):
+$<span class="arithmatex">\(\dot U = -2\beta X,\qquad \dot S_d = -\beta d\,X/U,\qquad \dot X = -(\beta+\gamma)X - \beta X^2/U + \beta\sum_d d(d-1)S_d/U.\)</span>$</p>
+<h2 id="lemma-closed-form-via-theta-reduction">Lemma (Closed-form via <span class="arithmatex">\(\theta\)</span>-reduction)<a class="headerlink" href="#lemma-closed-form-via-theta-reduction" title="Permanent link">&para;</a></h2>
+<p>Define <span class="arithmatex">\(\theta(t) = e^{-\beta\int_0^t X/U}\)</span>. Then
+$<span class="arithmatex">\(U = U(0)\theta^2 = n\bar d\,\theta^2,\qquad S_d = S_d(0)\theta^d = p_d n\,\theta^d.\)</span>$</p>
+<p><strong>Proof.</strong> <span class="arithmatex">\(\dot U/U = -2\beta X/U\)</span> ⇒ integrate. <span class="arithmatex">\(\dot S_d/S_d = -\beta d\,X/U\)</span> ⇒ integrate.</p>
+<h2 id="theorem-3-single-ode-for-theta">Theorem 3 (Single ODE for <span class="arithmatex">\(\theta\)</span>)<a class="headerlink" href="#theorem-3-single-ode-for-theta" title="Permanent link">&para;</a></h2>
+<p>$<span class="arithmatex">\(\frac{1}{\beta+\gamma}\dot\theta = -F(\theta),\qquad F(\theta) = \bar p\big(1 - G^*(\theta)\big) - (1-\theta),\)</span>$
+where <span class="arithmatex">\(G^*(\theta) = \sum_k \tfrac{(k+1)p_{k+1}}{\bar d}\theta^k\)</span> is the PGF of the size-biased excess degree, and <span class="arithmatex">\(\bar p = \beta/(\beta+\gamma)\)</span>.</p>
+<p><strong>Proof sketch.</strong> Use <span class="arithmatex">\(\beta\sum_d d(d-1)S_d/U = \beta n\sum d(d-1)p_d\theta^{d-2}/(n\bar d) = \beta\,\partial_\theta G^*(\theta)\)</span>, plug into <span class="arithmatex">\(\dot X/X\)</span>, then with <span class="arithmatex">\(\psi:=\theta X/U\)</span> derive a linear ODE in <span class="arithmatex">\(\psi\)</span> with solution <span class="arithmatex">\(\psi=\tfrac{\beta+\gamma}{\beta}(\theta-1)-(G^*(\theta)-1)\)</span>. Combine with <span class="arithmatex">\(\dot\theta = -\beta\psi\)</span>.</p>
+<h2 id="lemma-final-outbreak-size">Lemma (Final outbreak size)<a class="headerlink" href="#lemma-final-outbreak-size" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(\theta_\infty\)</span> = smallest root of <span class="arithmatex">\(F(\theta)=0\)</span> in <span class="arithmatex">\((0,1)\)</span>. Then
+$<span class="arithmatex">\(R_\infty/n \;\to\; 1 - G(\theta_\infty),\quad G(\theta)=\sum_k p_k\theta^k.\)</span>$</p>
+<p><strong>Why this matches forward/backward BP.</strong> <span class="arithmatex">\(1-\theta_\infty = \bar p(1-G^*(\theta_\infty))\)</span> is exactly the backward-BP fixed point (<span class="arithmatex">\(\eta^* = G^*(1-\bar p(1-\eta^*))\)</span> in disguise), and <span class="arithmatex">\(1-G(\theta_\infty)\)</span> is the forward survival <span class="arithmatex">\(1-G(\eta^*\)</span>-style pullback<span class="arithmatex">\()\)</span>.</p>
+<hr />
+<h2 id="force-of-infection-infection-runs-out-of-high-degree-first">Force of infection / "infection runs out of high-degree first"<a class="headerlink" href="#force-of-infection-infection-runs-out-of-high-degree-first" title="Permanent link">&para;</a></h2>
+<p>$<span class="arithmatex">\(\frac{1}{S_k}\dot S_k = -\frac{k}{\theta}(\beta+\gamma)F(\theta).\)</span>$
+Force is <strong>proportional to <span class="arithmatex">\(k\)</span></strong> ⇒ high-degree susceptibles deplete fastest.</p>
+<hr />
+<h2 id="pitfalls">Pitfalls<a class="headerlink" href="#pitfalls" title="Permanent link">&para;</a></h2>
+<ul>
+<li>For CM, the <strong>excess</strong> degree <span class="arithmatex">\(G^*\)</span> enters offspring (forward BP), not the raw <span class="arithmatex">\(G\)</span>.</li>
+<li><span class="arithmatex">\(R_0 = c\mathbb E[p_T] = c\bar p\)</span>; missing the <span class="arithmatex">\(\bar p\)</span> factor (averaging over recovery time) is the most common slip.</li>
+<li><span class="arithmatex">\(\theta\)</span> is <strong>not</strong> an extinction probability — it is the survival of an outgoing half-edge.</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../17-sir-and-epidemics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SIR and Epidemics">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                SIR and Epidemics
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Notes CC BY-NC-SA 4.0 · code MIT
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

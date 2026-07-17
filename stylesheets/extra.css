@@ -1,0 +1,641 @@
+/* ==========================================================================
+   geshu-compendium — design system
+   --------------------------------------------------------------------------
+   The palette is ported from the author's own Obsidian snippet
+   ("spring2026 copy"/.obsidian/snippets/networks-ui.css) so the site reads
+   like the vault it is generated from: teal accent on near-black in dark
+   mode, deep teal on warm paper in light mode.
+
+   Aesthetic target: a well-set textbook / research-group notes site.
+   Calm surfaces, hairline rules, one accent. No chrome, no shadows.
+
+   Everything is keyed off the --gx-* tokens defined per colour scheme
+   below; Material variables are then mapped onto them. To retune the
+   palette, edit the two token blocks only.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Fonts
+   System stacks only — no webfont requests, which keeps the site
+   self-contained and private for readers. CJK families are named explicitly
+   so mixed English/Chinese prose sets consistently across platforms.
+   -------------------------------------------------------------------------- */
+:root {
+  --gx-font:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+    "Microsoft YaHei", sans-serif;
+  --gx-font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, "JetBrains Mono",
+    Consolas, "Liberation Mono", monospace;
+
+  --md-text-font-family: var(--gx-font);
+  --md-code-font-family: var(--gx-font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   2. Colour tokens — dark ("slate")
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  color-scheme: dark;
+
+  --gx-bg:            #101418;
+  --gx-surface:       #171c21;
+  --gx-surface-alt:   #1d2329;
+  --gx-rule:          #2b343c;
+  --gx-rule-strong:   #3a4650;
+  --gx-text:          #dce3e8;
+  --gx-muted:         #95a0a9;
+  --gx-faint:         #6f7a83;
+  --gx-accent:        #3fb99f;
+  --gx-accent-text:   #3fb99f;  /* accent used AS text (nav active) — AA on bg */
+  --gx-accent-hover:  #55c8af;
+  --gx-link:          #82c9f4;
+  --gx-link-hover:    #a7daf7;
+  --gx-h1:            #f0f5f4;
+  --gx-h2:            #d9eee8;
+  --gx-h3:            #cce3f0;
+  --gx-quote:         #3fb99f;
+  --gx-thead:         #20282e;
+  --gx-code-bg:       #1a2026;
+  --gx-mark:          rgba(215, 181, 109, 0.28);
+
+  /* Tag facets — the vault's colour vocabulary. */
+  --gx-tag-area:      #7fc9b6;
+  --gx-tag-method:    #91b9f2;
+  --gx-tag-model:     #d7b56d;
+  --gx-tag-topic:     #d698ad;
+
+  /* Admonition accents, kept in the same register as the tags. */
+  --gx-adm-info:      #91b9f2;
+  --gx-adm-warn:      #d7b56d;
+  --gx-adm-danger:    #d698ad;
+
+  /* ---- Material variable mapping ---- */
+  --md-default-bg-color:            var(--gx-bg);
+  --md-default-fg-color:            var(--gx-text);
+  --md-default-fg-color--light:     var(--gx-muted);
+  --md-default-fg-color--lighter:   var(--gx-faint);
+  --md-default-fg-color--lightest:  color-mix(in srgb, var(--gx-faint) 18%, transparent);
+
+  /* Header ("primary") is a flat surface, not a brand bar. */
+  --md-primary-fg-color:            var(--gx-surface);
+  --md-primary-fg-color--light:     var(--gx-surface-alt);
+  --md-primary-fg-color--dark:      var(--gx-bg);
+  --md-primary-bg-color:            var(--gx-text);
+  --md-primary-bg-color--light:     var(--gx-muted);
+
+  --md-accent-fg-color:             var(--gx-accent-hover);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--gx-accent) 12%, transparent);
+  --md-accent-bg-color:             var(--gx-bg);
+
+  --md-typeset-a-color:             var(--gx-link);
+  --md-typeset-mark-color:          var(--gx-mark);
+  --md-typeset-table-color:         var(--gx-rule);
+  --md-typeset-table-color--light:  color-mix(in srgb, var(--gx-rule) 45%, transparent);
+
+  --md-code-bg-color:               var(--gx-code-bg);
+  --md-code-fg-color:               var(--gx-text);
+
+  --md-admonition-fg-color:         var(--gx-text);
+  --md-admonition-bg-color:         transparent;
+
+  --md-footer-bg-color:             transparent;
+  --md-footer-bg-color--dark:       transparent;
+  --md-footer-fg-color:             var(--gx-text);
+  --md-footer-fg-color--light:      var(--gx-muted);
+  --md-footer-fg-color--lighter:    var(--gx-faint);
+
+  /* Mermaid (rendered by Material's bundled build) */
+  --md-mermaid-font-family:         var(--gx-font);
+  --md-mermaid-node-bg-color:       color-mix(in srgb, var(--gx-accent) 12%, var(--gx-surface));
+  --md-mermaid-node-fg-color:       var(--gx-accent);
+  --md-mermaid-edge-color:          var(--gx-muted);
+  --md-mermaid-label-bg-color:      var(--gx-bg);
+  --md-mermaid-label-fg-color:      var(--gx-text);
+}
+
+/* --------------------------------------------------------------------------
+   3. Colour tokens — light ("default", warm paper)
+   Tag/admonition accents keep the vault hues but are darkened to hold
+   WCAG AA contrast on the paper background.
+   -------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] {
+  color-scheme: light;
+
+  --gx-bg:            #fbfaf7;
+  --gx-surface:       #f1f0eb;
+  --gx-surface-alt:   #e8e6df;
+  --gx-rule:          #d7d2c6;
+  --gx-rule-strong:   #c8c1b3;
+  --gx-text:          #1d2529;
+  --gx-muted:         #617078;
+  --gx-faint:         #879098;
+  --gx-accent:        #16836f;
+  --gx-accent-text:   #126c5f;  /* the vault's light text-accent; 6:1 on paper */
+  --gx-accent-hover:  #0b8572;
+  --gx-link:          #126da0;
+  --gx-link-hover:    #0c83c6;
+  --gx-h1:            #162326;
+  --gx-h2:            #203d3b;
+  --gx-h3:            #24495f;
+  --gx-quote:         #16836f;
+  --gx-thead:         #ebe8df;
+  --gx-code-bg:       #efeee8;
+  --gx-mark:          rgba(215, 181, 109, 0.42);
+
+  --gx-tag-area:      #0f6a58;
+  --gx-tag-method:    #2e5f97;
+  --gx-tag-model:     #7d5a10;
+  --gx-tag-topic:     #a34a67;
+
+  --gx-adm-info:      #2e5f97;
+  --gx-adm-warn:      #8a6414;
+  --gx-adm-danger:    #a34a67;
+
+  /* ---- Material variable mapping ---- */
+  --md-default-bg-color:            var(--gx-bg);
+  --md-default-fg-color:            var(--gx-text);
+  --md-default-fg-color--light:     var(--gx-muted);
+  --md-default-fg-color--lighter:   var(--gx-faint);
+  --md-default-fg-color--lightest:  color-mix(in srgb, var(--gx-faint) 18%, transparent);
+
+  --md-primary-fg-color:            var(--gx-bg);
+  --md-primary-fg-color--light:     var(--gx-surface);
+  --md-primary-fg-color--dark:      var(--gx-surface-alt);
+  --md-primary-bg-color:            var(--gx-text);
+  --md-primary-bg-color--light:     var(--gx-muted);
+
+  --md-accent-fg-color:             var(--gx-accent-hover);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--gx-accent) 10%, transparent);
+  --md-accent-bg-color:             var(--gx-bg);
+
+  --md-typeset-a-color:             var(--gx-link);
+  --md-typeset-mark-color:          var(--gx-mark);
+  --md-typeset-table-color:         var(--gx-rule);
+  --md-typeset-table-color--light:  color-mix(in srgb, var(--gx-rule) 45%, transparent);
+
+  --md-code-bg-color:               var(--gx-code-bg);
+  --md-code-fg-color:               var(--gx-text);
+
+  --md-admonition-fg-color:         var(--gx-text);
+  --md-admonition-bg-color:         transparent;
+
+  --md-footer-bg-color:             transparent;
+  --md-footer-bg-color--dark:       transparent;
+  --md-footer-fg-color:             var(--gx-text);
+  --md-footer-fg-color--light:      var(--gx-muted);
+  --md-footer-fg-color--lighter:    var(--gx-faint);
+
+  --md-mermaid-font-family:         var(--gx-font);
+  --md-mermaid-node-bg-color:       color-mix(in srgb, var(--gx-accent) 10%, var(--gx-surface));
+  --md-mermaid-node-fg-color:       var(--gx-accent);
+  --md-mermaid-edge-color:          var(--gx-muted);
+  --md-mermaid-label-bg-color:      var(--gx-bg);
+  --md-mermaid-label-fg-color:      var(--gx-text);
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout & reading measure
+   ~64rem grid with both sidebars leaves the prose column at roughly 760px,
+   the vault's line width.
+   -------------------------------------------------------------------------- */
+.md-grid {
+  max-width: 64rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. Typography & rhythm
+   -------------------------------------------------------------------------- */
+.md-typeset {
+  line-height: 1.62;
+  overflow-wrap: break-word;
+}
+
+.md-typeset p {
+  margin-block: 0.85em;
+}
+
+/* Dense reference notes: slightly tighter list rhythm than Material's. */
+.md-typeset ul li,
+.md-typeset ol li {
+  margin-bottom: 0.35em;
+}
+
+.md-typeset h1 {
+  color: var(--gx-h1);
+  font-size: 1.9em;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--gx-rule);
+  padding-bottom: 0.45em;
+  margin: 0 0 1.1em;
+}
+
+.md-typeset h2 {
+  color: var(--gx-h2);
+  font-size: 1.4em;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  margin: 2em 0 0.7em;
+}
+
+.md-typeset h3 {
+  color: var(--gx-h3);
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
+  margin: 1.6em 0 0.6em;
+}
+
+.md-typeset h4 {
+  color: var(--gx-h2);
+  font-size: 1em;
+  font-weight: 650;
+  letter-spacing: 0;
+  margin: 1.4em 0 0.5em;
+}
+
+.md-typeset hr {
+  border-bottom: 1px solid var(--gx-rule);
+}
+
+/* Links: quiet persistent underline (colour is never the only signal),
+   full-strength on hover. */
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentcolor 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.md-typeset a:hover,
+.md-typeset a:focus-visible {
+  color: var(--gx-link-hover);
+  text-decoration-color: currentcolor;
+}
+
+.md-typeset :is(.headerlink, .md-tag, .md-button, .footnote-backref) {
+  text-decoration: none;
+}
+
+.md-typeset .headerlink {
+  color: var(--gx-faint);
+}
+
+.md-typeset :hover > .headerlink,
+.md-typeset .headerlink:focus-visible {
+  color: var(--gx-accent-hover);
+}
+
+/* ==highlight== */
+.md-typeset mark {
+  border-radius: 0.15em;
+  padding: 0 0.1em;
+}
+
+.md-typeset blockquote {
+  border-left: 3px solid var(--gx-quote);
+  border-radius: 0 0.4rem 0.4rem 0;
+  background: color-mix(in srgb, var(--gx-quote) 7%, transparent);
+  padding: 0.6em 1em;
+  color: inherit;
+}
+
+/* Screenshots sit on a hairline card so light images don't glare on the
+   dark background. */
+.md-typeset p > img {
+  border: 1px solid var(--gx-rule);
+  border-radius: 0.4rem;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   6. Code
+   -------------------------------------------------------------------------- */
+.md-typeset :not(pre) > code {
+  border: 1px solid color-mix(in srgb, var(--gx-rule) 70%, transparent);
+  border-radius: 0.3em;
+  padding: 0.05em 0.3em;
+}
+
+.md-typeset pre > code {
+  border: 1px solid var(--gx-rule);
+  border-radius: 0.45rem;
+  scrollbar-width: thin;
+}
+
+.md-clipboard {
+  color: var(--gx-faint);
+}
+
+/* --------------------------------------------------------------------------
+   7. Tables
+   Framed, rounded, header tinted — the vault's table treatment. Material's
+   own JS wraps wide tables in a scroll container; the base table also
+   carries overflow:auto as a no-JS fallback, so the page never scrolls
+   sideways.
+   -------------------------------------------------------------------------- */
+.md-typeset table:not([class]) {
+  border: 1px solid var(--gx-rule);
+  border-radius: 0.4rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.72rem;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  padding: 0.6em 0.85em;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--gx-thead);
+  color: var(--gx-text);
+  font-weight: 600;
+  border-bottom: 1px solid var(--gx-rule);
+}
+
+.md-typeset table:not([class]) thead th:first-child {
+  border-top-left-radius: calc(0.4rem - 1px);
+}
+
+.md-typeset table:not([class]) thead th:last-child {
+  border-top-right-radius: calc(0.4rem - 1px);
+}
+
+.md-typeset__scrollwrap {
+  scrollbar-width: thin;
+}
+
+/* --------------------------------------------------------------------------
+   8. Maths (MathJax via arithmatex, generic mode)
+   Display equations scroll inside their own container on narrow screens.
+   -------------------------------------------------------------------------- */
+.md-typeset div.arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 0.1em 0;
+  scrollbar-width: thin;
+}
+
+mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* MathJax v3 cannot line-break inline formulas, and some notes carry long
+   inline inequalities. On viewports below Material's tablet breakpoint,
+   let an oversized inline formula scroll inside its own box instead of
+   widening the page. (Kept off desktop so baselines stay perfect there.) */
+@media screen and (max-width: 59.984375em) {
+  .md-typeset span.arithmatex {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: middle;
+    scrollbar-width: thin;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Mermaid
+   -------------------------------------------------------------------------- */
+.md-typeset pre.mermaid,
+.md-typeset .mermaid {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* --------------------------------------------------------------------------
+   10. Admonitions & Q&A cards
+   One quiet shape for all callouts: hairline border tinted by the type
+   colour, soft title tint, no shadows. Type colours are remapped from
+   Material's saturated defaults into the palette via --gx-adm.
+   -------------------------------------------------------------------------- */
+.md-typeset .admonition,
+.md-typeset details {
+  --gx-adm: var(--gx-adm-info);
+  font-size: 0.7rem;
+  border-radius: 0.4rem;
+  box-shadow: none;
+}
+
+/* Type → palette colour. */
+.md-typeset :is(.admonition, details):is(.tip, .hint, .important, .success, .check, .done, .question, .help, .faq) {
+  --gx-adm: var(--gx-accent);
+}
+
+.md-typeset :is(.admonition, details):is(.warning, .caution, .attention) {
+  --gx-adm: var(--gx-adm-warn);
+}
+
+.md-typeset :is(.admonition, details):is(.failure, .fail, .missing, .danger, .error, .bug) {
+  --gx-adm: var(--gx-adm-danger);
+}
+
+.md-typeset :is(.admonition, details):is(.example, .quote, .cite) {
+  --gx-adm: var(--gx-muted);
+}
+
+/* Application rules. :not(#gx) only raises specificity above Material's
+   per-type selectors (e.g. `.md-typeset details.question`) so one rule can
+   serve every type; the id never matches anything. */
+.md-typeset :is(.admonition, details):not(#gx) {
+  border: 1px solid color-mix(in srgb, var(--gx-adm) 32%, var(--gx-rule));
+}
+
+.md-typeset :is(.admonition, details):not(#gx):focus-within {
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--gx-adm) 14%, transparent);
+}
+
+.md-typeset :is(.admonition, details) > :is(.admonition-title, summary) {
+  background-color: color-mix(in srgb, var(--gx-adm) 8%, transparent);
+  font-weight: 600;
+}
+
+.md-typeset :is(.admonition, details) > :is(.admonition-title, summary)::before {
+  background-color: var(--gx-adm);
+}
+
+/* Q&A cards — the ML notes end in these; they should invite a click. */
+.md-typeset details.question {
+  background: var(--gx-surface);
+  margin-block: 0.9em;
+}
+
+.md-typeset details.question > summary {
+  background-color: transparent;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  transition: background-color 125ms;
+}
+
+.md-typeset details.question > summary::before,
+.md-typeset details.question > summary::after {
+  top: 0.55rem;
+}
+
+.md-typeset details.question > summary:hover {
+  background-color: color-mix(in srgb, var(--gx-accent) 8%, transparent);
+}
+
+.md-typeset details.question[open] > summary {
+  border-bottom: 1px solid var(--gx-rule);
+}
+
+/* --------------------------------------------------------------------------
+   11. Tags — facet colour coding, ported from the vault
+   area/ → teal, method/ → blue, model/ → gold, topic/ → pink.
+   The data-md-tag attribute is emitted by frontend/overrides/partials/tags.html.
+   -------------------------------------------------------------------------- */
+.md-typeset .md-tag {
+  --gx-tag: var(--gx-muted);
+  color: var(--gx-tag);
+  background: color-mix(in srgb, var(--gx-tag) 11%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gx-tag) 34%, transparent);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.md-typeset .md-tag[data-md-tag^="area/"]   { --gx-tag: var(--gx-tag-area); }
+.md-typeset .md-tag[data-md-tag^="method/"] { --gx-tag: var(--gx-tag-method); }
+.md-typeset .md-tag[data-md-tag^="model/"]  { --gx-tag: var(--gx-tag-model); }
+.md-typeset .md-tag[data-md-tag^="topic/"]  { --gx-tag: var(--gx-tag-topic); }
+
+.md-typeset a.md-tag:hover {
+  background: color-mix(in srgb, var(--gx-tag) 20%, transparent);
+  color: var(--gx-tag);
+}
+
+.md-tags {
+  margin-bottom: 0.8em;
+}
+
+/* --------------------------------------------------------------------------
+   12. Header & search
+   Flat surface with a hairline — no brand bar, no shadow.
+   -------------------------------------------------------------------------- */
+.md-header {
+  border-bottom: 1px solid var(--gx-rule);
+}
+
+.md-header--shadow {
+  box-shadow: none;
+}
+
+.md-header__title {
+  font-weight: 600;
+}
+
+.md-search__form {
+  background-color: color-mix(in srgb, var(--gx-text) 6%, transparent);
+  border-radius: 0.3rem;
+}
+
+.md-search__form:hover {
+  background-color: color-mix(in srgb, var(--gx-text) 11%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   13. Navigation sidebars
+   -------------------------------------------------------------------------- */
+.md-nav__link--active,
+.md-nav__link--active code {
+  color: var(--gx-accent-text);
+  font-weight: 600;
+}
+
+/* Desktop section labels: small caps, faint — like a book's running heads. */
+@media screen and (min-width: 76.25em) {
+  .md-nav__item--section > .md-nav__link {
+    font-size: 0.62rem;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gx-faint);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Footer (prev/next pager + meta)
+   -------------------------------------------------------------------------- */
+.md-footer {
+  border-top: 1px solid var(--gx-rule);
+}
+
+.md-footer__link:is(:focus, :hover) {
+  color: var(--gx-accent-hover);
+  opacity: 1;
+}
+
+.md-top {
+  border: 1px solid var(--gx-rule);
+}
+
+/* --------------------------------------------------------------------------
+   15. Landing page (docs/index.md wraps its content in .gx-home)
+   -------------------------------------------------------------------------- */
+.gx-home {
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.gx-home h1 {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin: 0.4em 0 0.3em;
+  font-size: 2.1em;
+}
+
+.gx-home .gx-lede {
+  color: var(--gx-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  max-width: 38rem;
+}
+
+.gx-home .gx-fine {
+  color: var(--gx-faint);
+  font-size: 0.66rem;
+}
+
+.gx-home .grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.md-typeset .grid.cards > ul > li {
+  background: var(--gx-surface);
+  border: 1px solid var(--gx-rule);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  transition: border-color 150ms;
+}
+
+.md-typeset .grid.cards > ul > li:is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--gx-accent) 45%, var(--gx-rule));
+  box-shadow: none;
+}
+
+.md-typeset .grid.cards > ul > li > hr {
+  margin: 0.6em 0;
+  border-bottom-color: var(--gx-rule);
+}
+
+/* --------------------------------------------------------------------------
+   16. Accessibility & polish
+   -------------------------------------------------------------------------- */
+:is(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--gx-accent-hover);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gx-accent) 30%, transparent);
+}
