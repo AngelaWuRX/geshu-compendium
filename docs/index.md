@@ -8,97 +8,116 @@ hide:
 
 # geshu-compendium
 
-A living notebook recording my daily work progress related to AI. The bet
-behind it: powerful agents amplify you *once you have a foundation of your
-own* — so this is where I build things, read papers, and keep the notes that
-back both. Public on purpose, so the progress has to be real.
+Notes, experiments, and production patterns for building fullstack AI systems.
 {: .gx-lede }
 
-## What I'm working on
+I'm building toward fullstack AI engineering: frontend interfaces, backend
+systems, data infrastructure, model integration, evaluation, and production
+reliability. This site is my live notebook — part field manual, part laboratory,
+and part record of what broke along the way.
+
+Every note answers the same three questions: **what problem does this solve,
+how do I build it, and how does it fail in production?** The third one is where
+most of the value is, and it is the one tutorials skip.
+
+## Current focus
+
+The structure is in place and most of it is empty — deliberately. The work now
+is the [first twelve notes](notes/index.md): three foundations, three fullstack,
+four AI, two production. Twelve real ones beat fifty stubs, and the failure mode
+here is a beautifully organised vault with nothing written in it.
+
+Alongside that: reading into agent safety, and hardening a postmortem agent into
+something production-shaped. More detail on [Now](now.md).
+
+## The capability map
+
+Organised by what I can build, not by which classes I took. A database course
+does not stay a database course; it gets decomposed into the capabilities it
+actually teaches.
 
 <div class="grid cards" markdown>
 
--   **🧮 Projects**
+-   **[Foundations](notes/foundations/index.md)**
 
     ---
 
-    Where I apply what I'm learning: building ChatGPT from scratch to understand
-    the whole ML pipeline, hardening a postmortem memory agent with *Designing
-    Data-Intensive Applications*, and every LeetCode problem worked as a mock
-    interview.
+    Requests, concurrency, storage, the network. Only the parts that have
+    changed a decision — probability as classifier confidence and evaluation,
+    not as a formula sheet.
 
-    [See the projects](projects/index.md)
-
--   **📝 Blog — Paper Notes**
+-   **[Frontend Engineering](notes/frontend/index.md)**
 
     ---
 
-    Short writeups on papers: the key idea in plain language, focused on the
-    result. Reading into agent safety and notable work from the top
-    conferences.
+    The standard layer, plus what AI products need and ordinary UIs never did:
+    token streaming, tool-call progress, human approval, citation rendering.
 
-    [Read the blog](blog/index.md)
+-   **[Backend Engineering](notes/backend/index.md)**
+
+    ---
+
+    APIs, auth, queues, idempotency, rate limits. Each note has to answer when
+    *not* to build the thing, and where it fails — not just how to write one.
+
+-   **[Data Systems](notes/data/index.md)**
+
+    ---
+
+    Schemas, transactions, indexes, migrations — and the tables an AI product
+    actually needs, instead of everything crammed into one JSON column.
+
+-   **[AI Engineering](notes/ai-engineering/index.md)**
+
+    ---
+
+    The core layer: model interfaces, prompt systems, retrieval, agents,
+    evaluation, safety. Everything else is the ground under it or the machinery
+    around it.
+
+-   **[Production Engineering](notes/production/index.md)**
+
+    ---
+
+    Deployment, cost, tracing, rollbacks, SLOs — plus model migrations and the
+    fact that a wrong answer still returns a 200.
 
 </div>
 
-## Reference notes
+## Recently
 
-Useful, but not the point of this repo — the background I lean on while
-building. Starting from scratch? Data Structures, then Algorithms. Here for the
-deep end? Networks, read in order. Brushing up for interviews? The Machine
-Learning notes end in collapsible Q&A cards.
+**2026-07-28** — Cut the home page back to the capability map: the featured
+projects block and the blog / build-log cards are gone.
+
+**2026-07-27** — Restructured the whole site around capability instead of
+course; added the Learn paths, the status system, and the twelve first note
+stubs. Full entry in the [changelog](changelog.md).
+
+## Also here
 
 <div class="grid cards" markdown>
 
--   **Networks**
+-   **[Learn](learn/index.md)**
 
     ---
 
-    Random graphs, concentration, the giant component, branching processes,
-    small worlds, PageRank and epidemics. The most developed section —
-    proof-heavy, best read in order. *18 notes.*
+    Five reading paths through the notes, in the order the ideas actually depend
+    on each other. Start here if the capability map looks like a list of words.
 
-    [Start with graph counting tricks](notes/networks/01-graph-counting-tricks.md)
-
--   **Machine Learning**
+-   **[Labs](labs/index.md)**
 
     ---
 
-    Probability and MLE/MAP through regression, classifiers, optimisation,
-    neural nets, CNNs, transformers and language models. Every note ends in
-    Q&A cards. *11 notes.*
-
-    [Start with probability](notes/machine-learning/01-probability.md)
-
--   **Data Structures**
-
-    ---
-
-    Arrays, lists, trees, hash maps, heaps and graphs — intuition, invariants,
-    complexity. The classic first course, in my own words. *18 notes.*
-
-    [Start with: what is a data structure?](notes/data-structures/data-structure.md)
-
--   **Algorithms**
-
-    ---
-
-    Divide and conquer, graph traversal, shortest paths, spanning trees,
-    linear programming and reductions — the patterns behind LeetCode-style
-    problems. *8 notes.*
-
-    [Start with divide and conquer](notes/algorithms/divide-and-conquer.md)
-
--   **Python**
-
-    ---
-
-    Reading notes on *hello-algo* — re-typing the book's implementations from
-    memory as active recall, chapter by chapter. *1 note.*
-
-    [Open the reading notes](notes/python/hello-algo-notes.md)
+    Experiments you run and change rather than code you read. No API key ever
+    reaches the browser, and mock mode is the default.
 
 </div>
+
+## Reference
+
+<!-- Intentionally blank for now. The 79 course-shaped notes are still reachable
+     from the Reference branch of the nav; what this section should say about
+     them is undecided. -->
 
 ---
 

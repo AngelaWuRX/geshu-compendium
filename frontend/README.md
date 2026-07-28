@@ -32,8 +32,10 @@ frontend/
 ## The palette
 
 Ported from the author's Obsidian snippet
-(`spring2026 copy/.obsidian/snippets/networks-ui.css`) — that file is the
-source of truth for the site's visual identity. Every colour is a `--gx-*`
+(`backend/data/vaults/spring2026/.obsidian/snippets/networks-ui.css`) — that
+file is the source of truth for the site's visual identity. It is inside a
+gitignored vault, so it never reaches CI; treat the token blocks below as the
+committed mirror of it. Every colour is a `--gx-*`
 token declared twice, once per scheme, at the top of `extra.css`; Material's
 `--md-*` variables are mapped onto the tokens right below. To retune the
 palette, edit only those two blocks.

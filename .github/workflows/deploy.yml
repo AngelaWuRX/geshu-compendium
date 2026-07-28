@@ -23,12 +23,18 @@ jobs:
       - name: Guard — no vault, PDF or private content in the tree
         run: |
           set -e
-          if git ls-files | grep -Ei '\.pdf$|\.tex$| copy/|midterm|resume|_sol'; then
+          # `backend/data/vaults/` is where the three source vaults now live;
+          # ` copy/` is their old repo-root location, kept because the recovery
+          # move (drag a fresh copy out of iCloud) lands there.
+          if git ls-files | grep -Ei '\.pdf$|\.tex$|backend/data/vaults/| copy/|midterm|resume|_sol'; then
             echo "::error::A vault file, PDF or solution set is tracked. See .gitignore."
             exit 1
           fi
-          if git grep -ilE 'ruoxi|angela wu|510[- ]?499|berkeley\.edu|Shixiang|AgentHLE|HW ?[0-9]+ ?[PQ][0-9]' -- docs/; then
-            echo "::error::docs/ matches a private-info pattern. See scripts/vault_manifest.toml."
+          # backend/ is scanned too: it holds the dataset's README and the agent
+          # code, both of which are written against private material and are the
+          # likeliest place for a stray name or path to be quoted.
+          if git grep -ilE 'ruoxi|angela wu|510[- ]?499|berkeley\.edu|Shixiang|AgentHLE|HW ?[0-9]+ ?[PQ][0-9]' -- docs/ backend/; then
+            echo "::error::docs/ or backend/ matches a private-info pattern. See scripts/vault_manifest.toml."
             exit 1
           fi
 

@@ -14,52 +14,48 @@
 docs_root  = "docs/notes"
 assets_dir = "docs/assets/images"
 
+# Roots are repo-relative (sync_vault resolves them as REPO / root) and the
+# directory name matches `name`, so a section's `vault = "cs"` reads straight
+# through to the folder on disk.
+#
+# These used to sit at the repo root as "<vault> copy". The suffix was load-
+# bearing — it keyed the iCloud staleness check — but it also meant every path
+# needed quoting, and it hid the fact that the three vaults are one dataset.
+# The iCloud twin is now named explicitly per vault instead of inferred.
 [[vault]]
-name = "cs"
-root = "Computer Science copy"
+name  = "cs"
+root  = "backend/data/vaults/cs"
+icloud = "Computer Science"
 
+# No iCloud twin: unlike the other two this vault only exists here, so there is
+# no upstream to be stale against and nothing to re-copy from if it is lost.
 [[vault]]
 name = "python"
-root = "python copy"
+root = "backend/data/vaults/python"
 
 [[vault]]
-name = "spring2026"
-root = "spring2026 copy"
+name  = "spring2026"
+root  = "backend/data/vaults/spring2026"
+icloud = "spring2026"
 
 
 # ─── Programming → Python ────────────────────────────────────────────────────
-# Reading notes taken while working through hello-algo.
-#
-# hello-algo is CC BY-NC-SA, so this publishes the author's own commentary and
-# NOT the book's material. Concretely: all five image embeds are dropped —
-# "Running time comparison", "Data structure classification", "Memory space",
-# "logn/n! time complexity" are the book's own figures, not screenshots of
-# anything original. The prose that stays is hand-typed reading commentary
-# ("It might run slow, but still be constant!!!"), which is the point of a
-# reading note.
-[[section]]
-title   = "Python"
-slug    = "python"
-group   = "Programming"
-vault   = "python"
-include = ["Python & DSA/hello-algo Notes.md"]
-
-# The top half is a sprint-week progress tracker, not content.
-strip_headings = ["## Progress (mapped to the sprint weeks)", "## Also worth a pass", "### (chapter name)"]
-
-drop_lines_matching = [
-  '!\[\[Running time comparison',
-  '!\[\[logn time complexity',
-  '!\[\[n! time complexity',
-  '!\[\[Data structure classification',
-  '!\[\[Memory space',
-]
+# Retired. It held exactly one note — the hello-algo reading notes — which now
+# publishes under Algorithms via that section's `include_from`. A section whose
+# only member moves elsewhere is a nav entry with nothing behind it, so it goes
+# rather than lingering as an empty heading.
 
 # ─── Programming → Data Structures (CS61B) ───────────────────────────────────
 [[section]]
 title   = "Data Structures"
 slug    = "data-structures"
-group   = "Programming"
+# All four sections now share one group. The site is organised by engineering
+# capability (docs/notes/foundations, backend, ai-engineering, …), and these
+# course-shaped notes are input to that, not part of it — so they collapse into
+# a single Reference branch rather than keeping the old Programming / Model
+# split. `group` only affects nav nesting; `slug` still drives the output path,
+# so no URL changes.
+group   = "Reference"
 vault   = "cs"
 include = [
   "cs61b/Data structure.md",
@@ -100,7 +96,7 @@ include = [
 [[section]]
 title   = "Algorithms"
 slug    = "algorithms"
-group   = "Programming"
+group   = "Reference"
 vault   = "cs"
 include = [
   "cs170/algorithm/Divide and Conquer.md",
@@ -113,6 +109,43 @@ include = [
   "Topological sort.md",
 ]
 
+# The hello-algo reading notes, pulled in from the `python` vault — the only
+# cross-vault include on the site. It sat in its own one-note "Python" section
+# until it was moved here.
+#
+# Worth knowing what it currently *is*: the four chapters written up so far are
+# Encounter Algorithms, Complexity Analysis, Data Structure, and Array & Linked
+# List — which overlap the Data Structures section (asymptotic, arraylist,
+# linkedlist, data-structure) more than they do anything here. The reading plan
+# queues Backtracking, DP, Divide & Conquer and Greedy, so this is where the
+# note is heading. Move the section if that stops being true.
+include_from = [
+  { vault = "python", paths = ["learning/Python & DSA/hello-algo Notes.md"] },
+]
+
+# ── Transforms below apply to the whole section, but exist for the hello-algo
+# note only. Verified non-colliding against all eight cs notes above:
+# strip_headings is exact-full-line and matches 0 of them; the embed patterns
+# match 0 files in the cs vault. Re-check if either list grows.
+
+# The top half is a sprint-week progress tracker, not content.
+strip_headings = ["## Progress (mapped to the sprint weeks)", "## Also worth a pass", "### (chapter name)"]
+
+# hello-algo is CC BY-NC-SA, so this publishes the author's own commentary and
+# NOT the book's material. Concretely: all five image embeds are dropped —
+# "Running time comparison", "Data structure classification", "Memory space",
+# "logn/n! time complexity" are the book's own figures, not screenshots of
+# anything original. The prose that stays is hand-typed reading commentary
+# ("It might run slow, but still be constant!!!"), which is the point of a
+# reading note.
+drop_lines_matching = [
+  '!\[\[Running time comparison',
+  '!\[\[logn time complexity',
+  '!\[\[n! time complexity',
+  '!\[\[Data structure classification',
+  '!\[\[Memory space',
+]
+
 
 # ─── Model → Machine Learning ────────────────────────────────────────────────────────
 # S1/S2 held back: a framework whose worked example is empty, and a to-do list
@@ -120,20 +153,20 @@ include = [
 [[section]]
 title   = "Machine Learning"
 slug    = "machine-learning"
-group   = "Model"
+group   = "Reference"
 vault   = "python"
 include = [
-  "ml/01 Probability.md",
-  "ml/02 MLE & MAP.md",
-  "ml/03 Linear Regression & Regularization.md",
-  "ml/04 Clustering.md",
-  "ml/05 Classifiers.md",
-  "ml/06 Optimization.md",
-  "ml/07 Neural Networks.md",
-  "ml/08 CNNs & ResNet.md",
-  "ml/09 Transformers & Attention.md",
-  "ml/10 Language Models.md",
-  "ml/11 Self-Supervised Learning.md",
+  "learning/ml/01 Probability.md",
+  "learning/ml/02 MLE & MAP.md",
+  "learning/ml/03 Linear Regression & Regularization.md",
+  "learning/ml/04 Clustering.md",
+  "learning/ml/05 Classifiers.md",
+  "learning/ml/06 Optimization.md",
+  "learning/ml/07 Neural Networks.md",
+  "learning/ml/08 CNNs & ResNet.md",
+  "learning/ml/09 Transformers & Attention.md",
+  "learning/ml/10 Language Models.md",
+  "learning/ml/11 Self-Supervised Learning.md",
 ]
 # "## Notes" is the one genuinely empty section (a single "- " bullet).
 # "## → add must-knows to [[ML]]" is the porting checklist footer.
@@ -179,8 +212,13 @@ scrub_regex = [
 title   = "Networks"
 slug    = "networks"
 vault   = "spring2026"
-# No `group`: top-level. It's 18 notes / 15k words — over half the site — and it
-# is neither programming nor ML modelling.
+# Was top-level, on the grounds that 18 notes / 15k words is over half the site
+# and is neither programming nor ML modelling. It now joins the other three
+# under Reference — not a demotion in quality (it is still the most developed
+# writing here) but a statement about what the site is *for*: the capability
+# map leads, and course material is the input behind it. `navigation.indexes`
+# still folds the landing page below into the section header, one level deeper.
+group   = "Reference"
 include = ["networks/topics/*.md"]
 
 # The landing page: 30-odd methods, which topic each one powers, and a decision
@@ -287,17 +325,17 @@ scrub_regex = [
 # The "HW" column indexes staff problems by number, and some row names are
 # defined by them ("Multiplicative Chernov (HW7 P1)").
 [[patch]]
-file = "spring2026 copy/networks/Final Method Index.md"
+file = "backend/data/vaults/spring2026/networks/Final Method Index.md"
 drop_table_columns = ["HW"]
 scrub_regex = ['\s*\((?:HW|hw)\s?\d+\s*P?\d*\)']
 
 # `### Solving problems` embeds a screenshot of a course problem's answer.
 [[patch]]
-file = "Computer Science copy/cs61b/OOP.md"
+file = "backend/data/vaults/cs/cs61b/OOP.md"
 drop_embeds = ["OOP eg answer.png"]
 
 [[patch]]
-file = "Computer Science copy/cs61b/Asymptotic.md"
+file = "backend/data/vaults/cs/cs61b/Asymptotic.md"
 drop_embeds = ["asymptotic solution.png"]
 
 
@@ -308,28 +346,35 @@ drop_embeds = ["asymptotic solution.png"]
 [denylist]
 paths = [
   # Staff / instructor material
-  "spring2026 copy/networks/hw/**",
-  "spring2026 copy/networks/Midterm Learning Guide.md",
-  "spring2026 copy/networks/Midterm Method Index.md",
-  "spring2026 copy/networks/midterm-solutions.pdf",
-  "spring2026 copy/networks/lecture_notes/**",
-  "spring2026 copy/machine_learning/lec/**",
-  "spring2026 copy/machine_learning/hw/**",
-  "spring2026 copy/machine_learning/reading/**",
-  "spring2026 copy/machine_learning/Guideline.md",
-  "spring2026 copy/machine_learning/hw4_written_student.tex",
-  "Computer Science copy/Files/**",
-  "Computer Science copy/Screenshot/OOP eg answer.png",
-  "Computer Science copy/Screenshot/asymptotic solution.png",
-  "Computer Science copy/Untitled.md",
-  # Own work that stays private
-  "python copy/application_plan/**",
-  "python copy/profile_strategy.md",
-  "python copy/daily_track/**",
-  "python copy/00 Dashboard.md",
-  "python copy/01 Sprint Plan.md",
+  "backend/data/vaults/spring2026/networks/hw/**",
+  "backend/data/vaults/spring2026/networks/Midterm Learning Guide.md",
+  "backend/data/vaults/spring2026/networks/Midterm Method Index.md",
+  "backend/data/vaults/spring2026/networks/midterm-solutions.pdf",
+  "backend/data/vaults/spring2026/networks/lecture_notes/**",
+  "backend/data/vaults/spring2026/machine_learning/lec/**",
+  "backend/data/vaults/spring2026/machine_learning/hw/**",
+  "backend/data/vaults/spring2026/machine_learning/reading/**",
+  "backend/data/vaults/spring2026/machine_learning/Guideline.md",
+  "backend/data/vaults/spring2026/machine_learning/hw4_written_student.tex",
+  "backend/data/vaults/cs/Files/**",
+  "backend/data/vaults/cs/Screenshot/OOP eg answer.png",
+  "backend/data/vaults/cs/Screenshot/asymptotic solution.png",
+  "backend/data/vaults/cs/Untitled.md",
+  # Own work that stays private.
+  #
+  # The python vault's reorganization renamed every entry in this group:
+  # `application_plan/` and the loose `profile_strategy.md` are now all under
+  # `application/`, and `daily_track/` moved under `learning/`. The old
+  # "00 Dashboard.md" and "01 Sprint Plan.md" no longer exist at all — they
+  # are not omissions.
+  "backend/data/vaults/python/application/**",
+  "backend/data/vaults/python/learning/daily_track/**",
+  # Source for the Postmortem Agent project page. That page is hand-written
+  # and scrubbed; this is the unscrubbed working vault behind it and must
+  # never be converted, even if a future include glob widens.
+  "backend/data/vaults/python/learning/System Design (DDIA)/**",
   # Copyright
-  "python copy/pdf/**",
+  "backend/data/vaults/python/learning/pdf/**",
   # Blanket
   "**/*.pdf",
   "**/*.tex",

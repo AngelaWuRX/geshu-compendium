@@ -2,7 +2,7 @@
    geshu-compendium — design system
    --------------------------------------------------------------------------
    The palette is ported from the author's own Obsidian snippet
-   ("spring2026 copy"/.obsidian/snippets/networks-ui.css) so the site reads
+   (backend/data/vaults/spring2026/.obsidian/snippets/networks-ui.css) so the site reads
    like the vault it is generated from: teal accent on near-black in dark
    mode, deep teal on warm paper in light mode.
 
@@ -65,6 +65,13 @@
   --gx-tag-method:    #91b9f2;
   --gx-tag-model:     #d7b56d;
   --gx-tag-topic:     #d698ad;
+
+  /* Note status. Same four hues as the tags, reused so the strip reads as
+     part of the existing vocabulary rather than a second colour system. */
+  --gx-status-seed:    #95a0a9;
+  --gx-status-working: #d7b56d;
+  --gx-status-stable:  #7fc9b6;
+  --gx-status-tested:  #91b9f2;
 
   /* Admonition accents, kept in the same register as the tags. */
   --gx-adm-info:      #91b9f2;
@@ -148,6 +155,15 @@
   --gx-tag-method:    #2e5f97;
   --gx-tag-model:     #7d5a10;
   --gx-tag-topic:     #a34a67;
+
+  /* `seed` is deliberately NOT --gx-muted: on the 11%-tinted pill that only
+     reaches 4.3:1. #556169 is the same grey family two steps darker, 5.2:1
+     on the pill and 6.1:1 on paper. The other three are the tag hues, which
+     were already checked at AA. */
+  --gx-status-seed:    #556169;
+  --gx-status-working: #7d5a10;
+  --gx-status-stable:  #0f6a58;
+  --gx-status-tested:  #2e5f97;
 
   --gx-adm-info:      #2e5f97;
   --gx-adm-warn:      #8a6414;
@@ -519,7 +535,67 @@ mjx-container {
 }
 
 /* --------------------------------------------------------------------------
-   12. Header & search
+   12. Note status strip
+   Emitted by frontend/overrides/partials/note-meta.html for any page whose
+   frontmatter declares `status`. Sits above the tags nav and the H1.
+
+   Deliberately quiet: this is apparatus, not content. Only the status pill
+   carries colour — the rest is a muted key/value run that a reader can skim
+   past. Wraps to as many lines as it needs, so a note with five fields does
+   not push the H1 off a phone screen.
+   -------------------------------------------------------------------------- */
+.gx-note-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  margin: 0 0 0.9em;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: var(--gx-muted);
+}
+
+.gx-note-meta__status {
+  --gx-status: var(--gx-status-seed);
+  color: var(--gx-status);
+  background: color-mix(in srgb, var(--gx-status) 11%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gx-status) 34%, transparent);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  font-weight: 650;
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.gx-note-meta__status--working          { --gx-status: var(--gx-status-working); }
+.gx-note-meta__status--stable           { --gx-status: var(--gx-status-stable); }
+.gx-note-meta__status--production-tested { --gx-status: var(--gx-status-tested); }
+
+.gx-note-meta__item {
+  white-space: nowrap;
+}
+
+/* The label. Small caps and faint, so the value is what the eye lands on. */
+.gx-note-meta__key {
+  margin-right: 0.3rem;
+  color: var(--gx-faint);
+  font-size: 0.58rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* "never" is a real answer, not missing data — italic keeps it distinct from
+   a date without shouting about it. */
+.gx-note-meta__never {
+  font-style: italic;
+  color: var(--gx-faint);
+}
+
+/* --------------------------------------------------------------------------
+   13. Header & search
    Flat surface with a hairline — no brand bar, no shadow.
    -------------------------------------------------------------------------- */
 .md-header {
@@ -544,7 +620,7 @@ mjx-container {
 }
 
 /* --------------------------------------------------------------------------
-   13. Navigation sidebars
+   14. Navigation sidebars
    -------------------------------------------------------------------------- */
 .md-nav__link--active,
 .md-nav__link--active code {
@@ -564,7 +640,7 @@ mjx-container {
 }
 
 /* --------------------------------------------------------------------------
-   14. Footer (prev/next pager + meta)
+   15. Footer (prev/next pager + meta)
    -------------------------------------------------------------------------- */
 .md-footer {
   border-top: 1px solid var(--gx-rule);
@@ -580,7 +656,7 @@ mjx-container {
 }
 
 /* --------------------------------------------------------------------------
-   15. Landing page (docs/index.md wraps its content in .gx-home)
+   16. Landing page (docs/index.md wraps its content in .gx-home)
    -------------------------------------------------------------------------- */
 .gx-home {
   max-width: 52rem;
@@ -629,7 +705,7 @@ mjx-container {
 }
 
 /* --------------------------------------------------------------------------
-   16. Accessibility & polish
+   17. Accessibility & polish
    -------------------------------------------------------------------------- */
 :is(a, button, input, [tabindex]):focus-visible {
   outline: 2px solid var(--gx-accent-hover);

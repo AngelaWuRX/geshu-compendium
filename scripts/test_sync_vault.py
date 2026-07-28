@@ -295,20 +295,29 @@ class TestPolicyGate(unittest.TestCase):
         else:
             self.fail("expected PolicyViolation")
 
+    # The `.md` and `.png` entries below are the load-bearing ones: every other
+    # fixture here is also caught by a blanket pattern (**/*.pdf, **/*.tex,
+    # **/midterm*, **/resume*), so it would stay green even if the explicit
+    # path list rotted. These two only pass while the per-path entries are
+    # correct — which is exactly what broke when the vaults were renamed.
     def test_denylisted_paths_are_denied(self):
-        for p in ["spring2026 copy/networks/midterm-solutions.pdf",
-                  "spring2026 copy/networks/hw/HW3 Study Notes.md",
-                  "python copy/application_plan/resume.tex",
-                  "python copy/pdf/cs188.pdf",
-                  "Computer Science copy/Screenshot/OOP eg answer.png",
-                  "spring2026 copy/machine_learning/hw4_written_student.tex"]:
+        for p in ["backend/data/vaults/spring2026/networks/midterm-solutions.pdf",
+                  "backend/data/vaults/spring2026/networks/hw/HW3 Study Notes.md",
+                  "backend/data/vaults/python/application/resume.tex",
+                  "backend/data/vaults/python/application/profile_strategy.md",
+                  "backend/data/vaults/python/learning/daily_track/2026-06-18.md",
+                  "backend/data/vaults/python/learning/System Design (DDIA)/Day 1 — Reliability.md",
+                  "backend/data/vaults/python/learning/pdf/cs188.pdf",
+                  "backend/data/vaults/cs/Screenshot/OOP eg answer.png",
+                  "backend/data/vaults/spring2026/machine_learning/hw4_written_student.tex"]:
             with self.subTest(path=p):
                 self.assertTrue(sv.is_denied(sv.REPO / p, self.deny), f"{p} should be denied")
 
     def test_published_paths_are_not_denied(self):
-        for p in ["spring2026 copy/networks/topics/06 Giant Component.md",
-                  "python copy/ml/09 Transformers & Attention.md",
-                  "Computer Science copy/cs61b/QuickSort.md"]:
+        for p in ["backend/data/vaults/spring2026/networks/topics/06 Giant Component.md",
+                  "backend/data/vaults/python/learning/ml/09 Transformers & Attention.md",
+                  "backend/data/vaults/python/learning/Python & DSA/hello-algo Notes.md",
+                  "backend/data/vaults/cs/cs61b/QuickSort.md"]:
             with self.subTest(path=p):
                 self.assertFalse(sv.is_denied(sv.REPO / p, self.deny), f"{p} should publish")
 

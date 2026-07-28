@@ -12,3 +12,13 @@
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   {{ super() }}
 {% endblock %}
+
+{% block content %}
+  {#- The note status strip, above Material's tags nav and the H1. The partial
+      is a no-op unless the page declares `status` in its frontmatter, so
+      generated notes and index pages are untouched. `super()` keeps stock
+      partials/content.html rather than forking it — one less file to re-diff
+      after a Material upgrade. -#}
+  {% include "partials/note-meta.html" %}
+  {{ super() }}
+{% endblock %}

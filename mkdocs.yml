@@ -52,13 +52,53 @@ plugins:
         - zh
   - tags
 
-# The LeetCode problem template is an in-repo authoring aid, not a page. Exclude
-# it from the build so `--strict` doesn't flag it as omitted-from-nav.
+# In-repo authoring aids, not pages. Excluded so `--strict` doesn't flag them as
+# omitted-from-nav. `docs/_templates/` holds the five content-type templates
+# (note, lab, project, postmortem, build-log); copy one to start a page.
 exclude_docs: |
   projects/leetcode/_template.md
+  _templates/*.md
 
+# Two taxonomies, crossed on purpose. `Notes` is filed by engineering
+# capability — where a page belongs. `Learn` is reading order, owns no pages,
+# and links across capabilities freely. `Reference` at the bottom is generated
+# from the vaults and holds the course-shaped notes that feed the rest.
 nav:
   - Home: index.md
+  - Learn:
+      - learn/index.md
+      - Foundations: learn/foundations.md
+      - Fullstack Systems: learn/fullstack-systems.md
+      - AI Applications: learn/ai-applications.md
+      - AI Infrastructure: learn/ai-infrastructure.md
+      - Production: learn/production.md
+  - Notes:
+      - notes/index.md
+      - Foundations:
+          - notes/foundations/index.md
+          - HTTP Request Lifecycle: notes/foundations/http-request-lifecycle.md
+          - Async, Concurrency and Parallelism: notes/foundations/async-concurrency-parallelism.md
+      - Frontend Engineering:
+          - notes/frontend/index.md
+          - Streaming Responses from Server to UI: notes/frontend/streaming-responses.md
+      - Backend Engineering:
+          - notes/backend/index.md
+          - Authentication Is Identity Plus Authority: notes/backend/authentication.md
+          - Background Jobs and Idempotency: notes/backend/background-jobs-and-idempotency.md
+      - Data Systems:
+          - notes/data/index.md
+          - Database Transactions: notes/data/database-transactions.md
+      - AI Engineering:
+          - notes/ai-engineering/index.md
+          - From Prompt to Model Response: notes/ai-engineering/prompt-to-model-response.md
+          - Structured Output and Validation: notes/ai-engineering/structured-output-and-validation.md
+          - Embeddings and Semantic Retrieval: notes/ai-engineering/embeddings-and-semantic-retrieval.md
+          - Building a Minimal RAG Pipeline: notes/ai-engineering/minimal-rag-pipeline.md
+          - Evaluating an AI Feature Before Shipping: notes/ai-engineering/evaluating-an-ai-feature.md
+      - Production Engineering:
+          - notes/production/index.md
+          - Observability for Model-Backed Apps: notes/production/observability-for-model-backed-apps.md
+  - Labs: labs/index.md
   - Projects:
       - projects/index.md
       - Building ChatGPT from Scratch: projects/chatgpt-from-scratch.md
@@ -67,11 +107,13 @@ nav:
           - projects/leetcode/index.md
           - Two Sum: projects/leetcode/two-sum.md
           - Remove Element: projects/leetcode/remove-element.md
+  - Build Logs: build-logs/index.md
+  - Postmortems: postmortems/index.md
   - Blog: blog/index.md
+  - Now: now.md
+  - Changelog: changelog.md
   # BEGIN GENERATED NAV — scripts/sync_vault.py rewrites everything between
-  - Programming:
-      - Python:
-          - 📖 hello-algo — Reading Notes: notes/python/hello-algo-notes.md
+  - Reference:
       - Data Structures:
           - ArrayList: notes/data-structures/arraylist.md
           - Asymptotic: notes/data-structures/asymptotic.md
@@ -94,13 +136,13 @@ nav:
       - Algorithms:
           - Divide and Conquer: notes/algorithms/divide-and-conquer.md
           - Graph Traversal: notes/algorithms/graph-traversal.md
+          - 📖 hello-algo — Reading Notes: notes/algorithms/hello-algo-notes.md
           - Linear programming: notes/algorithms/linear-programming.md
           - Minimum spanning trees: notes/algorithms/minimum-spanning-trees.md
           - Optimization: notes/algorithms/optimization.md
           - Reduction: notes/algorithms/reduction.md
           - Single-source shortest paths: notes/algorithms/single-source-shortest-paths.md
           - Topological sort: notes/algorithms/topological-sort.md
-  - Model:
       - Machine Learning:
           - Probability: notes/machine-learning/01-probability.md
           - MLE & MAP: notes/machine-learning/02-mle-and-map.md
@@ -113,26 +155,26 @@ nav:
           - Transformers & Attention: notes/machine-learning/09-transformers-and-attention.md
           - Language Models: notes/machine-learning/10-language-models.md
           - Self-Supervised Learning: notes/machine-learning/11-self-supervised-learning.md
-  - Networks:
-      - notes/networks/index.md
-      - Graph Counting Tricks: notes/networks/01-graph-counting-tricks.md
-      - Expected Counts and Union Bounds: notes/networks/02-expected-counts-and-union-bounds.md
-      - Concentration: notes/networks/03-concentration.md
-      - Configuration Model: notes/networks/04-configuration-model.md
-      - Thresholds: notes/networks/05-thresholds.md
-      - Giant Component: notes/networks/06-giant-component.md
-      - Branching Processes: notes/networks/07-branching-processes.md
-      - Diameter of the Giant Component: notes/networks/08-diameter-of-giant.md
-      - Directed Networks (Digraphs, SCC, Bow-tie): notes/networks/09-directed-networks.md
-      - Stochastic Block Model and Multitype Branching Process: notes/networks/10-sbm-and-multitype-bp.md
-      - Small World Models: notes/networks/11-small-world.md
-      - Preferential Attachment: notes/networks/12-preferential-attachment.md
-      - Markov Chains, Random Walks, PageRank: notes/networks/13-markov-chains-and-pagerank.md
-      - Mixing Time, Conductance, Spectral Gap: notes/networks/14-mixing-time-and-spectral-gap.md
-      - Spectral Clustering and Graph Partitioning: notes/networks/15-spectral-clustering.md
-      - Information Cascades and Influence Maximization: notes/networks/16-information-cascades.md
-      - SIR and Epidemics: notes/networks/17-sir-and-epidemics.md
-      - SIR on Networks: notes/networks/18-sir-on-networks.md
+      - Networks:
+          - notes/networks/index.md
+          - Graph Counting Tricks: notes/networks/01-graph-counting-tricks.md
+          - Expected Counts and Union Bounds: notes/networks/02-expected-counts-and-union-bounds.md
+          - Concentration: notes/networks/03-concentration.md
+          - Configuration Model: notes/networks/04-configuration-model.md
+          - Thresholds: notes/networks/05-thresholds.md
+          - Giant Component: notes/networks/06-giant-component.md
+          - Branching Processes: notes/networks/07-branching-processes.md
+          - Diameter of the Giant Component: notes/networks/08-diameter-of-giant.md
+          - Directed Networks (Digraphs, SCC, Bow-tie): notes/networks/09-directed-networks.md
+          - Stochastic Block Model and Multitype Branching Process: notes/networks/10-sbm-and-multitype-bp.md
+          - Small World Models: notes/networks/11-small-world.md
+          - Preferential Attachment: notes/networks/12-preferential-attachment.md
+          - Markov Chains, Random Walks, PageRank: notes/networks/13-markov-chains-and-pagerank.md
+          - Mixing Time, Conductance, Spectral Gap: notes/networks/14-mixing-time-and-spectral-gap.md
+          - Spectral Clustering and Graph Partitioning: notes/networks/15-spectral-clustering.md
+          - Information Cascades and Influence Maximization: notes/networks/16-information-cascades.md
+          - SIR and Epidemics: notes/networks/17-sir-and-epidemics.md
+          - SIR on Networks: notes/networks/18-sir-on-networks.md
   # END GENERATED NAV
 
 markdown_extensions:

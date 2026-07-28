@@ -206,13 +206,23 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# ─── Obsidian source vaults ───────────────────────────────────────────────
+# ─── Obsidian source vaults (the dataset) ─────────────────────────────────
 # Local editing source only. Notes reach the site via scripts/sync_vault.py,
 # which writes the publishable subset into docs/. These directories hold staff
 # solution sets, lecture decks, resumes and copyrighted books — never commit them.
+#
+# Only the *data* is ignored. backend/app/ and backend/agents/ are tracked:
+# ignoring them would mean no version control on the code, which is not the
+# same thing as keeping it private.
+/backend/data/vaults/
+
+# Legacy locations. Kept armed because the recovery move — dragging a fresh
+# copy out of iCloud into the repo root — lands exactly here, and would
+# otherwise arrive unignored.
 /Computer Science copy/
 /python copy/
 /spring2026 copy/
+/python/
 .obsidian/
 .DS_Store
 
@@ -225,3 +235,38 @@ __marimo__/
 [Rr]esume*
 hw*_sol*
 *.tex
+
+# LaTeX leaves this next to the .pdf/.tex pair it builds from. Those two are
+# already ignored above; this is the third file in the set.
+*.synctex.gz
+
+# ─── Tool caches ──────────────────────────────────────────────────────────
+# .pytest_cache is already covered by the Python block near the top; these are
+# the linters and type-checkers this repo will reach for next.
+.ruff_cache/
+.mypy_cache/
+
+# ─── Editor and agent local state ─────────────────────────────────────────
+# Deliberately narrow. `.claude/settings.local.json` is per-machine and holds
+# local permissions, so it must not travel; a shared `.claude/settings.json` or
+# a committed skill *should* be versioned, which is why the whole directory is
+# not ignored.
+.claude/settings.local.json
+.vscode/
+.idea/
+
+# ─── macOS ────────────────────────────────────────────────────────────────
+# .DS_Store is handled with the vault block above. These are the rest of what
+# macOS scatters — AppleDouble sidecars appear whenever files pass through a
+# non-native filesystem, a zip, or iCloud, which is exactly how the vaults move.
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# ─── Node ─────────────────────────────────────────────────────────────────
+# Nothing here needs it yet. Armed ahead of the browser-runtime labs, so a
+# stray `npm install` cannot commit 40k files before anyone notices.
+node_modules/
+.next/
+npm-debug.log*

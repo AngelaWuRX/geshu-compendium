@@ -1,0 +1,57 @@
+{#-
+  The note status strip.
+
+  Renders the engineering metadata a reader needs before deciding whether to
+  trust a page: how finished it is, how hard it is, what it runs on, and when
+  the code on it was last actually executed.
+
+  Driven entirely by frontmatter (see docs/_templates/note.md). The whole strip
+  is gated on `status`, which no generated note carries — so the 79 pages
+  produced by scripts/sync_vault.py, and every index page, render exactly as
+  they did before this file existed.
+
+  Included from main.html's `content` block, which puts it above Material's
+  tags nav and the H1. Status outranks topics, hence the order.
+-#}
+{% if page and page.meta and page.meta.status %}
+  {% set meta = page.meta %}
+  <div class="gx-note-meta">
+
+    {#- Status is the one field that is always present, because it gates the
+        strip. `production-tested` carries a space in the label but a hyphen in
+        the class. -#}
+    <span class="gx-note-meta__status gx-note-meta__status--{{ meta.status }}">
+      {{ meta.status | replace("-", " ") }}
+    </span>
+
+    {% if meta.difficulty %}
+      <span class="gx-note-meta__item">
+        <span class="gx-note-meta__key">Difficulty</span>{{ meta.difficulty }}
+      </span>
+    {% endif %}
+
+    {% if meta.runtime %}
+      <span class="gx-note-meta__item">
+        <span class="gx-note-meta__key">Runtime</span>{{ meta.runtime | join(", ") }}
+      </span>
+    {% endif %}
+
+    {#- "never" is deliberate rather than an omission: a page that ships code
+        and has never been run is exactly the thing a reader wants flagged.
+        Only shown when there is a runtime — prose notes have nothing to test. -#}
+    {% if meta.runtime %}
+      <span class="gx-note-meta__item">
+        <span class="gx-note-meta__key">Last tested</span>
+        {%- if meta.last_tested %}{{ meta.last_tested }}
+        {%- else %}<em class="gx-note-meta__never">never</em>{% endif %}
+      </span>
+    {% endif %}
+
+    {% if meta.projects %}
+      <span class="gx-note-meta__item">
+        <span class="gx-note-meta__key">Project</span>{{ meta.projects | join(", ") | replace("-", " ") }}
+      </span>
+    {% endif %}
+
+  </div>
+{% endif %}

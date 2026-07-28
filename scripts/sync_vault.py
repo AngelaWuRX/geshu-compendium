@@ -49,7 +49,11 @@ IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
 # publish yesterday's notes. Warn; don't block — staying out of the way of the
 # editing workflow matters more than being right about which copy is newer.
 ICLOUD = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents"
-ICLOUD_TWINS = {"Computer Science copy": "Computer Science", "spring2026 copy": "spring2026"}
+# Which iCloud vault each repo vault mirrors now comes from the manifest's
+# per-vault `icloud` key. It used to be a dict here, mapping directory names
+# like "spring2026 copy" — which quietly made that suffix load-bearing, so
+# renaming the folder broke the staleness check with no error. A vault with no
+# `icloud` key simply has no upstream and is skipped.
 
 
 class PolicyViolation(Exception):
@@ -675,8 +679,31 @@ def collect(cfg: dict, only: list[str] | None, rep: Report) -> tuple[list[Note],
                     f"{section.vault_name!r} — a section landing page cannot be a glob"
                 )
             patterns.insert(0, section.index)
-        for pattern in patterns:
-            matches = sorted(section.vault_root.glob(pattern))
+
+        # A section is normally one vault's worth of notes, which is also what
+        # makes it the unit of transforms and of one nav entry. `include_from`
+        # is the exception: it pulls specific notes out of *another* vault into
+        # this section, for when a note belongs to a topic that lives elsewhere
+        # on disk. Those notes get this section's transforms, so check for
+        # collisions before adding one.
+        sources = [(section.vault_root, p) for p in patterns]
+        for extra in sc.get("include_from", []):
+            if extra["vault"] not in roots:
+                raise SystemExit(
+                    f"[{section.slug}] include_from names unknown vault "
+                    f"{extra['vault']!r} — no [[vault]] declares it"
+                )
+            extra_root = roots[extra["vault"]]
+            if not extra_root.exists():
+                rep.warn(
+                    f"[{section.slug}] include_from vault {extra['vault']!r} not found "
+                    f"at {extra_root} — skipped"
+                )
+                continue
+            sources += [(extra_root, p) for p in extra["paths"]]
+
+        for root, pattern in sources:
+            matches = sorted(root.glob(pattern))
             if not matches:
                 rep.warn(f"[{section.slug}] include {pattern!r} matched nothing")
             for src in matches:
@@ -697,10 +724,13 @@ def collect(cfg: dict, only: list[str] | None, rep: Report) -> tuple[list[Note],
     return notes, roots, deny
 
 
-def warn_if_stale(roots: dict, rep: Report) -> None:
+def warn_if_stale(cfg: dict, rep: Report) -> None:
     """The repo copies are what we convert; iCloud is where Obsidian writes."""
-    for copy_name, live_name in ICLOUD_TWINS.items():
-        live, copy = ICLOUD / live_name, REPO / copy_name
+    for v in cfg["vault"]:
+        live_name = v.get("icloud")
+        if not live_name:
+            continue
+        live, copy = ICLOUD / live_name, REPO / v["root"]
         if not (live.exists() and copy.exists()):
             continue
         newer = [
@@ -711,8 +741,9 @@ def warn_if_stale(roots: dict, rep: Report) -> None:
         ]
         if newer:
             rep.warn(
-                f"{copy_name!r} is behind the live iCloud vault ({len(newer)} newer file(s), "
-                f"e.g. {newer[0].name!r}). Converting the repo copy anyway — re-copy if that's wrong."
+                f"{v['root']!r} is behind the live iCloud vault {live_name!r} "
+                f"({len(newer)} newer file(s), e.g. {newer[0].name!r}). Converting the "
+                f"repo copy anyway — re-copy if that's wrong."
             )
 
 
@@ -789,7 +820,7 @@ def main() -> int:
     assets = AssetRegistry(REPO / cfg["output"]["assets_dir"])
 
     notes, roots, deny = collect(cfg, args.section, rep)
-    warn_if_stale(roots, rep)
+    warn_if_stale(cfg, rep)
     index = build_name_index(roots)
 
     # Pass 1: parse, transform, decide output paths.
@@ -893,14 +924,30 @@ def main() -> int:
                 wrote += 1
 
     # Delete our own stale output (vault note renamed, removed, or de-manifested).
+    #
+    # Scope is every directory under docs_root, not one per manifest section.
+    # Deriving it from `cfg["section"]` meant a section could never be *removed*:
+    # drop it from the manifest and its directory stops being scanned, so its
+    # pages are orphaned — still on disk, still in git, no longer reachable from
+    # the nav and no longer regenerated. `is_ours` is what makes the wider scope
+    # safe; a hand-written page has no provenance marker and is never touched.
+    #
+    # `--section` still narrows to exactly the named slugs, so a filtered run
+    # cannot delete another section's output.
     keep = {REPO / n.out for n in notes}
-    scope = [docs_root / s["slug"] for s in cfg["section"] if not args.section or s["slug"] in args.section]
+    if args.section:
+        scope = [docs_root / s for s in args.section]
+    else:
+        scope = [d for d in sorted(docs_root.iterdir()) if d.is_dir()] if docs_root.exists() else []
     for d in scope:
         for old in d.glob("*.md") if d.exists() else []:
             if old not in keep and is_ours(old):
                 changed.append(("D", str(old.relative_to(REPO))))
                 if not args.check:
                     old.unlink()
+        # A section directory that we just emptied is our own leftover.
+        if not args.check and d.exists() and not any(d.iterdir()):
+            d.rmdir()
 
     if not args.check:
         assets.flush(rep)
