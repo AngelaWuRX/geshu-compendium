@@ -1,242 +1,418 @@
-# geshu-compendium
+# Geshu Compendium
 
-[![deploy](https://github.com/AngelaWuRX/geshu-compendium/actions/workflows/deploy.yml/badge.svg)](https://github.com/AngelaWuRX/geshu-compendium/actions/workflows/deploy.yml)
+> A live engineering notebook for turning daily learning, experiments, and project work into tested, reusable knowledge.
 
-> Notes, experiments, and production patterns for building fullstack AI systems.
+**Geshu Compendium** is the knowledge system I am building as I grow into a full-stack AI engineer.
 
-A documentation site built from private Obsidian vaults. Notes are filed by
-engineering capability rather than by course, and every note has to answer the
-same three questions: **what problem does this solve, how do I build it, and how
-does it fail in production?**
+It combines technical notes, project documentation, experiments, build logs, and postmortems in one searchable website. Instead of organizing knowledge only by course or publication date, Geshu organizes it around engineering capabilities: what problem something solves, how to build it, and how it fails in practice.
 
-**Live:** <https://angelawurx.github.io/geshu-compendium/>
+The longer-term goal is to make Geshu partially self-maintaining through **loop engineering**—iterative generate–evaluate–revise workflows that transform raw daily notes into structured update proposals, verify those changes, and place them into a human review queue before publication.
 
-The full design document — what the site is for, the content model, and the
-reasoning behind the structure — is in [DESIGN.md](DESIGN.md). This file covers
-how to run and contribute to it.
+**Live site:** [angelawurx.github.io/geshu-compendium](https://angelawurx.github.io/geshu-compendium/)
+**Status:** In active development
 
 ---
 
-## Quickstart
+## Why Geshu Exists
 
-Requires Python 3.12 (matching CI).
+Modern AI tools can generate code and explanations much faster than one person can manually absorb them. That makes it easy to produce more material while understanding less.
 
-```sh
+I am building Geshu to create the opposite workflow.
+
+The goal is not to save every output an agent produces. The goal is to preserve the parts I have understood, tested, connected to real projects, and made useful enough to revisit.
+
+Geshu helps me:
+
+* learn by implementing rather than only reading;
+* connect coursework to real engineering systems;
+* keep a record of experiments, failures, and design decisions;
+* turn project work into reusable technical knowledge;
+* distinguish provisional ideas from tested engineering patterns;
+* use AI as an iterative collaborator without treating its first output as correct.
+
+This repository is therefore both a public notebook and an engineering project of its own.
+
+---
+
+## The Core Workflow
+
+Geshu is designed around a gradual knowledge pipeline:
+
+```mermaid
+flowchart LR
+    A[Daily Notes] --> B[Extract]
+    B --> C[Generate]
+    C --> D[Evaluate]
+    D --> E{Checks Pass?}
+    E -- No --> F[Revise]
+    F --> D
+    E -- Yes --> G[Human Review]
+    G --> H[Publish]
+    H --> I[Living Knowledge Base]
+```
+
+A raw note may contain something I learned, built, misunderstood, or broke.
+
+The system should eventually be able to:
+
+1. identify the concepts and projects involved;
+2. structure the raw material without erasing uncertainty;
+3. find related pages already in the knowledge base;
+4. propose additions or corrections;
+5. validate metadata, links, code, and build output;
+6. preserve the source of every proposed change;
+7. require review before modifying dependable reference material.
+
+The loop-engineering pipeline is still under development. Geshu does **not** currently allow an AI agent to silently rewrite the public knowledge base.
+
+---
+
+## What Is Inside
+
+### Projects
+
+Complete systems where I apply what I am learning.
+
+Project pages document more than the final interface. They are intended to include:
+
+* the problem and intended user;
+* architecture and data flow;
+* important implementation decisions;
+* experiments and evaluations;
+* failure modes and limitations;
+* build logs and postmortems;
+* related technical notes;
+* live demos and source repositories, where available.
+
+Current project areas include AI agents, model implementation, developer tooling, and full-stack applications.
+
+### Field Notes
+
+Reusable explanations of engineering concepts and patterns.
+
+A formal note generally answers:
+
+1. What problem does this solve?
+2. What is the right mental model?
+3. What is the smallest working implementation?
+4. What breaks in a naive implementation?
+5. What changes in production?
+6. How can the behavior be tested?
+7. What tradeoffs affect the design decision?
+
+Notes are organized by engineering capability rather than by the class in which I first encountered the material.
+
+### Labs and Experiments
+
+Small, reproducible investigations.
+
+Examples may include:
+
+* comparing retrieval strategies;
+* measuring model latency and cost;
+* testing agent retry behavior;
+* evaluating structured outputs;
+* simulating failure conditions;
+* inspecting database or queue behavior;
+* reproducing results from papers.
+
+A lab should make it possible to change something, run it again, and observe what happens.
+
+### Build Logs
+
+Dated records of work on real projects.
+
+Build logs retain details that polished project pages usually remove:
+
+* wrong turns;
+* failed approaches;
+* bugs;
+* architectural changes;
+* incomplete questions;
+* reasons for choosing one implementation over another.
+
+### Postmortems
+
+Structured analysis of failures and incidents.
+
+A postmortem records:
+
+* what happened;
+* what was affected;
+* how the problem was detected;
+* the root cause;
+* contributing conditions;
+* the resolution;
+* preventive changes;
+* what I misunderstood before the incident.
+
+### Reference
+
+Selected notes derived from coursework and private learning materials.
+
+These pages provide foundations in areas such as:
+
+* programming;
+* data structures and algorithms;
+* probability and machine learning;
+* graph theory and networks.
+
+Reference material supports the engineering work, but it is not the final purpose of Geshu.
+
+---
+
+## Content Types
+
+Pages use explicit content types so that a short experiment is not presented as though it were a finished guide.
+
+| Type         | Purpose                                                |
+| ------------ | ------------------------------------------------------ |
+| `concept`    | Explains how something works                           |
+| `pattern`    | Solves a recurring engineering problem                 |
+| `lab`        | Provides a runnable or reproducible experiment         |
+| `build-log`  | Records progress and wrong turns during implementation |
+| `postmortem` | Analyzes a failure or incident                         |
+| `project`    | Documents a complete system                            |
+| `reference`  | Preserves supporting foundational material             |
+
+Pages may also carry a maturity status:
+
+| Status              | Meaning                                                               |
+| ------------------- | --------------------------------------------------------------------- |
+| `seed`              | Early questions or incomplete thinking                                |
+| `working`           | Useful content exists, but it may still change                        |
+| `stable`            | Reviewed and accurate enough to rely on                               |
+| `production-tested` | Used in a real system with tests, monitoring, or operational evidence |
+
+The status describes the maturity of the page, not the difficulty of its topic.
+
+---
+
+## Repository Structure
+
+```text
+geshu-compendium/
+├── docs/                   # Published website content
+│   ├── index.md            # Homepage
+│   ├── projects/           # Project overviews
+│   ├── notes/              # Technical and reference notes
+│   ├── blog/               # Reading and paper notes
+│   └── assets/             # Images and other static assets
+│
+├── frontend/               # MkDocs theme overrides and visual system
+│   └── overrides/
+│
+├── scripts/                # Content synchronization and validation tools
+│   ├── sync_vault.py
+│   └── vault_manifest.toml
+│
+├── .github/workflows/      # Build and deployment automation
+├── mkdocs.yml              # Site configuration and navigation
+├── requirements.txt        # Python dependencies
+└── README.md
+```
+
+Private Obsidian vaults and unpublished source materials are not committed to this repository.
+
+---
+
+## Local Development
+
+The site is built with Python and MkDocs.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/AngelaWuRX/geshu-compendium.git
+cd geshu-compendium
+```
+
+### 2. Create a virtual environment
+
+```bash
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-
-.venv/bin/mkdocs serve            # http://127.0.0.1:8000/geshu-compendium/
-.venv/bin/mkdocs build --strict   # what CI runs; must stay green
+source .venv/bin/activate
 ```
 
-`--strict`, combined with the `validation:` block in `mkdocs.yml`, turns a
-broken internal link or a page missing from the nav into a failed build rather
-than a silently broken site.
+On Windows:
+
+```powershell
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the local site
+
+```bash
+mkdocs serve
+```
+
+### 5. Run the strict production build
+
+```bash
+mkdocs build --strict
+```
+
+The strict build should pass before changes are merged or deployed.
 
 ---
 
-## Repository layout
+## Publishing Notes from the Vault
 
-```text
-docs/                     Site content (the MkDocs source)
-  index.md                Home
-  learn/                  Five reading paths — order, not filing
-  notes/
-    foundations/  frontend/  backend/
-    data/  ai-engineering/  production/     hand-written, by capability
-    data-structures/  algorithms/
-    machine-learning/  networks/            generated, published as Reference
-  labs/  projects/  build-logs/  postmortems/
-  now.md  changelog.md
-  _templates/             Authoring templates; excluded from the build
+Selected reference material is generated from private Obsidian notes through the synchronization script.
 
-frontend/                 Everything about how the site looks
-  overrides/              theme.custom_dir — templates + the design system
+Check for differences without writing files:
 
-backend/                  What the site will run on (not yet wired up)
-  app/  agents/           HTTP surface and agent code
-  data/vaults/            The private Obsidian vaults — gitignored
-
-scripts/
-  sync_vault.py           Vault -> docs/ converter
-  vault_manifest.toml     Publish policy: what ships, what never does
-  test_sync_vault.py      45 tests
+```bash
+python3 scripts/sync_vault.py --check
 ```
 
-Two directories carry their own README with more detail:
-[`frontend/`](frontend/README.md) and [`backend/`](backend/README.md).
+Regenerate approved public content:
 
----
-
-## Two taxonomies, crossed on purpose
-
-This is the one structural idea worth understanding before editing anything.
-
-- **Capability = folder.** `docs/notes/<capability>/` is *where a note belongs*,
-  by the engineering capability it teaches.
-- **Learn path = sequence.** `docs/learn/` is *what order to read in*. A path
-  owns no pages and crosses folders freely.
-
-So "Database transactions" is filed under `notes/data/` but appears third in the
-Foundations path. Filing and reading order are different questions, and the site
-answers both rather than compromising on one.
-
----
-
-## Content types
-
-Not everything is a "note". The `type:` frontmatter key distinguishes them.
-There are five templates in `docs/_templates/` for six types — `concept` and
-`pattern` share `note.md`, because they differ in what they explain, not in how
-the page is shaped.
-
-| Type | What it is |
-|---|---|
-| `concept` | Explains a model — how HTTP streaming works, what an embedding represents |
-| `pattern` | Solves a recurring engineering problem — idempotent webhooks, hybrid retrieval |
-| `lab` | A runnable experiment you change and re-run |
-| `build-log` | What happened while building, wrong turns kept in |
-| `postmortem` | An incident, written up properly |
-| `project` | A built thing, linked back to the notes it exercises |
-
----
-
-## Writing a note
-
-Copy a template, fill it in, add one line to `nav:` in `mkdocs.yml`.
-
-```sh
-cp docs/_templates/note.md docs/notes/backend/rate-limiting.md
+```bash
+python3 scripts/sync_vault.py
 ```
 
-Every formal note follows the same nine sections. The order is deliberate: the
-problem comes before the definition, and **What Breaks** is the section that
-separates this from a tutorial.
+Run synchronization tests:
 
-```text
-1. The Problem          5. Production Version    9. References
-2. Mental Model         6. Live Lab
-3. Minimal Build        7. Build Challenge
-4. What Breaks          8. Decision Record
-```
-
-### Frontmatter
-
-```yaml
-title: Background Jobs and Idempotency
-summary: Accepting work you cannot finish inside a request, exactly once.
-type: pattern            # concept | pattern | lab | build-log | postmortem | project
-status: seed             # seed | working | stable | production-tested
-difficulty: intermediate # beginner | intermediate | advanced
-topics: [queues, reliability, idempotency]
-course_sources: [distributed-systems]
-projects: [postmortem-agent]
-runtime: [python, postgresql]
-last_tested:             # YYYY-MM-DD; blank means never
-tags: [topic/queues]     # drives the colour-coded facets
-```
-
-`topics` is the source of truth for what a note is about. `tags` exists only to
-render the facet chips, so mirror across the ones worth showing and leave the
-rest out — one authoritative key, not two.
-
-### Status
-
-Rendered above the title of every note by
-`frontend/overrides/partials/note-meta.html`.
-
-| Status | Means |
-|---|---|
-| `seed` | A problem statement and scattered thinking. Not yet worth reading. |
-| `working` | Explanation and code exist, and may still change. |
-| `stable` | Accurate enough to rely on. |
-| `production-tested` | Runs in a real project, with tests or monitoring behind it. |
-
-A note that declares a `runtime` but no `last_tested` renders **never**. That is
-deliberate: code that has never been run is exactly what a reader wants flagged.
-
-The strip is gated on `status`, so pages without it — index pages and every
-generated note — render as if the partial did not exist.
-
----
-
-## How generated content is published
-
-The `Reference` section is **not** hand-edited. Its 57 pages are produced by
-`scripts/sync_vault.py` from private Obsidian vaults, and every one carries an
-`AUTOGENERATED` marker at the top.
-
-```sh
-python3 scripts/sync_vault.py --check    # report drift, write nothing
-python3 scripts/sync_vault.py            # regenerate + rewrite the nav block
+```bash
 python3 -m pytest scripts/test_sync_vault.py -q
 ```
 
-The converter resolves wikilinks, converts Obsidian callouts to admonitions,
-copies embedded images, strips sections named in the manifest, and rewrites the
-nav between the `BEGIN/END GENERATED NAV` sentinels in `mkdocs.yml`.
+Generated pages should not be edited directly. Their source notes or publishing rules should be changed instead, followed by another synchronization run.
 
-**Editing a generated page is pointless** — the next sync overwrites it. Edit
-the vault note and re-run. Conversely, hand-written pages are never touched:
-the cleanup pass only deletes files carrying the provenance marker, which is
-what lets `notes/foundations/` and `notes/networks/` live side by side.
+Hand-written engineering notes, projects, labs, build logs, and postmortems remain separate from generated reference content.
 
 ---
 
-## Privacy model
+## Privacy and Publication Boundaries
 
-The vaults contain staff solution sets, lecture material, copyrighted books and
-personal documents. None of it can reach the site, and that is enforced in three
-independent places rather than by care alone.
+The private vault may contain course materials, personal documents, copyrighted resources, incomplete work, and information that should never become public.
 
-1. **`.gitignore`** — `/backend/data/vaults/` never enters the repository, plus
-   blanket rules for `*.pdf`, `*.tex`, `*solution*`, `[Rr]esume*`.
-2. **`scripts/vault_manifest.toml`** — the publish policy. Sections use explicit
-   per-file include lists, not directory globs. The `[denylist]` is a hard gate:
-   one hit aborts the entire run and writes nothing. `fail_patterns` are checked
-   against every rendered byte, and a hit reports the file and line but never
-   the matched text — printing it would copy the thing being protected into CI
-   logs.
-3. **`.github/workflows/deploy.yml`** — greps the committed tree for denied
-   paths and private-info patterns, and fails the build on a match.
+Geshu therefore follows several publication rules:
 
-If you add a section to the manifest, run `sync_vault.py --check` first and read
-what it reports before letting it write.
+* private vault directories remain outside version control;
+* publication uses explicit allowlists rather than publishing entire folders;
+* denied file names and content patterns block synchronization;
+* generated pages preserve provenance;
+* public builds run validation before deployment;
+* private or copyrighted material should never be copied into public notes;
+* uncertainty in a source note should not be rewritten as certainty;
+* AI-generated changes to canonical notes should require human review.
+
+If you are an instructor, teaching assistant, author, or rights holder and believe something should not be public, please open an issue.
 
 ---
 
-## Deployment
+## Loop Engineering Roadmap
 
-Push to `main`. The workflow installs pinned dependencies, runs the privacy
-guard, builds with `--strict`, and publishes via `mkdocs gh-deploy`.
+The current static site and vault publishing pipeline are the foundation for a larger loop-engineering system.
 
-GitHub Pages serves static files only, which is the constraint the `backend/`
-directory is designed around — see [`backend/README.md`](backend/README.md) for
-what that implies for anything interactive.
+### Available now
+
+* searchable MkDocs website;
+* customized light and dark visual system;
+* generated navigation;
+* selected vault-to-site synchronization;
+* strict site builds;
+* GitHub Pages deployment;
+* project and reference documentation.
+
+### In progress
+
+* clearer separation between projects, labs, logs, and field notes;
+* structured page metadata;
+* daily-note ingestion;
+* backlinks between projects and technical notes;
+* content maturity indicators;
+* automated changelog generation;
+* stronger validation and privacy checks.
+
+### Planned
+
+* concept extraction from daily notes;
+* retrieval of related existing pages;
+* AI-generated update proposals;
+* citation and provenance tracking;
+* executable code validation;
+* contradiction and duplication detection;
+* reviewable pull requests for canonical-note changes;
+* stale-note and outdated-runtime detection;
+* evaluation reports for every automation run.
+
+The intended workflow is not “ask an agent to improve the website.”
+
+It is:
+
+```text
+trigger
+→ retrieve relevant context
+→ generate a bounded proposal
+→ evaluate against explicit checks
+→ revise when checks fail
+→ stop when evidence is sufficient
+→ request human review
+```
 
 ---
 
-## Current state
+## Design Principles
 
-Honest, because the site itself claims to be:
+### Projects are the output
 
-- **Built** — the capability map, five Learn paths, the status system, content
-  templates, and the vault pipeline with 57 generated pages.
-- **Seeded** — the twelve first notes exist as stubs with a real problem
-  statement and a `What Breaks` list, and nothing else.
-- **Empty** — Labs, Build Logs and Postmortems have templates but no entries.
-  The AI Infrastructure path lists what is planned and says it is empty.
-- **Not started** — filtering by status or runtime, browser-runtime labs, the
-  backend service, and any AI assistant over the notes. Ordinary search comes
-  first; a chat box over a corpus you cannot search hides the problem instead of
-  fixing it.
+Reference notes are useful, but the purpose of the knowledge base is to support things I actually build.
+
+### Problems come before definitions
+
+A technical note should explain why a concept is needed before presenting terminology.
+
+### Failure modes are part of the explanation
+
+A demo that works once is not yet an engineering pattern.
+
+### Uncertainty should remain visible
+
+The system must not turn “I think this may work” into “this is the correct solution.”
+
+### Generated content needs provenance
+
+Every automated change should be traceable to its source note, experiment, project, or reference.
+
+### Review is a feature
+
+Human review is not a temporary inconvenience to remove. It is part of the system’s reliability model.
+
+### The website should remain useful without an AI assistant
+
+Search, navigation, links, and page structure should work before a chat interface is placed over the content.
 
 ---
 
-## Licence
+## Contributing
 
-Notes are [CC BY-NC-SA 4.0](LICENSE-CONTENT); the site's code is
-[MIT](LICENSE).
+Geshu is primarily a personal learning and engineering repository, but corrections and thoughtful suggestions are welcome.
 
-If you are an instructor or TA and something here should not be public, open an
-issue and it will be removed.
+Useful contributions include:
+
+* reporting a technical error;
+* identifying a broken link or failed example;
+* suggesting a clearer explanation;
+* pointing out material that should not be public;
+* proposing an improvement to the publishing or validation pipeline.
+
+For larger changes, please open an issue before submitting a pull request.
+
+---
+
+## License
+
+Website code is licensed under the [MIT License](LICENSE).
+
+Published notes and written content are licensed under the terms described in [LICENSE-CONTENT](LICENSE-CONTENT).
+
+Unless explicitly stated otherwise, third-party material remains the property of its original authors.
