@@ -52,7 +52,7 @@ see [`data/README.md`](data/README.md) for the full picture:
 
 **The frontend stays MkDocs.** The site keeps building to static HTML on GitHub
 Pages exactly as it does now. Interactivity arrives as a small client in
-`frontend/overrides/javascripts/` that `fetch()`es this backend. The 79 notes,
+`frontend/overrides/javascripts/` that `fetch()`es this backend. The 57 generated pages,
 the design system, LaTeX, tag facets and CJK search all keep working untouched.
 
 **The first agent writes the daily work-log.** It reads the day's git activity

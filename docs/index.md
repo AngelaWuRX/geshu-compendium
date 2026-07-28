@@ -115,7 +115,7 @@ stubs. Full entry in the [changelog](changelog.md).
 
 ## Reference
 
-<!-- Intentionally blank for now. The 79 course-shaped notes are still reachable
+<!-- Intentionally blank for now. The 57 course-shaped pages are still reachable
      from the Reference branch of the nav; what this section should say about
      them is undecided. -->
 

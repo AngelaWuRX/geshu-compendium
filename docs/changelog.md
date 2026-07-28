@@ -24,7 +24,11 @@ Cut the home page back to one argument.
 - Removed the **Blog** and **Build Logs / Postmortems** cards from *Also here*,
   leaving Learn and Labs. All four pages still exist and stay in the nav.
 - Left the home page's **Reference** section blank pending a decision about what
-  it should say. The 79 notes are unaffected and still reachable from the nav.
+  it should say. The 57 generated pages are unaffected and still reachable from
+  the nav.
+- Corrected a repeated miscount: the Reference section holds **57** generated
+  pages, not 79. The wrong number had propagated into four files and onto this
+  page.
 - Deleted the **AI Research Assistant** project page. It documented a project
   that does not exist — a plan wearing a project page's clothes. Nine notes had
   it in their `projects:` frontmatter, so the status strip was advertising it on
