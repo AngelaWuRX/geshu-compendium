@@ -52,12 +52,10 @@ plugins:
         - zh
   - tags
 
-# In-repo authoring aids, not pages. Excluded so `--strict` doesn't flag them as
-# omitted-from-nav. `docs/_templates/` holds the five content-type templates
-# (note, lab, project, postmortem, build-log); copy one to start a page.
+# An in-repo authoring aid, not a page. Excluded so `--strict` doesn't flag it
+# as omitted-from-nav.
 exclude_docs: |
   projects/leetcode/_template.md
-  _templates/*.md
 
 # Two taxonomies, crossed on purpose. `Notes` is filed by engineering
 # capability — where a page belongs. `Learn` is reading order, owns no pages,
@@ -98,7 +96,6 @@ nav:
       - Production Engineering:
           - notes/production/index.md
           - Observability for Model-Backed Apps: notes/production/observability-for-model-backed-apps.md
-  - Labs: labs/index.md
   - Projects:
       - projects/index.md
       - Building ChatGPT from Scratch: projects/chatgpt-from-scratch.md
@@ -107,8 +104,6 @@ nav:
           - projects/leetcode/index.md
           - Two Sum: projects/leetcode/two-sum.md
           - Remove Element: projects/leetcode/remove-element.md
-  - Build Logs: build-logs/index.md
-  - Postmortems: postmortems/index.md
   - Blog: blog/index.md
   - Now: now.md
   - Changelog: changelog.md

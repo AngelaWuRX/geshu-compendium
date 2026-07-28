@@ -9,6 +9,7 @@ It combines technical notes, project documentation, experiments, build logs, and
 The longer-term goal is to make Geshu partially self-maintaining through **loop engineering**—iterative generate–evaluate–revise workflows that transform raw daily notes into structured update proposals, verify those changes, and place them into a human review queue before publication.
 
 **Live site:** [angelawurx.github.io/geshu-compendium](https://angelawurx.github.io/geshu-compendium/)
+
 **Status:** In active development
 
 ---
@@ -102,50 +103,6 @@ A formal note generally answers:
 
 Notes are organized by engineering capability rather than by the class in which I first encountered the material.
 
-### Labs and Experiments
-
-Small, reproducible investigations.
-
-Examples may include:
-
-* comparing retrieval strategies;
-* measuring model latency and cost;
-* testing agent retry behavior;
-* evaluating structured outputs;
-* simulating failure conditions;
-* inspecting database or queue behavior;
-* reproducing results from papers.
-
-A lab should make it possible to change something, run it again, and observe what happens.
-
-### Build Logs
-
-Dated records of work on real projects.
-
-Build logs retain details that polished project pages usually remove:
-
-* wrong turns;
-* failed approaches;
-* bugs;
-* architectural changes;
-* incomplete questions;
-* reasons for choosing one implementation over another.
-
-### Postmortems
-
-Structured analysis of failures and incidents.
-
-A postmortem records:
-
-* what happened;
-* what was affected;
-* how the problem was detected;
-* the root cause;
-* contributing conditions;
-* the resolution;
-* preventive changes;
-* what I misunderstood before the incident.
-
 ### Reference
 
 Selected notes derived from coursework and private learning materials.
@@ -165,15 +122,15 @@ Reference material supports the engineering work, but it is not the final purpos
 
 Pages use explicit content types so that a short experiment is not presented as though it were a finished guide.
 
-| Type         | Purpose                                                |
-| ------------ | ------------------------------------------------------ |
-| `concept`    | Explains how something works                           |
-| `pattern`    | Solves a recurring engineering problem                 |
-| `lab`        | Provides a runnable or reproducible experiment         |
-| `build-log`  | Records progress and wrong turns during implementation |
-| `postmortem` | Analyzes a failure or incident                         |
-| `project`    | Documents a complete system                            |
-| `reference`  | Preserves supporting foundational material             |
+| Type        | Purpose                                    |
+| ----------- | ------------------------------------------ |
+| `concept`   | Explains how something works               |
+| `pattern`   | Solves a recurring engineering problem     |
+| `project`   | Documents a complete system                |
+| `reference` | Preserves supporting foundational material |
+
+Labs, build logs and postmortems are described in the roadmap below. They have
+no pages yet, so they have no type until they do.
 
 Pages may also carry a maturity status:
 

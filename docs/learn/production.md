@@ -38,12 +38,6 @@ with enough context to be replayed. Teams that build them separately end up
 evaluating against inputs they invented, which is how a metric improves while
 users get worse answers.
 
-## Where the failures go
-
-When this layer is not enough, the write-up goes in
-[Postmortems](../postmortems/index.md) — including for a personal project, and
-including when the only person to blame is me.
-
 ## Prerequisites
 
 [AI Applications](ai-applications.md). Evaluating a pipeline you have not built

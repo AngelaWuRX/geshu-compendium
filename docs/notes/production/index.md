@@ -25,6 +25,3 @@ output needs defining before it can be measured.
 Deployment · CI/CD · environments · secrets · logging · metrics · tracing ·
 cost tracking · feature flags · incident response · load testing · model
 migrations · data migrations · rollbacks · SLOs.
-
-Incidents get written up under [Postmortems](../../postmortems/index.md) rather
-than here — this section is the machinery, those are the times it was not enough.

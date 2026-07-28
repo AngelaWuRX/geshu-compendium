@@ -14,6 +14,24 @@ last month is still what it says.
 
 ---
 
+## 2026-07-28 (later)
+
+Removed the sections that had structure but no content.
+
+- Deleted **Labs**, **Build Logs** and **Postmortems**. Three index pages
+  describing what would eventually go in them, and nothing in them. The ideas
+  are on the roadmap; the empty rooms are not.
+- Deleted `docs/_templates/`. The templates existed to fill sections that no
+  longer exist, and the note structure they encoded is documented in the README.
+- Deleted `DESIGN.md`. Nothing linked to it, so nobody could find it; it stays
+  in git history.
+- Fixed the links that pointed at all of the above — the home page's Labs card,
+  and the pointers to Postmortems from the Production path and the Production
+  Engineering index.
+
+What survives is what has something in it: the capability map, the Learn paths,
+Projects, Blog, and the generated Reference section.
+
 ## 2026-07-28
 
 Cut the home page back to one argument.

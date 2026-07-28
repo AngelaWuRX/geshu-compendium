@@ -104,13 +104,6 @@ stubs. Full entry in the [changelog](changelog.md).
     Five reading paths through the notes, in the order the ideas actually depend
     on each other. Start here if the capability map looks like a list of words.
 
--   **[Labs](labs/index.md)**
-
-    ---
-
-    Experiments you run and change rather than code you read. No API key ever
-    reaches the browser, and mock mode is the default.
-
 </div>
 
 ## Reference
