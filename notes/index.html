@@ -1,0 +1,5605 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A living notebook recording my daily work progress related to AI — projects, paper notes, and reference notes.">
+      
+      
+      
+        <link rel="canonical" href="https://angelawurx.github.io/geshu-compendium/notes/">
+      
+      
+        <link rel="prev" href="../learn/production/">
+      
+      
+        <link rel="next" href="foundations/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Notes - geshu-compendium</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="geshu-compendium" class="md-header__button md-logo" aria-label="geshu-compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            geshu-compendium
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AngelaWuRX/geshu-compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="geshu-compendium" class="md-nav__button md-logo" aria-label="geshu-compendium" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    geshu-compendium
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AngelaWuRX/geshu-compendium" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../learn/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Learn
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Learn
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learn/foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learn/fullstack-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fullstack Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learn/ai-applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Applications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learn/ai-infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Infrastructure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../learn/production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Production
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  
+  <span class="md-ellipsis">
+    Notes
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="foundations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Foundations
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Foundations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="foundations/http-request-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HTTP Request Lifecycle
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="foundations/async-concurrency-parallelism/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Async, Concurrency and Parallelism
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="frontend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Frontend Engineering
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Frontend Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="frontend/streaming-responses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Streaming Responses from Server to UI
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="backend/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Backend Engineering
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Backend Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="backend/authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication Is Identity Plus Authority
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="backend/background-jobs-and-idempotency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Background Jobs and Idempotency
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="data/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Systems
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Data Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data/database-transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Database Transactions
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="ai-engineering/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    AI Engineering
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            AI Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai-engineering/prompt-to-model-response/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    From Prompt to Model Response
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai-engineering/structured-output-and-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Structured Output and Validation
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai-engineering/embeddings-and-semantic-retrieval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Embeddings and Semantic Retrieval
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai-engineering/minimal-rag-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building a Minimal RAG Pipeline
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai-engineering/evaluating-an-ai-feature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Evaluating an AI Feature Before Shipping
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="production/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Production Engineering
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Production Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="production/observability-for-model-backed-apps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Observability for Model-Backed Apps
+    
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--seed"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../projects/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Projects
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/chatgpt-from-scratch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building ChatGPT from Scratch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/postmortem-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Postmortem Agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../projects/leetcode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    LeetCode
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            LeetCode
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/leetcode/two-sum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Two Sum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/leetcode/remove-element/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remove Element
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../now/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Now
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Data Structures
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/arraylist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ArrayList
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/asymptotic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Asymptotic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/b-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    B-Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/comparison-based-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Comparison-based sort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/data-structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/hashing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hashing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/heap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/heapsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HeapSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/insertionsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    InsertionSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/linkedlist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LinkedList
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/mergesort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MergeSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/oop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OOP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/quicksort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/radixsort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RadixSort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/red-black-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Red Black Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/search-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search Trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/sorting-and-selecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sorting and Selecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-structures/union-find-disjoint-set/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Union-Find (Disjoint Set)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithms
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/divide-and-conquer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Divide and Conquer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/graph-traversal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph Traversal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/hello-algo-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📖 hello-algo — Reading Notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/linear-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear programming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/minimum-spanning-trees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Minimum spanning trees
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/reduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/single-source-shortest-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Single-source shortest paths
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="algorithms/topological-sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Topological sort
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Machine Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
+            <span class="md-nav__icon md-icon"></span>
+            Machine Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/01-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/02-mle-and-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MLE & MAP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/03-linear-regression-and-regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Regression & Regularization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/04-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clustering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/05-classifiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Classifiers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/06-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/07-neural-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Neural Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/08-cnns-and-resnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CNNs & ResNet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/09-transformers-and-attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transformers & Attention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/10-language-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Language Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="machine-learning/11-self-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Self-Supervised Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="networks/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Networks
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8_4" id="__nav_8_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_4">
+            <span class="md-nav__icon md-icon"></span>
+            Networks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/01-graph-counting-tricks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graph Counting Tricks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/02-expected-counts-and-union-bounds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Expected Counts and Union Bounds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/03-concentration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concentration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/04-configuration-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/05-thresholds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thresholds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/06-giant-component/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Giant Component
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/07-branching-processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Branching Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/08-diameter-of-giant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diameter of the Giant Component
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/09-directed-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Directed Networks (Digraphs, SCC, Bow-tie)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/10-sbm-and-multitype-bp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stochastic Block Model and Multitype Branching Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/11-small-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Small World Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/12-preferential-attachment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Preferential Attachment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/13-markov-chains-and-pagerank/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Markov Chains, Random Walks, PageRank
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/14-mixing-time-and-spectral-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mixing Time, Conductance, Spectral Gap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/15-spectral-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spectral Clustering and Graph Partitioning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/16-information-cascades/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information Cascades and Influence Maximization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/17-sir-and-epidemics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SIR and Epidemics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="networks/18-sir-on-networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SIR on Networks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status-and-what-it-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status, and what it means
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#by-capability" class="md-nav__link">
+    <span class="md-ellipsis">
+      By capability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="By capability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foundations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Engineering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Engineering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Engineering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Engineering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browse-by-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browse by topic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Browse by topic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag:algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areaepidemics" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/epidemics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areamarkov-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/markov-chains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areamethods" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areanetworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/networks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areaprobability" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areaprocesses" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:arearandom-graphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/random-graphs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:areaspectral" class="md-nav__link">
+    <span class="md-ellipsis">
+      area/spectral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:datastructureimplementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      dataStructureImplementations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodbfs-exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/bfs-exploration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodbranching-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/branching-process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodcheeger" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/cheeger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodchernov" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/chernov
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodconcentration" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/concentration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodcounting" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/counting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodcoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/coupling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodexpected-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/expected-counts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodfirst-moment" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/first-moment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodgenerating-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/generating-functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodhashmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/hashmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodmatching" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/matching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodmixing-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/mixing-time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodmultitype-branching-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/multitype-branching-process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodode" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/ode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodrecurrence" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/recurrence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodsecond-moment" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/second-moment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodsubmodularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/submodularity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodsweep-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/sweep-cut
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodthresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/thresholds
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodtwo-pointers" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/two-pointers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:methodunion-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      method/union-bound
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modelconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modeldirected" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/directed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modelpagerank" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/pagerank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modelpreferential-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/preferential-attachment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modelsbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/sbm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modelsir" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/sir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:modelsmall-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      model/small-world
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      runtime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:statusreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      status/reference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicarrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/auth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicbow-tie" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/bow-tie
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicclustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/clustering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicconcurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/concurrency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicembeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/embeddings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicevaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/evaluation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicgiant-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/giant-component
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topichttp" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/http
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicinfluence" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/influence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicmodel-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/model-interfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicnavigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/navigation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicnetworking" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/networking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicobservability" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/observability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicqueues" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/queues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicrag" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/rag
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicreliability" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/reliability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicretrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/retrieval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicsecurity" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicstreaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/streaming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicstructured-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/structured-output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topictesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/testing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topictransactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/transactions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag:topicvalidation" class="md-nav__link">
+    <span class="md-ellipsis">
+      topic/validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-built-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Not built yet
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h1>
+<p>Filed by capability, not by course. A database course does not stay a database
+course — it gets decomposed into data modelling, indexes and query plans,
+transactions, connection pooling, vector search. The question this site answers
+is not <em>which classes did I take</em>, it is <em>which engineering capabilities do I
+have</em>.</p>
+<p>Reading order lives on the <a href="../learn/">Learn paths</a> instead.</p>
+<h2 id="status-and-what-it-means">Status, and what it means<a class="headerlink" href="#status-and-what-it-means" title="Permanent link">&para;</a></h2>
+<p>Every note carries one. They are honest labels, not decoration:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seed</code></td>
+<td>A problem statement and scattered thinking. Not yet worth your time.</td>
+</tr>
+<tr>
+<td><code>working</code></td>
+<td>Explanation and code exist, and may still change.</td>
+</tr>
+<tr>
+<td><code>stable</code></td>
+<td>Accurate enough that you can rely on it.</td>
+</tr>
+<tr>
+<td><code>production-tested</code></td>
+<td>The approach runs in a real project, with tests or monitoring behind it.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="by-capability">By capability<a class="headerlink" href="#by-capability" title="Permanent link">&para;</a></h2>
+<h3 id="foundations"><a href="foundations/">Foundations</a><a class="headerlink" href="#foundations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Status</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="foundations/http-request-lifecycle/">How an HTTP request moves through a fullstack application</a></td>
+<td><code>seed</code></td>
+<td>beginner</td>
+</tr>
+<tr>
+<td><a href="foundations/async-concurrency-parallelism/">Async execution, concurrency and parallelism</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="frontend-engineering"><a href="frontend/">Frontend Engineering</a><a class="headerlink" href="#frontend-engineering" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Status</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="frontend/streaming-responses/">Streaming responses from server to UI</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backend-engineering"><a href="backend/">Backend Engineering</a><a class="headerlink" href="#backend-engineering" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Status</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="backend/authentication/">Authentication is identity plus authority</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+<tr>
+<td><a href="backend/background-jobs-and-idempotency/">Background jobs and idempotency</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-systems"><a href="data/">Data Systems</a><a class="headerlink" href="#data-systems" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Status</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="data/database-transactions/">Database transactions through real failure cases</a></td>
+<td><code>seed</code></td>
+<td>advanced</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-engineering"><a href="ai-engineering/">AI Engineering</a><a class="headerlink" href="#ai-engineering" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Status</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ai-engineering/prompt-to-model-response/">From prompt to model response</a></td>
+<td><code>seed</code></td>
+<td>beginner</td>
+</tr>
+<tr>
+<td><a href="ai-engineering/structured-output-and-validation/">Structured output and validation</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+<tr>
+<td><a href="ai-engineering/embeddings-and-semantic-retrieval/">Embeddings and semantic retrieval</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+<tr>
+<td><a href="ai-engineering/minimal-rag-pipeline/">Building a minimal RAG pipeline</a></td>
+<td><code>seed</code></td>
+<td>intermediate</td>
+</tr>
+<tr>
+<td><a href="ai-engineering/evaluating-an-ai-feature/">Evaluating an AI feature before shipping</a></td>
+<td><code>seed</code></td>
+<td>advanced</td>
+</tr>
+</tbody>
+</table>
+<h3 id="production-engineering"><a href="production/">Production Engineering</a><a class="headerlink" href="#production-engineering" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Status</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="production/observability-for-model-backed-apps/">Observability for model-backed applications</a></td>
+<td><code>seed</code></td>
+<td>advanced</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<p>The course-shaped notes — Networks, Machine Learning, Data Structures,
+Algorithms — are still here, under <strong>Reference</strong> in the navigation. Seventy-nine
+of them, and the Networks section is the most developed writing on this site by
+some distance.</p>
+<p>They are input to the notes above rather than part of them, and they are not
+being migrated wholesale. Per the site's own plan, spending months re-filing old
+course notes is how you end up with a tidy archive and no engineering system of
+your own.</p>
+<h2 id="browse-by-topic">Browse by topic<a class="headerlink" href="#browse-by-topic" title="Permanent link">&para;</a></h2>
+
+
+  <h3 id="tag:algorithms">
+
+
+<span class="md-tag">algorithms</span><a class="headerlink" href="#tag:algorithms" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="data-structures/asymptotic/">
+          Asymptotic
+        </a>
+      </li>
+    
+      <li>
+        <a href="data-structures/sorting-and-selecting/">
+          Sorting and Selecting
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areaepidemics">
+
+
+<span class="md-tag">area/epidemics</span><a class="headerlink" href="#tag:areaepidemics" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/17-sir-and-epidemics/">
+          SIR and Epidemics
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/18-sir-on-networks/">
+          SIR on Networks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areamarkov-chains">
+
+
+<span class="md-tag">area/markov-chains</span><a class="headerlink" href="#tag:areamarkov-chains" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/13-markov-chains-and-pagerank/">
+          Markov Chains, Random Walks, PageRank
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/14-mixing-time-and-spectral-gap/">
+          Mixing Time, Conductance, Spectral Gap
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areamethods">
+
+
+<span class="md-tag">area/methods</span><a class="headerlink" href="#tag:areamethods" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/">
+          Networks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areanetworks">
+
+
+<span class="md-tag">area/networks</span><a class="headerlink" href="#tag:areanetworks" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/09-directed-networks/">
+          Directed Networks (Digraphs, SCC, Bow-tie)
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/16-information-cascades/">
+          Information Cascades and Influence Maximization
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/11-small-world/">
+          Small World Models
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areaprobability">
+
+
+<span class="md-tag">area/probability</span><a class="headerlink" href="#tag:areaprobability" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/03-concentration/">
+          Concentration
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areaprocesses">
+
+
+<span class="md-tag">area/processes</span><a class="headerlink" href="#tag:areaprocesses" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/07-branching-processes/">
+          Branching Processes
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/06-giant-component/">
+          Giant Component
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/17-sir-and-epidemics/">
+          SIR and Epidemics
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:arearandom-graphs">
+
+
+<span class="md-tag">area/random-graphs</span><a class="headerlink" href="#tag:arearandom-graphs" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/04-configuration-model/">
+          Configuration Model
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/08-diameter-of-giant/">
+          Diameter of the Giant Component
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/02-expected-counts-and-union-bounds/">
+          Expected Counts and Union Bounds
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/06-giant-component/">
+          Giant Component
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/01-graph-counting-tricks/">
+          Graph Counting Tricks
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/12-preferential-attachment/">
+          Preferential Attachment
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/18-sir-on-networks/">
+          SIR on Networks
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/10-sbm-and-multitype-bp/">
+          Stochastic Block Model and Multitype Branching Process
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/05-thresholds/">
+          Thresholds
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:areaspectral">
+
+
+<span class="md-tag">area/spectral</span><a class="headerlink" href="#tag:areaspectral" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/14-mixing-time-and-spectral-gap/">
+          Mixing Time, Conductance, Spectral Gap
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/15-spectral-clustering/">
+          Spectral Clustering and Graph Partitioning
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:datastructureimplementations">
+
+
+<span class="md-tag">dataStructureImplementations</span><a class="headerlink" href="#tag:datastructureimplementations" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="data-structures/heap/">
+          Heap
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodbfs-exploration">
+
+
+<span class="md-tag">method/bfs-exploration</span><a class="headerlink" href="#tag:methodbfs-exploration" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/08-diameter-of-giant/">
+          Diameter of the Giant Component
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/09-directed-networks/">
+          Directed Networks (Digraphs, SCC, Bow-tie)
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/06-giant-component/">
+          Giant Component
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodbranching-process">
+
+
+<span class="md-tag">method/branching-process</span><a class="headerlink" href="#tag:methodbranching-process" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/07-branching-processes/">
+          Branching Processes
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/17-sir-and-epidemics/">
+          SIR and Epidemics
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/18-sir-on-networks/">
+          SIR on Networks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodcheeger">
+
+
+<span class="md-tag">method/cheeger</span><a class="headerlink" href="#tag:methodcheeger" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/14-mixing-time-and-spectral-gap/">
+          Mixing Time, Conductance, Spectral Gap
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/15-spectral-clustering/">
+          Spectral Clustering and Graph Partitioning
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodchernov">
+
+
+<span class="md-tag">method/chernov</span><a class="headerlink" href="#tag:methodchernov" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/03-concentration/">
+          Concentration
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodconcentration">
+
+
+<span class="md-tag">method/concentration</span><a class="headerlink" href="#tag:methodconcentration" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/03-concentration/">
+          Concentration
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodcounting">
+
+
+<span class="md-tag">method/counting</span><a class="headerlink" href="#tag:methodcounting" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/01-graph-counting-tricks/">
+          Graph Counting Tricks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodcoupling">
+
+
+<span class="md-tag">method/coupling</span><a class="headerlink" href="#tag:methodcoupling" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/13-markov-chains-and-pagerank/">
+          Markov Chains, Random Walks, PageRank
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodexpected-counts">
+
+
+<span class="md-tag">method/expected-counts</span><a class="headerlink" href="#tag:methodexpected-counts" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/02-expected-counts-and-union-bounds/">
+          Expected Counts and Union Bounds
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/01-graph-counting-tricks/">
+          Graph Counting Tricks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodfirst-moment">
+
+
+<span class="md-tag">method/first-moment</span><a class="headerlink" href="#tag:methodfirst-moment" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/02-expected-counts-and-union-bounds/">
+          Expected Counts and Union Bounds
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/05-thresholds/">
+          Thresholds
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodgenerating-functions">
+
+
+<span class="md-tag">method/generating-functions</span><a class="headerlink" href="#tag:methodgenerating-functions" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/07-branching-processes/">
+          Branching Processes
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodhashmap">
+
+
+<span class="md-tag">method/hashmap</span><a class="headerlink" href="#tag:methodhashmap" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="../projects/leetcode/two-sum/">
+          Two Sum
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodmatching">
+
+
+<span class="md-tag">method/matching</span><a class="headerlink" href="#tag:methodmatching" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/04-configuration-model/">
+          Configuration Model
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodmixing-time">
+
+
+<span class="md-tag">method/mixing-time</span><a class="headerlink" href="#tag:methodmixing-time" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/14-mixing-time-and-spectral-gap/">
+          Mixing Time, Conductance, Spectral Gap
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodmultitype-branching-process">
+
+
+<span class="md-tag">method/multitype-branching-process</span><a class="headerlink" href="#tag:methodmultitype-branching-process" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/10-sbm-and-multitype-bp/">
+          Stochastic Block Model and Multitype Branching Process
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodode">
+
+
+<span class="md-tag">method/ode</span><a class="headerlink" href="#tag:methodode" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/18-sir-on-networks/">
+          SIR on Networks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodrecurrence">
+
+
+<span class="md-tag">method/recurrence</span><a class="headerlink" href="#tag:methodrecurrence" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/12-preferential-attachment/">
+          Preferential Attachment
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodsecond-moment">
+
+
+<span class="md-tag">method/second-moment</span><a class="headerlink" href="#tag:methodsecond-moment" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/03-concentration/">
+          Concentration
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/05-thresholds/">
+          Thresholds
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodsubmodularity">
+
+
+<span class="md-tag">method/submodularity</span><a class="headerlink" href="#tag:methodsubmodularity" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/16-information-cascades/">
+          Information Cascades and Influence Maximization
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodsweep-cut">
+
+
+<span class="md-tag">method/sweep-cut</span><a class="headerlink" href="#tag:methodsweep-cut" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/15-spectral-clustering/">
+          Spectral Clustering and Graph Partitioning
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodthresholds">
+
+
+<span class="md-tag">method/thresholds</span><a class="headerlink" href="#tag:methodthresholds" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/05-thresholds/">
+          Thresholds
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodtwo-pointers">
+
+
+<span class="md-tag">method/two-pointers</span><a class="headerlink" href="#tag:methodtwo-pointers" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="../projects/leetcode/remove-element/">
+          Remove Element
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:methodunion-bound">
+
+
+<span class="md-tag">method/union-bound</span><a class="headerlink" href="#tag:methodunion-bound" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/02-expected-counts-and-union-bounds/">
+          Expected Counts and Union Bounds
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modelconfiguration">
+
+
+<span class="md-tag">model/configuration</span><a class="headerlink" href="#tag:modelconfiguration" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/04-configuration-model/">
+          Configuration Model
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modeldirected">
+
+
+<span class="md-tag">model/directed</span><a class="headerlink" href="#tag:modeldirected" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/09-directed-networks/">
+          Directed Networks (Digraphs, SCC, Bow-tie)
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modelpagerank">
+
+
+<span class="md-tag">model/pagerank</span><a class="headerlink" href="#tag:modelpagerank" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/13-markov-chains-and-pagerank/">
+          Markov Chains, Random Walks, PageRank
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modelpreferential-attachment">
+
+
+<span class="md-tag">model/preferential-attachment</span><a class="headerlink" href="#tag:modelpreferential-attachment" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/12-preferential-attachment/">
+          Preferential Attachment
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modelsbm">
+
+
+<span class="md-tag">model/sbm</span><a class="headerlink" href="#tag:modelsbm" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/10-sbm-and-multitype-bp/">
+          Stochastic Block Model and Multitype Branching Process
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modelsir">
+
+
+<span class="md-tag">model/sir</span><a class="headerlink" href="#tag:modelsir" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/17-sir-and-epidemics/">
+          SIR and Epidemics
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/18-sir-on-networks/">
+          SIR on Networks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:modelsmall-world">
+
+
+<span class="md-tag">model/small-world</span><a class="headerlink" href="#tag:modelsmall-world" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/11-small-world/">
+          Small World Models
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:runtime">
+
+
+<span class="md-tag">runtime</span><a class="headerlink" href="#tag:runtime" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="data-structures/asymptotic/">
+          Asymptotic
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:statusreference">
+
+
+<span class="md-tag">status/reference</span><a class="headerlink" href="#tag:statusreference" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/">
+          Networks
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicarrays">
+
+
+<span class="md-tag">topic/arrays</span><a class="headerlink" href="#tag:topicarrays" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="../projects/leetcode/remove-element/">
+          Remove Element
+        </a>
+      </li>
+    
+      <li>
+        <a href="../projects/leetcode/two-sum/">
+          Two Sum
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicauth">
+
+
+<span class="md-tag">topic/auth</span><a class="headerlink" href="#tag:topicauth" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="backend/authentication/">
+          Authentication Is Identity Plus Authority
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicbow-tie">
+
+
+<span class="md-tag">topic/bow-tie</span><a class="headerlink" href="#tag:topicbow-tie" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/09-directed-networks/">
+          Directed Networks (Digraphs, SCC, Bow-tie)
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicclustering">
+
+
+<span class="md-tag">topic/clustering</span><a class="headerlink" href="#tag:topicclustering" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/15-spectral-clustering/">
+          Spectral Clustering and Graph Partitioning
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicconcurrency">
+
+
+<span class="md-tag">topic/concurrency</span><a class="headerlink" href="#tag:topicconcurrency" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="foundations/async-concurrency-parallelism/">
+          Async, Concurrency and Parallelism
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicembeddings">
+
+
+<span class="md-tag">topic/embeddings</span><a class="headerlink" href="#tag:topicembeddings" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/embeddings-and-semantic-retrieval/">
+          Embeddings and Semantic Retrieval
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicevaluation">
+
+
+<span class="md-tag">topic/evaluation</span><a class="headerlink" href="#tag:topicevaluation" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/evaluating-an-ai-feature/">
+          Evaluating an AI Feature Before Shipping
+        </a>
+      </li>
+    
+      <li>
+        <a href="production/observability-for-model-backed-apps/">
+          Observability for Model-Backed Apps
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicgiant-component">
+
+
+<span class="md-tag">topic/giant-component</span><a class="headerlink" href="#tag:topicgiant-component" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/08-diameter-of-giant/">
+          Diameter of the Giant Component
+        </a>
+      </li>
+    
+      <li>
+        <a href="networks/06-giant-component/">
+          Giant Component
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topichttp">
+
+
+<span class="md-tag">topic/http</span><a class="headerlink" href="#tag:topichttp" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="foundations/http-request-lifecycle/">
+          HTTP Request Lifecycle
+        </a>
+      </li>
+    
+      <li>
+        <a href="frontend/streaming-responses/">
+          Streaming Responses from Server to UI
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicinfluence">
+
+
+<span class="md-tag">topic/influence</span><a class="headerlink" href="#tag:topicinfluence" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/16-information-cascades/">
+          Information Cascades and Influence Maximization
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicmodel-interfaces">
+
+
+<span class="md-tag">topic/model-interfaces</span><a class="headerlink" href="#tag:topicmodel-interfaces" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/prompt-to-model-response/">
+          From Prompt to Model Response
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicnavigation">
+
+
+<span class="md-tag">topic/navigation</span><a class="headerlink" href="#tag:topicnavigation" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="networks/11-small-world/">
+          Small World Models
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicnetworking">
+
+
+<span class="md-tag">topic/networking</span><a class="headerlink" href="#tag:topicnetworking" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="foundations/http-request-lifecycle/">
+          HTTP Request Lifecycle
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicobservability">
+
+
+<span class="md-tag">topic/observability</span><a class="headerlink" href="#tag:topicobservability" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="production/observability-for-model-backed-apps/">
+          Observability for Model-Backed Apps
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicqueues">
+
+
+<span class="md-tag">topic/queues</span><a class="headerlink" href="#tag:topicqueues" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="backend/background-jobs-and-idempotency/">
+          Background Jobs and Idempotency
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicrag">
+
+
+<span class="md-tag">topic/rag</span><a class="headerlink" href="#tag:topicrag" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/minimal-rag-pipeline/">
+          Building a Minimal RAG Pipeline
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicreliability">
+
+
+<span class="md-tag">topic/reliability</span><a class="headerlink" href="#tag:topicreliability" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="backend/background-jobs-and-idempotency/">
+          Background Jobs and Idempotency
+        </a>
+      </li>
+    
+      <li>
+        <a href="data/database-transactions/">
+          Database Transactions
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicretrieval">
+
+
+<span class="md-tag">topic/retrieval</span><a class="headerlink" href="#tag:topicretrieval" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/minimal-rag-pipeline/">
+          Building a Minimal RAG Pipeline
+        </a>
+      </li>
+    
+      <li>
+        <a href="ai-engineering/embeddings-and-semantic-retrieval/">
+          Embeddings and Semantic Retrieval
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicsecurity">
+
+
+<span class="md-tag">topic/security</span><a class="headerlink" href="#tag:topicsecurity" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="backend/authentication/">
+          Authentication Is Identity Plus Authority
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicstreaming">
+
+
+<span class="md-tag">topic/streaming</span><a class="headerlink" href="#tag:topicstreaming" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="frontend/streaming-responses/">
+          Streaming Responses from Server to UI
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicstructured-output">
+
+
+<span class="md-tag">topic/structured-output</span><a class="headerlink" href="#tag:topicstructured-output" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/structured-output-and-validation/">
+          Structured Output and Validation
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topictesting">
+
+
+<span class="md-tag">topic/testing</span><a class="headerlink" href="#tag:topictesting" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/evaluating-an-ai-feature/">
+          Evaluating an AI Feature Before Shipping
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topictransactions">
+
+
+<span class="md-tag">topic/transactions</span><a class="headerlink" href="#tag:topictransactions" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="data/database-transactions/">
+          Database Transactions
+        </a>
+      </li>
+    
+    
+  </ul>
+
+
+
+  <h3 id="tag:topicvalidation">
+
+
+<span class="md-tag">topic/validation</span><a class="headerlink" href="#tag:topicvalidation" title="Permanent link">&para;</a></h3>
+  <ul>
+    
+      <li>
+        <a href="ai-engineering/structured-output-and-validation/">
+          Structured Output and Validation
+        </a>
+      </li>
+    
+    
+  </ul>
+
+<h2 id="not-built-yet">Not built yet<a class="headerlink" href="#not-built-yet" title="Permanent link">&para;</a></h2>
+<p>Filtering by status, difficulty, runtime and project needs a generated index
+plus a small client-side widget. It is deliberately not half-built: the tag
+listing above is real and works, and the rest arrives when there are enough
+notes for filtering to beat scrolling.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../learn/production/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Production">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Production
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="foundations/" class="md-footer__link md-footer__link--next" aria-label="Next: Foundations">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Foundations
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Notes CC BY-NC-SA 4.0 · code MIT
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.indexes", "navigation.footer", "toc.follow", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
